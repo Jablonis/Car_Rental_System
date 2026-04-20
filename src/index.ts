@@ -7,6 +7,8 @@ import authRoutes from "./routes/auth.route.js";
 import { checkAuthStatus } from "./middleware/check-auth.middleware.js";
 import adminRoutes from "./routes/admin.route.js";
 import carRoutes from "./routes/car.route.js";
+import dotenv from "dotenv";
+dotenv.config();
 
 const app = express();
 
@@ -23,11 +25,11 @@ app.use(
   express.static(path.join(process.cwd(), "src", "views", "public", "assets")),
 );
 app.use(
-  session({
-    secret: "super-secret-key",
-    resave: false,
-    saveUninitialized: false,
-  }),
+session({
+  secret: process.env.SESSION_SECRET || "fallback-secret",
+  resave: false,
+  saveUninitialized: false,
+}),
 );
 // routes
 app.use(checkAuthStatus);
@@ -37,7 +39,7 @@ app.use("/", authRoutes);
 app.use("/", adminRoutes);
 app.use("/", carRoutes);
 
-const PORT = 3000;
+const PORT = Number(process.env.PORT) || 3000;
 
 async function startServer() {
   try {

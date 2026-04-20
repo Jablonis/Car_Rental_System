@@ -47,7 +47,7 @@ app.use("/", carRoutes);
 
 async function startLocalServer() {
   try {
-    const [rows] = await pool.query("SELECT 1");
+    const { rows } = await pool.query("SELECT 1");
     console.log("DB connected:", rows);
 
     app.listen(PORT, "0.0.0.0", () => {

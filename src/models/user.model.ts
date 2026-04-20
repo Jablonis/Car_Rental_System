@@ -1,16 +1,15 @@
 import crypto from "crypto";
 import { promisify } from "util";
-import { ResultSetHeader, RowDataPacket } from "mysql2/promise";
 import pool from "../data/db.js";
 
 const scrypt = promisify(crypto.scrypt);
 
-type UserRow = RowDataPacket & {
+type UserRow = {
   user_id: number;
   name: string;
   email: string;
   password: string;
-  isAdmin: number;
+  isAdmin: boolean;
 };
 
 class User {
@@ -53,66 +52,71 @@ class User {
 
   async save(): Promise<void> {
     if (this.user_id) {
-      await pool.query<ResultSetHeader>(
-        `UPDATE users SET name = ?, email = ?, password = ?, isAdmin = ? WHERE user_id = ?`,
-        [this.name, this.email, this.password, this.isAdmin ? 1 : 0, this.user_id],
+      await pool.query(
+        `UPDATE users
+         SET name = $1, email = $2, password = $3, is_admin = $4
+         WHERE user_id = $5`,
+        [this.name, this.email, this.password, this.isAdmin, this.user_id],
       );
     } else {
       const hashedPassword = await User.hashPassword(this.password);
 
-      const [result] = await pool.query<ResultSetHeader>(
-        `INSERT INTO users (name, email, password, isAdmin) VALUES (?, ?, ?, ?)`,
-        [this.name, this.email, hashedPassword, this.isAdmin ? 1 : 0],
+      const result = await pool.query<{ user_id: number }>(
+        `INSERT INTO users (name, email, password, is_admin)
+         VALUES ($1, $2, $3, $4)
+         RETURNING user_id`,
+        [this.name, this.email, hashedPassword, this.isAdmin],
       );
 
-      this.user_id = result.insertId;
+      this.user_id = result.rows[0].user_id;
       this.password = hashedPassword;
     }
   }
 
   static async findByEmail(email: string): Promise<User | null> {
-    const [rows] = await pool.query<UserRow[]>(
-      `SELECT user_id, name, email, password, isAdmin FROM users WHERE email = ?`,
+    const result = await pool.query<UserRow>(
+      `SELECT user_id, name, email, password, is_admin as "isAdmin"
+       FROM users
+       WHERE email = $1`,
       [email],
     );
 
-    if (rows.length === 0) {
-      return null;
-    }
+    if (result.rows.length === 0) return null;
 
-    const row = rows[0];
+    const row = result.rows[0];
 
     return new User(
       {
         name: row.name,
         email: row.email,
         password: row.password,
-        isAdmin: Boolean(row.isAdmin),
+        isAdmin: row.isAdmin,
       },
       row.user_id,
     );
   }
-    static async findAll(search?: string): Promise<User[]> {
-    let query = `SELECT user_id, name, email, password, isAdmin FROM users`;
+
+  static async findAll(search?: string): Promise<User[]> {
+    let query = `SELECT user_id, name, email, password, is_admin as "isAdmin" FROM users`;
     const params: (string | number)[] = [];
 
     if (search && search.trim() !== "") {
-      query += ` WHERE name LIKE ? OR email LIKE ?`;
+      query += ` WHERE name ILIKE $1 OR email ILIKE $2`;
       params.push(`%${search}%`, `%${search}%`);
     }
 
     query += ` ORDER BY user_id ASC`;
 
-    const [rows] = await pool.query<UserRow[]>(query, params);
+    const result = await pool.query<UserRow>(query, params);
 
-    return rows.map(
+    return result.rows.map(
       (row) =>
         new User(
           {
             name: row.name,
             email: row.email,
             password: row.password,
-            isAdmin: Boolean(row.isAdmin),
+            isAdmin: row.isAdmin,
           },
           row.user_id,
         ),
@@ -120,57 +124,54 @@ class User {
   }
 
   static async findById(user_id: number): Promise<User | null> {
-    const [rows] = await pool.query<UserRow[]>(
-      `SELECT user_id, name, email, password, isAdmin FROM users WHERE user_id = ?`,
+    const result = await pool.query<UserRow>(
+      `SELECT user_id, name, email, password, is_admin as "isAdmin"
+       FROM users
+       WHERE user_id = $1`,
       [user_id],
     );
 
-    if (rows.length === 0) {
-      return null;
-    }
+    if (result.rows.length === 0) return null;
 
-    const row = rows[0];
+    const row = result.rows[0];
 
     return new User(
       {
         name: row.name,
         email: row.email,
         password: row.password,
-        isAdmin: Boolean(row.isAdmin),
+        isAdmin: row.isAdmin,
       },
       row.user_id,
     );
   }
 
   static async deleteById(user_id: number): Promise<void> {
-    await pool.query<ResultSetHeader>(
-      `DELETE FROM users WHERE user_id = ?`,
-      [user_id],
-    );
+    await pool.query(`DELETE FROM users WHERE user_id = $1`, [user_id]);
   }
 
   static async countAdmins(): Promise<number> {
-    const [rows] = await pool.query<RowDataPacket[]>(
-      `SELECT COUNT(*) as count FROM users WHERE isAdmin = 1`,
+    const result = await pool.query<{ count: number }>(
+      `SELECT COUNT(*)::int as count FROM users WHERE is_admin = true`,
     );
 
-    return Number(rows[0].count);
+    return result.rows[0].count;
   }
 
   static async emailExists(
     email: string,
     excludeUserId?: number,
   ): Promise<boolean> {
-    let query = `SELECT user_id FROM users WHERE email = ?`;
+    let query = `SELECT user_id FROM users WHERE email = $1`;
     const params: (string | number)[] = [email];
 
     if (excludeUserId) {
-      query += ` AND user_id != ?`;
+      query += ` AND user_id != $2`;
       params.push(excludeUserId);
     }
 
-    const [rows] = await pool.query<RowDataPacket[]>(query, params);
-    return rows.length > 0;
+    const result = await pool.query(query, params);
+    return result.rows.length > 0;
   }
 }
 

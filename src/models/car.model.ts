@@ -1,7 +1,6 @@
-import { ResultSetHeader, RowDataPacket } from "mysql2/promise";
 import pool from "../data/db.js";
 
-type CarRow = RowDataPacket & {
+type CarRow = {
   car_id: number;
   title: string;
   brand: string;
@@ -66,10 +65,11 @@ class Car {
 
   async save(): Promise<void> {
     if (this.car_id) {
-      await pool.query<ResultSetHeader>(
+      await pool.query(
         `UPDATE cars
-         SET title = ?, brand = ?, model = ?, year = ?, price = ?, mileage = ?, fuel = ?, transmission = ?, description = ?, image = ?
-         WHERE car_id = ?`,
+         SET title = $1, brand = $2, model = $3, year = $4, price = $5,
+             mileage = $6, fuel = $7, transmission = $8, description = $9, image = $10
+         WHERE car_id = $11`,
         [
           this.title,
           this.brand,
@@ -85,9 +85,11 @@ class Car {
         ],
       );
     } else {
-      const [result] = await pool.query<ResultSetHeader>(
-        `INSERT INTO cars (title, brand, model, year, price, mileage, fuel, transmission, description, image, user_id)
-         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      const result = await pool.query<{ car_id: number }>(
+        `INSERT INTO cars
+         (title, brand, model, year, price, mileage, fuel, transmission, description, image, user_id)
+         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
+         RETURNING car_id`,
         [
           this.title,
           this.brand,
@@ -103,7 +105,7 @@ class Car {
         ],
       );
 
-      this.car_id = result.insertId;
+      this.car_id = result.rows[0].car_id;
     }
   }
 
@@ -116,20 +118,24 @@ class Car {
     let query = `SELECT * FROM cars`;
     const params: (string | number)[] = [];
     const whereConditions: string[] = [];
+    let paramIndex = 1;
 
     if (search && search.trim() !== "") {
-      whereConditions.push(`(title LIKE ? OR brand LIKE ? OR model LIKE ?)`);
+      whereConditions.push(`(title ILIKE $${paramIndex} OR brand ILIKE $${paramIndex + 1} OR model ILIKE $${paramIndex + 2})`);
       params.push(`%${search}%`, `%${search}%`, `%${search}%`);
+      paramIndex += 3;
     }
 
     if (minPrice !== undefined && minPrice !== null && minPrice !== "") {
-      whereConditions.push(`price >= ?`);
+      whereConditions.push(`price >= $${paramIndex}`);
       params.push(Number(minPrice));
+      paramIndex += 1;
     }
 
     if (maxPrice !== undefined && maxPrice !== null && maxPrice !== "") {
-      whereConditions.push(`price <= ?`);
+      whereConditions.push(`price <= $${paramIndex}`);
       params.push(Number(maxPrice));
+      paramIndex += 1;
     }
 
     if (whereConditions.length > 0) {
@@ -154,9 +160,9 @@ class Car {
         break;
     }
 
-    const [rows] = await pool.query<CarRow[]>(query, params);
+    const result = await pool.query<CarRow>(query, params);
 
-    return rows.map(
+    return result.rows.map(
       (row) =>
         new Car(
           {
@@ -164,7 +170,7 @@ class Car {
             brand: row.brand,
             model: row.model,
             year: row.year,
-            price: row.price,
+            price: Number(row.price),
             mileage: row.mileage,
             fuel: row.fuel,
             transmission: row.transmission,
@@ -179,16 +185,14 @@ class Car {
   }
 
   static async findById(car_id: number): Promise<Car | null> {
-    const [rows] = await pool.query<CarRow[]>(
-      `SELECT * FROM cars WHERE car_id = ?`,
+    const result = await pool.query<CarRow>(
+      `SELECT * FROM cars WHERE car_id = $1`,
       [car_id],
     );
 
-    if (rows.length === 0) {
-      return null;
-    }
+    if (result.rows.length === 0) return null;
 
-    const row = rows[0];
+    const row = result.rows[0];
 
     return new Car(
       {
@@ -196,7 +200,7 @@ class Car {
         brand: row.brand,
         model: row.model,
         year: row.year,
-        price: row.price,
+        price: Number(row.price),
         mileage: row.mileage,
         fuel: row.fuel,
         transmission: row.transmission,
@@ -210,12 +214,12 @@ class Car {
   }
 
   static async findAllByUserId(userId: number): Promise<Car[]> {
-    const [rows] = await pool.query<CarRow[]>(
-      `SELECT * FROM cars WHERE user_id = ? ORDER BY created_at DESC`,
+    const result = await pool.query<CarRow>(
+      `SELECT * FROM cars WHERE user_id = $1 ORDER BY created_at DESC`,
       [userId],
     );
 
-    return rows.map(
+    return result.rows.map(
       (row) =>
         new Car(
           {
@@ -223,7 +227,7 @@ class Car {
             brand: row.brand,
             model: row.model,
             year: row.year,
-            price: row.price,
+            price: Number(row.price),
             mileage: row.mileage,
             fuel: row.fuel,
             transmission: row.transmission,
@@ -238,10 +242,7 @@ class Car {
   }
 
   static async deleteById(car_id: number): Promise<void> {
-    await pool.query<ResultSetHeader>(
-      `DELETE FROM cars WHERE car_id = ?`,
-      [car_id],
-    );
+    await pool.query(`DELETE FROM cars WHERE car_id = $1`, [car_id]);
   }
 }
 

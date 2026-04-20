@@ -12,6 +12,8 @@ import carRoutes from "./routes/car.route.js";
 dotenv.config();
 
 const app = express();
+const isVercel = Boolean(process.env.VERCEL);
+const PORT = Number(process.env.PORT) || 3000;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -19,16 +21,20 @@ app.use(express.json());
 app.set("view engine", "ejs");
 app.set("views", path.join(process.cwd(), "src", "views"));
 
-app.use(
-  "/assets",
-  express.static(path.join(process.cwd(), "src", "views", "public", "assets")),
-);
+app.use("/assets", express.static(path.join(process.cwd(), "public", "assets")));
+
+app.set("trust proxy", 1);
 
 app.use(
   session({
     secret: process.env.SESSION_SECRET || "fallback-secret",
     resave: false,
     saveUninitialized: false,
+    cookie: {
+      secure: process.env.NODE_ENV === "production",
+      httpOnly: true,
+      sameSite: "lax",
+    },
   }),
 );
 
@@ -39,9 +45,7 @@ app.use("/", authRoutes);
 app.use("/", adminRoutes);
 app.use("/", carRoutes);
 
-const PORT = Number(process.env.PORT) || 3000;
-
-async function startServer() {
+async function startLocalServer() {
   try {
     const [rows] = await pool.query("SELECT 1");
     console.log("DB connected:", rows);
@@ -54,4 +58,8 @@ async function startServer() {
   }
 }
 
-startServer();
+if (!isVercel) {
+  void startLocalServer();
+}
+
+export default app;

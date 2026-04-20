@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import publicRoutes from "./routes/public.route.js";
 import pool from "./data/db.js";
 import session from "express-session";
+import connectPgSimple from "connect-pg-simple";
 import authRoutes from "./routes/auth.route.js";
 import { checkAuthStatus } from "./middleware/check-auth.middleware.js";
 import adminRoutes from "./routes/admin.route.js";
@@ -25,8 +26,15 @@ app.use("/assets", express.static(path.join(process.cwd(), "public", "assets")))
 
 app.set("trust proxy", 1);
 
+const PgSession = connectPgSimple(session);
+
 app.use(
   session({
+    store: new PgSession({
+      pool,                     // reuse your existing DB pool
+      tableName: "session",     // the table you created in Supabase
+      createTableIfMissing: false,
+    }),
     secret: process.env.SESSION_SECRET || "fallback-secret",
     resave: false,
     saveUninitialized: false,
@@ -34,6 +42,7 @@ app.use(
       secure: process.env.NODE_ENV === "production",
       httpOnly: true,
       sameSite: "lax",
+      maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
     },
   }),
 );

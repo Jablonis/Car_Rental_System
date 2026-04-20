@@ -6,6 +6,7 @@
     "express-session": "^1.19.0",
     "git": "^0.1.5",
     "mysql2": "^3.22.0",
+    "postgres": "^3.4.9",
     "zod": "^4.3.6"
   },
   "devDependencies": {

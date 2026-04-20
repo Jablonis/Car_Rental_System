@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="sk">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Prihlásenie</title>
+  <link rel="stylesheet" href="/assets/css/styles.css" />
+</head>
+<body>
+<%- include("../components/header") %>
+
+<main class="section">
+  <div class="container">
+    <h1>Prihlásenie</h1>
+
+    <% if (errors && errors.length > 0) { %>
+      <ul>
+        <% errors.forEach((error) => { %>
+          <li><%= error.message %></li>
+        <% }) %>
+      </ul>
+    <% } %>
+
+    <form method="POST" action="/login">
+      <input type="email" name="email" placeholder="Email" value="<%= formData.email || '' %>" />
+      <input type="password" name="password" placeholder="Heslo" />
+      <button type="submit">Prihlásiť sa</button>
+    </form>
+  </div>
+</main>
+
+<%- include("../components/footer") %>
+<script src="/assets/js/app.js"></script>
+</body>
+</html>

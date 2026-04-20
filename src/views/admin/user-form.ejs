@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="sk">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title><%= mode === "create" ? "Vytvoriť používateľa" : "Upraviť používateľa" %></title>
+  <link rel="stylesheet" href="/assets/css/styles.css" />
+</head>
+<body>
+<%- include("../components/header") %>
+
+<main class="section">
+  <div class="container">
+    <h1><%= mode === "create" ? "Vytvoriť používateľa" : "Upraviť používateľa" %></h1>
+
+    <% if (errors && errors.length > 0) { %>
+      <ul>
+        <% errors.forEach((error) => { %>
+          <li><%= error.message %></li>
+        <% }) %>
+      </ul>
+    <% } %>
+
+    <form
+      method="POST"
+      action="<%= mode === 'create' ? '/admin/users/new' : '/admin/users/' + user.user_id + '/edit' %>"
+    >
+      <div>
+        <label for="name">Meno</label>
+        <input
+          id="name"
+          type="text"
+          name="name"
+          value="<%= formData.name || '' %>"
+        />
+      </div>
+
+      <div>
+        <label for="email">Email</label>
+        <input
+          id="email"
+          type="email"
+          name="email"
+          value="<%= formData.email || '' %>"
+        />
+      </div>
+
+      <% if (mode === "create") { %>
+        <div>
+          <label for="password">Heslo</label>
+          <input id="password" type="password" name="password" />
+        </div>
+      <% } %>
+
+      <div>
+        <label for="isAdmin">Rola</label>
+        <select id="isAdmin" name="isAdmin">
+          <option value="0" <%= String(formData.isAdmin) === "0" ? "selected" : "" %>>
+            Používateľ
+          </option>
+          <option value="1" <%= String(formData.isAdmin) === "1" ? "selected" : "" %>>
+            Admin
+          </option>
+        </select>
+      </div>
+
+      <div style="margin-top:16px;">
+        <button type="submit">
+          <%= mode === "create" ? "Vytvoriť" : "Uložiť zmeny" %>
+        </button>
+
+        <a href="/admin/users">Späť</a>
+      </div>
+    </form>
+  </div>
+</main>
+
+<%- include("../components/footer") %>
+<script src="/assets/js/app.js"></script>
+</body>
+</html>

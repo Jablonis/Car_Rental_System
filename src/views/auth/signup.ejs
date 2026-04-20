@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="sk">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Registrácia</title>
+  <link rel="stylesheet" href="/assets/css/styles.css" />
+</head>
+<body>
+<%- include("../components/header") %>
+
+<main class="section">
+  <div class="container">
+    <h1>Registrácia</h1>
+
+    <% if (errors && errors.length > 0) { %>
+      <ul>
+        <% errors.forEach((error) => { %>
+          <li><%= error.message %></li>
+        <% }) %>
+      </ul>
+    <% } %>
+
+    <form method="POST" action="/signup">
+      <input type="text" name="name" placeholder="Meno" value="<%= formData.name || '' %>" />
+      <input type="email" name="email" placeholder="Email" value="<%= formData.email || '' %>" />
+      <input type="password" name="password" placeholder="Heslo" />
+      <input type="password" name="confirmPassword" placeholder="Potvrď heslo" />
+      <button type="submit">Registrovať sa</button>
+    </form>
+  </div>
+</main>
+
+<%- include("../components/footer") %>
+<script src="/assets/js/app.js"></script>
+</body>
+</html>

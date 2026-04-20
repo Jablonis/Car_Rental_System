@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="sk">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Ponuka áut</title>
+  <link rel="stylesheet" href="/assets/css/styles.css" />
+</head>
+<body>
+<%- include("../components/header") %>
+
+<main class="section">
+  <div class="container">
+    <h1>Ponuka áut</h1>
+
+    <div class="filter-section">
+      <div class="filter-header">
+        <h2 class="filter-title">Filtre</h2>
+        <button type="button" class="filter-toggle" id="filterToggle">
+          <span class="filter-toggle-icon">▼</span> Filtre
+        </button>
+      </div>
+
+      <form method="GET" action="/cars" class="filter-form" id="filterForm">
+        <div class="filter-grid">
+          <div class="filter-group">
+            <label class="filter-label" for="search">Hľadať</label>
+            <input
+              type="text"
+              id="search"
+              name="search"
+              class="filter-input"
+              placeholder="Názov, model..."
+              value="<%= search || '' %>"
+            />
+          </div>
+
+          <div class="filter-group">
+            <label class="filter-label" for="minPrice">Cena od</label>
+            <input
+              type="number"
+              id="minPrice"
+              name="minPrice"
+              class="filter-input"
+              placeholder="Min"
+              value="<%= minPrice || '' %>"
+              min="0"
+              step="100"
+            />
+          </div>
+
+          <div class="filter-group">
+            <label class="filter-label" for="maxPrice">Cena do</label>
+            <input
+              type="number"
+              id="maxPrice"
+              name="maxPrice"
+              class="filter-input"
+              placeholder="Max"
+              value="<%= maxPrice || '' %>"
+              min="0"
+              step="100"
+            />
+          </div>
+
+          <div class="filter-group">
+            <label class="filter-label" for="sort">Zoradiť podľa</label>
+            <select id="sort" name="sort" class="filter-input filter-select">
+              <option value="">Najnovšie</option>
+              <option value="price_asc" <%= sort === "price_asc" ? "selected" : "" %>>Cena od najnižšej</option>
+              <option value="price_desc" <%= sort === "price_desc" ? "selected" : "" %>>Cena od najvyššej</option>
+              <option value="year_desc" <%= sort === "year_desc" ? "selected" : "" %>>Najnovší rok</option>
+              <option value="year_asc" <%= sort === "year_asc" ? "selected" : "" %>>Najstarší rok</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="filter-actions">
+          <a href="/cars" class="btn-filter-reset">Reset</a>
+          <button type="submit" class="btn-filter-submit">
+            <span class="btn-icon">🔍</span> Filtrovať
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <div class="grid-3">
+      <% if (cars.length === 0) { %>
+        <p>Nenašli sa žiadne autá.</p>
+      <% } %>
+
+      <% cars.forEach((car) => { %>
+        <article class="card">
+          <img class="card-img" src="<%= car.image %>" alt="<%= car.title %>" />
+          <h3><%= car.title %></h3>
+          <p><%= car.brand %> <%= car.model %> • <%= car.year %></p>
+          <p><strong><%= car.price %> €</strong></p>
+          <a class="btn btn-small btn-primary" href="/cars/<%= car.car_id %>">Detail</a>
+        </article>
+      <% }) %>
+    </div>
+  </div>
+</main>
+
+<%- include("../components/footer") %>
+<script src="/assets/js/app.js"></script>
+</body>
+</html>

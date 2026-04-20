@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="sk">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Moje autá</title>
+  <link rel="stylesheet" href="/assets/css/styles.css" />
+</head>
+<body>
+<%- include("../components/header") %>
+
+<main class="section">
+  <div class="container">
+    <h1>Moje autá</h1>
+
+    <p><a href="/cars/new">Pridať nové auto</a></p>
+
+    <div class="grid-3">
+      <% if (cars.length === 0) { %>
+        <p>Zatiaľ nemáš žiadne autá.</p>
+      <% } %>
+
+      <% cars.forEach((car) => { %>
+        <article class="card">
+          <img class="card-img" src="<%= car.image %>" alt="<%= car.title %>" />
+          <h3><%= car.title %></h3>
+          <p><%= car.brand %> <%= car.model %> • <%= car.year %></p>
+          <p><strong><%= car.price %> €</strong></p>
+
+          <a href="/cars/<%= car.car_id %>">Detail</a>
+          <a href="/cars/<%= car.car_id %>/edit">Upraviť</a>
+
+          <form method="POST" action="/cars/<%= car.car_id %>/delete">
+            <button type="submit">Vymazať</button>
+          </form>
+        </article>
+      <% }) %>
+    </div>
+  </div>
+</main>
+
+<%- include("../components/footer") %>
+<script src="/assets/js/app.js"></script>
+</body>
+</html>

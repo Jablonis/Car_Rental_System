@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="sk">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title><%= car.title %></title>
+  <link rel="stylesheet" href="/assets/css/styles.css" />
+</head>
+<body>
+<%- include("../components/header") %>
+
+<main class="section">
+  <div class="container">
+    <h1><%= car.title %></h1>
+
+    <div class="card">
+      <img class="card-img" src="<%= car.image %>" alt="<%= car.title %>" />
+      <p><strong>Značka:</strong> <%= car.brand %></p>
+      <p><strong>Model:</strong> <%= car.model %></p>
+      <p><strong>Rok:</strong> <%= car.year %></p>
+      <p><strong>Cena:</strong> <%= car.price %> €</p>
+      <p><strong>Najazdené km:</strong> <%= car.mileage %></p>
+      <p><strong>Palivo:</strong> <%= car.fuel %></p>
+      <p><strong>Prevodovka:</strong> <%= car.transmission %></p>
+      <p><strong>Popis:</strong> <%= car.description %></p>
+    </div>
+  </div>
+</main>
+
+<%- include("../components/footer") %>
+<script src="/assets/js/app.js"></script>
+</body>
+</html>

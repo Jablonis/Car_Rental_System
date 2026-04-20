@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="sk">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Admin - Používatelia</title>
+  <link rel="stylesheet" href="/assets/css/styles.css" />
+</head>
+<body>
+<%- include("../components/header") %>
+
+<main class="section">
+  <div class="container">
+    <h1>Správa používateľov</h1>
+
+    <% if (deleteError) { %>
+      <p><%= deleteError %></p>
+    <% } %>
+
+    <form method="GET" action="/admin/users">
+      <input
+        type="text"
+        name="search"
+        placeholder="Hľadať podľa mena alebo emailu"
+        value="<%= search || '' %>"
+      />
+      <button type="submit">Hľadať</button>
+    </form>
+
+    <p style="margin-top: 16px;">
+      <a href="/admin/users/new">Vytvoriť používateľa</a>
+    </p>
+
+    <table border="1" cellpadding="8" cellspacing="0" style="width:100%; margin-top:16px;">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Meno</th>
+          <th>Email</th>
+          <th>Admin</th>
+          <th>Akcie</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if (users.length === 0) { %>
+          <tr>
+            <td colspan="5">Nenašli sa žiadni používatelia.</td>
+          </tr>
+        <% } %>
+
+        <% users.forEach((user) => { %>
+          <tr>
+            <td><%= user.user_id %></td>
+            <td><%= user.name %></td>
+            <td><%= user.email %></td>
+            <td><%= user.isAdmin ? "Áno" : "Nie" %></td>
+            <td>
+              <a href="/admin/users/<%= user.user_id %>/edit">Upraviť</a>
+
+              <form
+                method="POST"
+                action="/admin/users/<%= user.user_id %>/delete"
+                style="display:inline;"
+              >
+                <button type="submit">Vymazať</button>
+              </form>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+</main>
+
+<%- include("../components/footer") %>
+<script src="/assets/js/app.js"></script>
+</body>
+</html>

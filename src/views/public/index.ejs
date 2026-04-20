@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="sk">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AutoSalón | Domov</title>
+  <link rel="stylesheet" href="/assets/css/styles.css" />
+</head>
+<body data-page="home">
+<%- include("../components/header") %>
+
+<main>
+
+  <section class="hero">
+    <div class="container hero-inner">
+      <div class="hero-grid">
+        <div>
+          <span class="badge">Predaj & dovoz áut</span>
+          <h1 class="hero-title">Auto, ktoré sadne na prvé otočenie kľúčom.</h1>
+          <p class="section-lead">Jednoduchý výber, férová komunikácia, jasný stav vozidla. Pozri si ponuku a vyberieme spolu to správne.</p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="cars">Pozrieť ponuku áut</a>
+            <a class="btn" href="contact">Nezáväzný dopyt</a>
+          </div>
+
+          <div class="kpis">
+            <div class="kpi"><strong>50+ áut</strong><span>v ponuke</span></div>
+            <div class="kpi"><strong>Overený pôvod</strong><span>jasná história</span></div>
+            <div class="kpi"><strong>Rýchly kontakt</strong><span>odpoveď do 24h</span></div>
+          </div>
+        </div>
+    </div>
+  </section>
+
+  <section class="section small">
+    <div class="container">
+      <h2>Prečo práve my</h2>
+      <p class="section-lead">Nehráme sa na “luxusné reči”. Chceme, aby si odchádzal spokojný a vedel, čo kupuješ.</p>
+
+      <div class="grid-3" style="margin-top:18px">
+        <div class="card">
+          <h3>Jasný stav</h3>
+          <p>Každé auto má základný popis + detaily. Nič neskrývame.</p>
+        </div>
+        <div class="card">
+          <h3>Jednoduchý proces</h3>
+          <p>Výber → kontakt → obhliadka → papiere. Bez chaosu.</p>
+        </div>
+        <div class="card">
+          <h3>Ľudský prístup</h3>
+          <p>Komunikujeme normálne. Keď niečo nevieme, povieme to.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-muted">
+    <div class="container">
+      <div class="grid-2">
+        <div>
+          <h2>Ako to funguje</h2>
+          <p class="section-lead">Tri kroky, ktoré pochopíš na prvý pohľad.</p>
+
+          <div class="steps">
+            <div class="step">
+              <div class="step-num">1</div>
+              <div>
+                <h3>Vyber si auto</h3>
+                <p>Pozri ponuku, prefiltruj podľa názvu a otvor detaily.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">2</div>
+              <div>
+                <h3>Napíš / zavolaj</h3>
+                <p>Dohodneme obhliadku alebo rezerváciu.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">3</div>
+              <div>
+                <h3>Hotovo</h3>
+                <p>Pomôžeme s papiermi, prepisom a odporučíme servis.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <img class="card-img" src="assets/img/gallery/g-1.jpg" alt="Ukážka showroomu" />
+          <p></p>
+          <a class="btn btn-small" href="about">Viac o nás</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>Top výber</h2>
+      <p class="section-lead">Krátka ochutnávka. Celú ponuku nájdeš na stránke Ponuka áut.</p>
+
+      <div class="grid-3" style="margin-top:18px">
+        <article class="card">
+          <img class="card-img" src="assets/img/cars/car-1.jpg" alt="Auto 1" />
+          <h3>BMW 3 • 2020</h3>
+          <p>Automat • 140 kW • 85 000 km</p>
+          <a class="btn btn-small btn-primary" href="cars.html">Pozrieť ponuku</a>
+        </article>
+
+        <article class="card">
+          <img class="card-img" src="assets/img/cars/car-2.jpg" alt="Auto 2" />
+          <h3>Audi A4 • 2019</h3>
+          <p>Quattro • 150 kW • 92 000 km</p>
+          <a class="btn btn-small btn-primary" href="cars.html">Pozrieť ponuku</a>
+        </article>
+
+        <article class="card">
+          <img class="card-img" src="assets/img/cars/car-3.svg" alt="Auto 3" />
+          <h3>Mercedes C • 2021</h3>
+          <p>AMG Line • 145 kW • 55 000 km</p>
+          <a class="btn btn-small btn-primary" href="cars.html">Pozrieť ponuku</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-muted">
+    <div class="container">
+      <h2>FAQ</h2>
+      <p class="section-lead">Najčastejšie otázky, ktoré rieši väčšina ľudí pri kúpe auta.</p>
+
+      <div class="faq">
+        <button class="faq-item" type="button">
+          <span>Máte možnosť rezervácie?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-content">
+          Rezervácia je možná po dohode. Napíš nám do kontaktu a dohodneme si podmienky.
+        </div>
+
+        <button class="faq-item" type="button">
+          <span>Dá sa auto preveriť v servise?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-content">
+          Áno. Odporúčame obhliadku aj v servise – je to najlepšie pre obe strany.
+        </div>
+
+        <button class="faq-item" type="button">
+          <span>Pomôžete s prepisom a papiermi?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-content">
+          Pomôžeme s tým, čo treba (základné papierovanie, tipy, postup). Všetko vysvetlíme jednoducho.
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+<%- include("../components/footer") %>
+
+<button id="backToTop" type="button" aria-label="Back to top">↑</button>
+
+<script src="assets/js/app.js"></script>
+</body>
+</html>

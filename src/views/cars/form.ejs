@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="sk">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title><%= mode === "create" ? "Pridať auto" : "Upraviť auto" %></title>
+  <link rel="stylesheet" href="/assets/css/styles.css" />
+</head>
+<body>
+<%- include("../components/header") %>
+
+<main class="section">
+  <div class="container">
+    <h1><%= mode === "create" ? "Pridať auto" : "Upraviť auto" %></h1>
+
+    <% if (errors && errors.length > 0) { %>
+      <ul>
+        <% errors.forEach((error) => { %>
+          <li><%= error.message %></li>
+        <% }) %>
+      </ul>
+    <% } %>
+
+    <form
+      method="POST"
+      action="<%= mode === 'create' ? '/cars/new' : '/cars/' + car.car_id + '/edit' %>"
+    >
+      <input type="text" name="title" placeholder="Názov auta" value="<%= formData.title || '' %>" />
+      <input type="text" name="brand" placeholder="Značka" value="<%= formData.brand || '' %>" />
+      <input type="text" name="model" placeholder="Model" value="<%= formData.model || '' %>" />
+      <input type="number" name="year" placeholder="Rok" value="<%= formData.year || '' %>" />
+      <input type="number" name="price" placeholder="Cena" value="<%= formData.price || '' %>" />
+      <input type="number" name="mileage" placeholder="Najazdené km" value="<%= formData.mileage || '' %>" />
+      <input type="text" name="fuel" placeholder="Palivo" value="<%= formData.fuel || '' %>" />
+      <input type="text" name="transmission" placeholder="Prevodovka" value="<%= formData.transmission || '' %>" />
+      <input type="text" name="image" placeholder="URL alebo cesta k obrázku" value="<%= formData.image || '' %>" />
+      <textarea name="description" placeholder="Popis auta"><%= formData.description || '' %></textarea>
+
+      <button type="submit">
+        <%= mode === "create" ? "Pridať auto" : "Uložiť zmeny" %>
+      </button>
+    </form>
+  </div>
+</main>
+
+<%- include("../components/footer") %>
+<script src="/assets/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="sk">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AutoSalón | Kontakt</title>
+  <link rel="stylesheet" href="/assets/css/styles.css" />
+</head>
+<body data-page="contact">
+<%- include("../components/header") %>
+
+
+<main>
+
+  <section class="section">
+    <div class="container">
+      <h1>Kontakt</h1>
+      <p class="section-lead">Napíš nám. Odpovieme čo najskôr.</p>
+    </div>
+  </section>
+
+  <section class="section section-muted">
+    <div class="container">
+      <div class="grid-2">
+        <div>
+          <h2>Kde nás nájdeš</h2>
+          <p>Námestovo</p>
+          <ul class="list-clean">
+            <li>Tel.: +421 900 000 000</li>
+            <li>E-mail: info@autosalon.sk</li>
+            <li>Po–Pi: 9:00–17:00</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <img class="card-img" src="/assets/img/contact-map.svg" alt="Mapa">
+          <script src="/assets/js/app.js"></script>
+          <p>Budova OC</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>Nezáväzný dopyt</h2>
+
+      <form id="contactForm" class="form">
+        <div>
+          <div class="label">Meno</div>
+          <input class="input" type="text" name="name" required placeholder="Tvoje meno">
+        </div>
+
+        <div>
+          <div class="label">E-mail</div>
+          <input class="input" type="email" name="email" required placeholder="tvoj@email.sk">
+        </div>
+
+        <div>
+          <div class="label">Zaujíma ma auto</div>
+          <select class="input" name="car">
+            <option value="">— vyber —</option>
+            <option>BMW 3 (2020)</option>
+            <option>Audi A4 (2019)</option>
+            <option>Mercedes C (2021)</option>
+            <option>Iné</option>
+          </select>
+        </div>
+
+        <div>
+          <div class="label">Správa</div>
+          <textarea class="input" name="message" required placeholder="Napíš, čo potrebuješ..."></textarea>
+        </div>
+
+        <button class="btn btn-primary" type="submit">Odoslať</button>
+      </form>
+
+      <div id="previewBox" class="preview" hidden>
+        <h3>Preview správy</h3>
+        <p id="previewText"></p>
+      </div>
+    </div>
+  </section>
+
+</main>
+<%- include("../components/footer") %>
+
+
+<button id="backToTop" type="button" aria-label="Back to top">↑</button>
+
+<script src="assets/js/app.js"></script>
+</body>
+</html>

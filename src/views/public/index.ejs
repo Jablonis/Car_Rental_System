@@ -7,135 +7,128 @@
 <%- include('../components/header') %>
 
 <main class="nocturne-shell">
-  <header class="relative h-screen w-full flex items-center justify-center overflow-hidden">
-    <div class="absolute inset-0 z-0">
-      <img class="w-full h-full object-cover grayscale opacity-60" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBbrpR290ZEt5WOlZJkdOfLGOm4Bpo2T5HuWtrm0kBJjhRSTcE4HmncFkLsar5f9O7A8sDvQSuhNeIPfl5gUUrKPpP7Nxmz6B1Oc2TFJ_QBDcnS54Te6X-3paRcOQekim5XEUVg8QDTXly3niMSFF0uQ4Nwpr63SePWgQKSolpa04K7c9a17Az6vKmJAKLyFBf5aleuMuRR2i6ZajrUiWHHGM6iLAcUp_r9KUofhcnwUOl1tEjM06XQI26Byl98EZU-yqLDYN0sL6Wq" alt="Cinematic Porsche" />
-      <div class="absolute inset-0 bg-gradient-to-b from-surface/20 via-surface/60 to-surface"></div>
-    </div>
-    <div class="relative z-10 w-full px-6 md:px-12 max-w-7xl pt-20">
-      <div class="flex flex-col gap-4">
-        <span class="tracking-[0.4em] uppercase text-primary font-semibold text-[10px] md:text-xs">Volume IV // The Curated Motion</span>
-        <h1 class="text-6xl md:text-9xl font-headline font-bold tracking-tighter leading-none max-w-4xl text-on-surface">
-          Mechanical <br>
-          <span class="italic text-primary/80">Elegance.</span>
-        </h1>
-        <div class="mt-8 flex flex-col md:flex-row md:items-center gap-8 md:gap-12">
-          <div class="flex items-center gap-8 md:gap-12">
-            <div class="flex flex-col">
-              <span class="font-headline text-3xl font-bold">964</span>
-              <span class="text-[10px] uppercase tracking-widest text-on-surface-variant">Generation</span>
-            </div>
-            <div class="w-px h-12 bg-outline-variant/30 hidden md:block"></div>
-            <div class="flex flex-col">
-              <span class="font-headline text-3xl font-bold">1992</span>
-              <span class="text-[10px] uppercase tracking-widest text-on-surface-variant">Epoch</span>
+  <section class="relative pt-32 pb-20 px-6 md:px-12 bg-surface overflow-hidden">
+    <div class="max-w-[1600px] mx-auto grid grid-cols-12 gap-4 min-h-[820px] lg:h-[870px] home-hero-grid">
+      <div class="hidden lg:block col-span-1 h-full overflow-hidden rounded-lg group reveal-up" data-reveal>
+        <img
+          class="w-full h-full object-cover grayscale brightness-50 transition-all duration-700 hero-parallax"
+          data-parallax="0.08"
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuBdqaltlOayidu7PICmLM20feKeH36pbU30h3Y2uq8Cbk_VzxoJcHbt-V52W5u9fZ6NjR-szTYNZ-wuFLCBU1Dv3Qd98KM9M4-4hecygYbeahtPn8ycAnxOGNKAPyt-_-VoBv4-VDhuuH7WwrSj2NJVCPlHbZdJeNabr_Z2D7EFmovhIsO1hNkUltfdmEDpubUFy8HXeS39sZB18xQWsvhRPxxADflVHdbsrYAzWkpjQgacfzk5dcLqA4IvSKTNg1AQFMA9emHk40o0"
+          alt="Close-up of a vintage Porsche headlight"
+        />
+      </div>
+
+      <div class="col-span-12 lg:col-span-9 h-full relative flex flex-col justify-end bg-surface-container-lowest rounded-lg overflow-hidden group reveal-up" data-reveal>
+        <div class="absolute inset-0 z-0 overflow-hidden">
+          <img
+            class="w-full h-full object-cover transition-transform duration-[2000ms] hero-parallax hero-main-image"
+            data-parallax="0.12"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCKQ_JKq784hXSH4Ng2o6LZyZlsdJZkb1eepdU9Ly200ShlfVQzcy7Zvp7cc5Mm2rvx1m-Xx5ijPtGff4j3aji4GlUEEP8sgWzYTxSD8YOgJN3Hk_ub8srQjkUhRcyVpt7c_Hjpm44XqyPxSejCPGsxix3yGhovTD5HgiE7AhVMBgzYQ5W46SIHWvolC2LLz0kZA6Vr0LPiUChe4YgBegjE9a9Tq7scggxjPDGgjO0vOb9zM3Zv-YI3zRYNBXdK0dnys167J5wDW2a1"
+            alt="Wide shot of a modern Porsche 911 GT3"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-black/10"></div>
+        </div>
+
+        <div class="absolute top-12 right-12 z-10 text-right hidden md:block reveal-fade" data-reveal>
+          <div class="font-headline italic text-white/55 text-xl mb-1">Legacy series</div>
+          <div class="font-body text-[10px] tracking-widest uppercase text-white">Issue 042 // Rennsport</div>
+        </div>
+
+        <div class="relative z-10 p-8 md:p-12 pointer-events-none">
+          <h1 class="font-headline font-black tracking-tighter text-white mb-4 leading-[0.85] text-[clamp(4rem,12vw,10rem)] uppercase reveal-fade" data-reveal>
+            NOCTURNE DRIVE
+          </h1>
+          <div class="flex flex-col md:flex-row gap-8 items-start md:items-end reveal-up delay-100" data-reveal>
+            <div class="font-body font-bold text-white text-3xl md:text-5xl tracking-tighter">GT3 RS</div>
+            <div class="font-body text-[10px] tracking-[0.3em] uppercase text-white pb-2 flex gap-4 md:gap-6 flex-wrap">
+              <span>525 HP</span>
+              <span class="opacity-30">|</span>
+              <span>295 KM/H</span>
+              <span class="opacity-30">|</span>
+              <span>3.2S 0-100</span>
             </div>
           </div>
-          <p class="max-w-xs text-sm leading-relaxed text-on-surface-variant">
-            A definitive exploration of the air-cooled era. Curated Motion traverses the boundary between engineering and sculpture.
-          </p>
-        </div>
-        <div class="mt-8 flex flex-wrap gap-4">
-          <a href="/cars" class="bg-gradient-to-br from-primary to-on-primary-container text-on-primary-fixed px-8 py-3 rounded-full font-bold text-xs tracking-[0.24em] uppercase hover:scale-105 transition-transform">View Inventory</a>
-          <a href="/about" class="border border-outline-variant/20 text-on-surface px-8 py-3 rounded-full font-bold text-xs tracking-[0.24em] uppercase hover:border-primary/40 hover:text-primary transition-colors">Our Ethos</a>
+          <div class="mt-8 flex flex-wrap gap-4 reveal-up delay-200" data-reveal>
+            <a href="/cars" class="bg-gradient-to-r from-primary to-primary-container text-on-primary-fixed px-6 py-3 rounded-full font-body uppercase tracking-widest text-[10px] font-bold pointer-events-auto hover:scale-105 transition-all duration-500 ease-in-out">
+              View Archive
+            </a>
+            <a href="/contact" class="border border-white/15 text-white px-6 py-3 rounded-full font-body uppercase tracking-widest text-[10px] font-bold pointer-events-auto hover:border-primary hover:text-primary transition-all duration-500">
+              Bespoke Inquiry
+            </a>
+          </div>
         </div>
       </div>
-    </div>
-  </header>
 
-  <section class="bg-surface-container-low py-28 md:py-40 overflow-hidden">
-    <div class="max-w-7xl mx-auto px-6 md:px-12">
-      <div class="flex flex-col md:flex-row items-end justify-between gap-16 md:gap-20 mb-24 md:mb-32">
-        <div class="max-w-md">
-          <h2 class="text-4xl md:text-5xl font-headline font-bold mb-8 leading-tight">Curated <br>Legacy</h2>
-          <p class="text-on-surface-variant text-lg leading-relaxed">
-            We don't just review vehicles; we document the heritage of motion. Each specimen is selected for its soul, its story, and its mechanical purity.
-          </p>
-        </div>
-        <div class="flex-1 grid grid-cols-2 gap-x-8 md:gap-x-12 gap-y-10 md:gap-y-16">
-          <div class="group">
-            <div class="font-headline text-5xl md:text-6xl text-primary font-bold mb-2 transition-transform group-hover:-translate-y-2">124</div>
-            <div class="h-px w-full bg-outline-variant/20 mb-4"></div>
-            <span class="text-[10px] uppercase tracking-[0.3em] font-bold text-on-surface">Unique Archives</span>
-          </div>
-          <div class="group">
-            <div class="font-headline text-5xl md:text-6xl text-on-surface font-bold mb-2 transition-transform group-hover:-translate-y-2">08</div>
-            <div class="h-px w-full bg-outline-variant/20 mb-4"></div>
-            <span class="text-[10px] uppercase tracking-[0.3em] font-bold text-on-surface-variant">Curated Films</span>
-          </div>
-          <div class="group">
-            <div class="font-headline text-5xl md:text-6xl text-on-surface font-bold mb-2 transition-transform group-hover:-translate-y-2">18</div>
-            <div class="h-px w-full bg-outline-variant/20 mb-4"></div>
-            <span class="text-[10px] uppercase tracking-[0.3em] font-bold text-on-surface-variant">Global Meets</span>
-          </div>
-          <div class="group">
-            <div class="font-headline text-5xl md:text-6xl text-primary font-bold mb-2 transition-transform group-hover:-translate-y-2">2M+</div>
-            <div class="h-px w-full bg-outline-variant/20 mb-4"></div>
-            <span class="text-[10px] uppercase tracking-[0.3em] font-bold text-on-surface">Total Miles</span>
-          </div>
+      <div class="hidden lg:block col-span-2 h-full overflow-hidden rounded-lg group relative reveal-up delay-200" data-reveal>
+        <img
+          class="w-full h-full object-cover grayscale brightness-50 transition-all duration-700 hero-parallax"
+          data-parallax="0.06"
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuATPozCnbvB4W3DI6QP7lVvNdU9LabZr3M-g3o0FPCD20E0xInz8oafTNwTEnRzlsVg1zbIlznc_ttHVz5yF0v1OfySzLxUUtsK6DG9zGc2z96t4_sUVzovXGVtTl5UcSemFXwa9QzLVi2rVhiDduB-VYLccQWTlAITc-8ZQBJU1QH8NzNjU-KE94u9falwARIftvjLa-8EdNddCALSHhtsfhk5QBTrH0O3Lw5FFKHZIljLs7vapRrynyvy2HvEuLTmHeNmggo8_ebv"
+          alt="Side profile detail of a Porsche 911"
+        />
+        <div class="absolute bottom-12 left-1/2 -translate-x-1/2 vertical-text font-body text-[10px] tracking-[0.5em] uppercase text-white/40 transition-colors duration-500">
+          THE ART OF MOTION
         </div>
       </div>
     </div>
   </section>
 
-  <section class="py-28 md:py-40 bg-surface">
-    <div class="max-w-7xl mx-auto px-6 md:px-12">
-      <div class="flex items-center justify-between mb-16 md:mb-24 gap-6">
+  <section class="bg-surface-container-low py-24 px-6 md:px-12 overflow-hidden">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-12">
+      <div class="text-center md:text-left reveal-up" data-reveal>
+        <div class="font-headline text-5xl font-black mb-2 js-counter" data-counter="1240" data-suffix="+">0</div>
+        <div class="font-body text-[10px] tracking-widest uppercase text-slate-500">Archived Journals</div>
+      </div>
+      <div class="h-12 w-px bg-outline-variant/20 hidden md:block"></div>
+      <div class="text-center md:text-left reveal-up delay-100" data-reveal>
+        <div class="font-headline text-5xl font-black mb-2 js-counter" data-counter="84">0</div>
+        <div class="font-body text-[10px] tracking-widest uppercase text-slate-500">Active Technicals</div>
+      </div>
+      <div class="h-12 w-px bg-outline-variant/20 hidden md:block"></div>
+      <div class="text-center md:text-left reveal-up delay-200" data-reveal>
+        <div class="font-headline text-5xl font-black mb-2 js-counter" data-counter="12" data-suffix="M">0</div>
+        <div class="font-body text-[10px] tracking-widest uppercase text-slate-500">Global Reach</div>
+      </div>
+      <div class="h-12 w-px bg-outline-variant/20 hidden md:block"></div>
+      <div class="text-center md:text-left reveal-up delay-300" data-reveal>
+        <div class="font-headline text-5xl font-black mb-2 js-counter" data-counter="0">0</div>
+        <div class="font-body text-[10px] tracking-widest uppercase text-slate-500">Compromises</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-32 px-6 md:px-12 bg-surface overflow-hidden">
+    <div class="max-w-[1600px] mx-auto">
+      <div class="flex justify-between items-end mb-20 gap-8 flex-wrap reveal-up" data-reveal>
         <div>
-          <span class="text-primary text-xs tracking-widest uppercase font-bold mb-2 block">The Collection</span>
-          <h2 class="text-5xl md:text-6xl font-headline font-bold">Showroom</h2>
+          <span class="font-body text-[10px] tracking-[0.4em] uppercase text-primary mb-4 block">Selected Works</span>
+          <h2 class="font-headline text-5xl md:text-6xl font-bold tracking-tighter">The Showroom</h2>
         </div>
-        <div class="h-px flex-1 mx-8 md:mx-20 bg-outline-variant/10 hidden md:block"></div>
-        <a href="/cars" class="text-on-surface hover:text-primary transition-colors flex items-center gap-2 group shrink-0">
-          <span class="text-xs uppercase tracking-widest font-bold">View Inventory</span>
-          <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
-        </a>
+        <a class="font-body text-[10px] tracking-widest uppercase border-b border-outline-variant/40 pb-2 hover:border-primary transition-colors" href="/cars">Explore Full Collection</a>
       </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-start">
-        <div class="md:col-span-7 bg-surface-container-lowest rounded-lg overflow-hidden group">
-          <div class="relative aspect-[4/5] overflow-hidden">
-            <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBmvfo1aEnkqEyw7TLcp7yH_zcgsJKHlV8atwPYMNTFQPnnHyQkMc6bOWgwWZqqt4Ezc6zunNbPKblFG8fwyjbB1k5UWKKkdI_Uhq7iPwbnSQ1TReB7oxXbDoDpJ3Yvv9Qb4VfZYcbPTAj7kMkhYlzePb-TfpU09cWHekIZm6tOLWKPUFy7eLPNfDhXfy-O1qJbGQiMjvawqh5Whm55pvs-FPwYOZv2G4SMEH35JUFERynyeG112mUW7ZXQk8X6_DOEB4ZF5d3QIwih" alt="Berlinetta" />
-            <div class="absolute top-8 left-8">
-              <span class="px-4 py-1 bg-primary text-on-primary-fixed text-[10px] font-bold tracking-widest uppercase rounded-full">Available</span>
-            </div>
-          </div>
-          <div class="p-8 md:p-12">
-            <div class="flex justify-between items-start gap-6 mb-6">
-              <h3 class="text-3xl md:text-4xl font-headline font-bold">L-Series Berlinetta</h3>
-              <span class="text-2xl font-headline text-primary">$345,000</span>
-            </div>
-            <div class="grid grid-cols-3 gap-4 md:gap-8 py-8 border-t border-outline-variant/10">
-              <div><span class="text-[10px] uppercase tracking-widest text-on-surface-variant block mb-1">0-60 MPH</span><span class="font-headline text-lg md:text-xl">2.9 SEC</span></div>
-              <div><span class="text-[10px] uppercase tracking-widest text-on-surface-variant block mb-1">Peak Power</span><span class="font-headline text-lg md:text-xl">620 BHP</span></div>
-              <div><span class="text-[10px] uppercase tracking-widest text-on-surface-variant block mb-1">Weight</span><span class="font-headline text-lg md:text-xl">1,340 KG</span></div>
-            </div>
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+        <div class="md:col-span-8 bg-surface-container rounded-lg overflow-hidden relative group aspect-[16/9] reveal-up" data-reveal>
+          <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVJeEPL3qIBr0k6uulbiObZBPSGb4fXsXTe49tUutt3vDqjcVEBcucPKRhltwn8ECU73hp6CS6QcoGICFp4cjKuB0il3tZlIxcnuafO0uix94MRCMtzQI9DQckXvlYwassf_S0OAeIl5Vy8R5mtkptldxNjAINBTun9xRQCV9j68uJQ_wnE3gu3hd1_Otuu5ZH-ayVeLWGaxKRB8RJ-Zv758JeRVr0aPyzbr00ls1A3cPHc51pYLTBcja4ZGQPRYvbB0SQYdRCBuJy" alt="Carrera RS 73" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60"></div>
+          <div class="absolute bottom-10 left-10">
+            <div class="font-headline text-3xl font-bold text-white mb-2">Carrera RS '73</div>
+            <div class="font-body text-[10px] tracking-widest uppercase text-primary">Preservation Project</div>
           </div>
         </div>
-
-        <div class="md:col-span-5 flex flex-col gap-8 md:gap-12 md:mt-32">
-          <div class="bg-surface-container rounded-lg overflow-hidden group">
-            <div class="relative aspect-[3/2] overflow-hidden">
-              <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBeWJ0sEv9jEFJ5bWLtZjzLH4gp211xfV4HVykxrQKMHPD6IumeqDi8tdXrvcYkFolaL9568vArEkMh_0fWQ15XBJV4ANEAMzS9Kvp3bwBIe1vIj5nZ78giEJ7Fv6qL8Bg-Zt7hjFkyVv8LIJhwW4Nw89ps9KGfEKFBMHx1x01GK-t223uwSbVX26B61De3sLTp_mLHFaE9D8tneqfinL11G8SPRkNEFlPmyPGc2fDljbqK4IKkYAPytlV__Ch7aNVIEAHZiLRU3OH-" alt="Touring Concept" />
-            </div>
-            <div class="p-8">
-              <h3 class="text-2xl font-headline font-bold mb-4">Touring Concept II</h3>
-              <div class="flex justify-between items-center text-on-surface-variant">
-                <span class="text-xs uppercase tracking-widest">Heritage Spec</span>
-                <span class="material-symbols-outlined">north_east</span>
-              </div>
-            </div>
-          </div>
-          <div class="bg-surface-container rounded-lg overflow-hidden group">
-            <div class="relative aspect-[3/2] overflow-hidden">
-              <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBaCVJELYGjAxAYpmKrjTyupfTWtNcx4qGOUhbyPlUi_wlYEfWf_jxRKaCqZfL_t2B2A1tYaK9PourVGJ4oCiQbG_fJvcTMPfxzvhFD92M1AW4-sysDq-923QMIrFNweelh8Of5EPTQX122UhGZ5jkSwlTDUH127_ypSJVI-_aGQd7TfASqw2DkhgaoObMcPLeWsqp2BsCz8X8M5NIYM2MWhelFMhCUL8XUmcA6dJSb7p0VDZK3rTc4QH2GZkEyWb4fQZbsVair-QFB" alt="Interior Package" />
-            </div>
-            <div class="p-8">
-              <h3 class="text-2xl font-headline font-bold mb-4">Nocturne Interior Package</h3>
-              <div class="flex justify-between items-center text-on-surface-variant">
-                <span class="text-xs uppercase tracking-widest">Limited Bespoke</span>
-                <span class="material-symbols-outlined">north_east</span>
-              </div>
+        <div class="md:col-span-4 bg-surface-container rounded-lg overflow-hidden group aspect-square md:aspect-auto reveal-up delay-100" data-reveal>
+          <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC8vn18YdTYSUozjLTB5yoxSUiEpI1rLwUul3xXBzXFMUPyNa5jKWJ9z3kwWueZAslMIUTb4QAagXSjQjVaQ-8EiwocrItV43l5Y5XuK4Swyxd5-kgRKO93mygcbIvrop2ir_70mS9BAMxjVjBWsY8zsiRFqVo5Vw_fYQYzPETmD4nuDyKR6dkbh8OPwxVEofUXx_E76K158N_jzxn4f4L3m4KIXWAGKNN21Doh-9XbOn5HBIgM8D2nt2oQT8cKqzcZak_I01fAZOD5" alt="Porsche interior" />
+        </div>
+        <div class="md:col-span-4 bg-surface-container rounded-lg overflow-hidden group aspect-square reveal-up delay-200" data-reveal>
+          <img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAIY4NhF7cZYnGMkfvtKaIxu0ns03GTfcjyc-GweSQT4ApNdsgQzXuZnCtgiDuTu0coyrDykUHuzl4c2bzsXTeGQpg33F1I5plP7HA8Hs9UPPax9DRO-S8nsdKIxxFvCmZOXZ8MHCxONPg9Ie2zFNihKGHDTcbPfGLV4gITWwFjtwrfqGMd-QEh0u1g7Fs_ANQd0rIetjGqIM42hGoGEy4vjk3_fAowskBy2KlzlpCxET4pxKrbf9WdZ6K81z8VQ5s1Th7uUBn12bFz" alt="Forest road drive" />
+        </div>
+        <div class="md:col-span-8 bg-surface-container rounded-lg overflow-hidden relative group aspect-video md:aspect-auto reveal-up delay-300" data-reveal>
+          <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_juSYhsm74mwd7-3mo4Y7OB01XryI6te90ZujqzWphVUWjbheTsGBdQqnuxXMAvTUV8yQnPdfk9Ej7z2_3AONbdc7PIMBhs235AkqPZTfp3tHaahOfAyGTHEKjGw8dEIDN1hFJKZkwhfEkyFzLzA0M_X3mKD2HiaanlqvYXbxt-Q-KOwjFocw_dM3apKUQwlG8In2lzVpfdswieBsyUX-NotoTWGSOys3KfyUNb5m7CV6pqjj62FG2mIWql1Ja8Z8ankIbMGl_lXs" alt="Turbo S rear view" />
+          <div class="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent"></div>
+          <div class="absolute inset-y-0 left-0 flex items-center p-12">
+            <div class="max-w-xs">
+              <h3 class="font-headline text-4xl font-bold mb-4">Turbo S</h3>
+              <p class="font-body text-xs text-slate-400 leading-relaxed mb-6">The ultimate cross-continental machine, refined for the modern collector.</p>
+              <a href="/cars" class="bg-white text-black px-6 py-3 rounded-full font-body uppercase tracking-widest text-[10px] font-bold inline-flex">View Specs</a>
             </div>
           </div>
         </div>
@@ -143,26 +136,50 @@
     </div>
   </section>
 
-  <section class="bg-surface-container-lowest py-32 md:py-60">
-    <div class="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-12 gap-16 items-center">
-      <div class="md:col-span-5">
-        <span class="text-primary text-xs tracking-widest uppercase font-bold mb-6 block">The Journal</span>
-        <h2 class="text-4xl md:text-6xl font-headline font-bold leading-[0.95] mb-8">Chasing the <br><span class="italic text-primary/70">Midnight Horizon</span></h2>
-        <p class="text-on-surface-variant text-lg leading-relaxed max-w-md mb-10">
-          An editorial journey through desert plains at the blue hour—where the machine becomes a silhouette and the horizon starts to hum.
-        </p>
-        <a href="/about" class="inline-flex items-center gap-2 text-xs uppercase tracking-widest font-bold text-on-surface hover:text-primary transition-colors group">
-          Read narrative
-          <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
-        </a>
+  <section class="py-32 bg-surface-container-lowest overflow-hidden">
+    <div class="max-w-7xl mx-auto px-6 md:px-12">
+      <div class="text-center mb-24 reveal-up" data-reveal>
+        <span class="font-body text-[10px] tracking-[0.5em] uppercase text-primary mb-4 block">The Journal</span>
+        <h2 class="font-headline text-5xl font-bold mb-8">Stories of Motion</h2>
+        <div class="w-12 h-1 bg-primary mx-auto"></div>
       </div>
-      <div class="md:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-8 items-end">
-        <div class="bg-surface-container rounded-lg overflow-hidden md:-translate-y-24">
-          <img class="w-full aspect-[4/5] object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7EKS0J6mUjmgitfrZafH4Qie2HvAb1msbGFC6x8Qm52uXxVKiDbi37P6MtYY4yuBTfL4ZQT_gCMrC6AAUcRnWgkY3Anrrxs5q9qQKK6bMsl3hr1TwR9vsNwSECHLB5VNt-njZ2eLSP7JQjNRiNi4m1v14uUWl3H-b26hjpfSGf3m4Kr43v7f7ZVkdkQjT9SGAHqkq5dVAin8iX3E1q4gnVN5uWw5X7J4to4jZjvL8pVNQoqPfm2F8HxqB4vBGLATUHOM05Ffp5wI" alt="The journal" />
-        </div>
-        <div class="bg-surface-container rounded-lg overflow-hidden">
-          <img class="w-full aspect-[4/5] object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAq2ZgL8hNksu2yRnhQwaV8vCUZ3mtaZUoNwVgKH8mehfTq0sxL1XMF3DV4Me4ftA4MTGRXvHcP0FojkWaMfgh0gkt1m29s0oKIDdC9-T8_0xmgol6hSkvURglp5DrWV4V9inSYp-MAM3JcPFWMfoIvBqX0KpLYEtXAvynYibRGvS6mYhLwAQ1KCF3uoQMLD-t_kuCCd0zI8F5KSr1ekcxDvhVqlW9sdV5l70k13uIhy9uJbFbD4YgQWGfu8Q2Ji0kb4SXT4QfI" alt="Coastal road" />
-        </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-16">
+        <article class="flex flex-col reveal-up" data-reveal>
+          <div class="aspect-[4/5] overflow-hidden rounded-lg mb-8">
+            <img class="w-full h-full object-cover hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVLGBZI_6YsqZublXvZfwmrfyklWWUuKtblY2yi7Fh4ileW4FXw060MtorV2OT27SctMMC0owkjEO-qZj9kwiVY6j_8HULtCTogqW-YmA4mM2YE-jsPq_nths1lic-IvJLgvl00UoEx3o9slW0JHkGR9NB5uxnrEE45w68KjvX30u0dbX5Aq6Om7QJBtzU2NBprmdBiXZj-2rMxuU6lg7hUAIAGnunidiS-ckH2DRWCoEBWfCh-0pH5UVXlKNxwVv78KgF5mXeo2EA" alt="Air cooled aesthetic" />
+          </div>
+          <span class="font-body text-[10px] tracking-widest uppercase text-slate-500 mb-4">September 12, 2024</span>
+          <h3 class="font-headline text-2xl font-bold mb-4 leading-tight">The Air-Cooled Aesthetic: Why We Still Look Back</h3>
+          <p class="font-body text-sm text-slate-400 leading-relaxed mb-6">Tracing the mechanical purity of the flat-six engine and its enduring influence on car culture.</p>
+          <a class="text-primary font-body uppercase tracking-widest text-[10px] font-bold flex items-center gap-2 group" href="/about">
+            Read Story
+            <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+          </a>
+        </article>
+        <article class="flex flex-col mt-0 md:mt-24 reveal-up delay-100" data-reveal>
+          <div class="aspect-[4/5] overflow-hidden rounded-lg mb-8">
+            <img class="w-full h-full object-cover hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDlV_PkXQDlrrRmyVJA0DsQuXwNfyXTi-H3AokbiYh06stacbsuvjfy4pxrfMiH4PeyItznZFqVXbi9n-sPOglFqJYKcHiN_3YJnqAvv_x9l_RFCVb9NsgonSermrzE0LEkY0y_1sgAQxupkbpyyBPqmVQYB7r-1hydVAsEjyiaMZN5A-5vyol3_Zk2jAk4xkDaw9bUu9WbpDVRglVOuP3RLiTpOc6cJV_gxbC4SXxBgYbHdCD7Ivg3Wz-TykE-zywCd1pNnlSFh-xT" alt="Midnight in Tokyo" />
+          </div>
+          <span class="font-body text-[10px] tracking-widest uppercase text-slate-500 mb-4">August 28, 2024</span>
+          <h3 class="font-headline text-2xl font-bold mb-4 leading-tight">Midnight in Tokyo: A RWB Pilgrimage</h3>
+          <p class="font-body text-sm text-slate-400 leading-relaxed mb-6">An intimate look at Nakai-San's workshop and the philosophy of wide-body craftsmanship.</p>
+          <a class="text-primary font-body uppercase tracking-widest text-[10px] font-bold flex items-center gap-2 group" href="/contact">
+            Read Story
+            <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+          </a>
+        </article>
+        <article class="flex flex-col reveal-up delay-200" data-reveal>
+          <div class="aspect-[4/5] overflow-hidden rounded-lg mb-8">
+            <img class="w-full h-full object-cover hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAo4aRsiJVPIHVtjPfYhMpm5Vi2rsJ18ql-fFKxVx3gwevlQDdNLZ46JIFRjvsubef4vTtFJgAIFQWj2dJyQ6YCviA9FI5ofVX7NGiRJPqXMYrMK123OQ-wWTnYCv819kjkU2Ayu-Bm5ZhyqKv3Ru2S_IO7gav723z_y4Vslwn4_6dRdyiCXddSiM3F-iHjNYPcXH9XWVxmiyKYupv8TX2XEw5AIKHD70iPeshFOF6fsWgoswAYeH98AuMErE3UpNktnAgwGwSKFket" alt="Stelvio pass" />
+          </div>
+          <span class="font-body text-[10px] tracking-widest uppercase text-slate-500 mb-4">August 15, 2024</span>
+          <h3 class="font-headline text-2xl font-bold mb-4 leading-tight">Stelvio: The Ultimate Test of Man and Machine</h3>
+          <p class="font-body text-sm text-slate-400 leading-relaxed mb-6">48 hairpins, 9,000 feet of elevation, and one perfect morning drive.</p>
+          <a class="text-primary font-body uppercase tracking-widest text-[10px] font-bold flex items-center gap-2 group" href="/cars">
+            Read Story
+            <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+          </a>
+        </article>
       </div>
     </div>
   </section>

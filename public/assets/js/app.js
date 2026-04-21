@@ -95,6 +95,75 @@ var toggles = document.querySelectorAll(".car-toggle");
       form.reset();
     });
   }
+
+  var revealItems = document.querySelectorAll("[data-reveal]");
+  if (revealItems.length) {
+    var revealObserver = new IntersectionObserver(function (entries, observer) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("reveal-visible");
+        observer.unobserve(entry.target);
+      });
+    }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
+
+    revealItems.forEach(function (item) {
+      revealObserver.observe(item);
+    });
+  }
+
+  var counterItems = document.querySelectorAll(".js-counter");
+  if (counterItems.length) {
+    var animateCounter = function (el) {
+      var target = Number(el.getAttribute("data-counter") || "0");
+      var suffix = el.getAttribute("data-suffix") || "";
+      var duration = 1600;
+      var start = null;
+
+      var step = function (timestamp) {
+        if (!start) start = timestamp;
+        var progress = Math.min((timestamp - start) / duration, 1);
+        var eased = 1 - Math.pow(1 - progress, 3);
+        var value = Math.floor(target * eased);
+        el.textContent = value.toLocaleString("en-US") + suffix;
+        if (progress < 1) {
+          window.requestAnimationFrame(step);
+        } else {
+          el.textContent = target.toLocaleString("en-US") + suffix;
+        }
+      };
+
+      window.requestAnimationFrame(step);
+    };
+
+    var counterObserver = new IntersectionObserver(function (entries, observer) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        if (!entry.target.dataset.counted) {
+          entry.target.dataset.counted = "true";
+          animateCounter(entry.target);
+        }
+        observer.unobserve(entry.target);
+      });
+    }, { threshold: 0.4 });
+
+    counterItems.forEach(function (item) {
+      counterObserver.observe(item);
+    });
+  }
+
+  var parallaxItems = document.querySelectorAll("[data-parallax]");
+  if (parallaxItems.length && window.innerWidth >= 1024) {
+    var updateParallax = function () {
+      var scrollY = window.scrollY;
+      parallaxItems.forEach(function (item) {
+        var speed = Number(item.getAttribute("data-parallax") || "0.08");
+        item.style.transform = "translate3d(0, " + (scrollY * speed) + "px, 0) scale(1.04)";
+      });
+    };
+
+    updateParallax();
+    window.addEventListener("scroll", updateParallax, { passive: true });
+  }
   var topBtn = document.getElementById("backToTop");
   if (topBtn) {
     window.addEventListener("scroll", function () {

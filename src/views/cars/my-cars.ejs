@@ -5,38 +5,55 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Moje autá</title>
   <link rel="stylesheet" href="/assets/css/styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,600;0,700;1,400&family=Epilogue:wght@300;400;500;600;700&display=swap" />
 </head>
-<body>
+<body data-page="cars">
 <%- include("../components/header") %>
 
-<main class="section">
-  <div class="container">
-    <h1>Moje autá</h1>
-
-    <p><a href="/cars/new">Pridať nové auto</a></p>
-
-    <div class="grid-3">
-      <% if (cars.length === 0) { %>
-        <p>Zatiaľ nemáš žiadne autá.</p>
-      <% } %>
-
-      <% cars.forEach((car) => { %>
-        <article class="card">
-          <img class="card-img" src="<%= car.image %>" alt="<%= car.title %>" />
-          <h3><%= car.title %></h3>
-          <p><%= car.brand %> <%= car.model %> • <%= car.year %></p>
-          <p><strong><%= car.price %> €</strong></p>
-
-          <a href="/cars/<%= car.car_id %>">Detail</a>
-          <a href="/cars/<%= car.car_id %>/edit">Upraviť</a>
-
-          <form method="POST" action="/cars/<%= car.car_id %>/delete">
-            <button type="submit">Vymazať</button>
-          </form>
-        </article>
-      <% }) %>
+<main>
+  <div class="page-header">
+    <div class="container">
+      <h1>Moje autá</h1>
     </div>
   </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="car-actions" style="margin-bottom: 24px;">
+        <a class="btn btn-primary" href="/cars/new">Pridať nové auto</a>
+      </div>
+
+      <div class="grid-3">
+        <% if (cars.length === 0) { %>
+          <p>Zatiaľ nemáš žiadne autá.</p>
+        <% } %>
+
+        <% cars.forEach((car) => { %>
+          <article class="car-card">
+            <img class="car-card-img" src="<%= car.image %>" alt="<%= car.title %>" />
+            <div class="car-card-body">
+              <h3 class="car-card-title"><%= car.title %></h3>
+              <div class="car-meta">
+                <span class="car-meta-item"><%= car.brand %> <%= car.model %></span>
+                <span class="car-meta-item"><%= car.year %></span>
+                <span class="car-meta-item"><%= car.mileage %> km</span>
+              </div>
+              <div class="car-price"><%= car.price %> €</div>
+              <div class="car-actions">
+                <a class="btn btn-small btn-primary" href="/cars/<%= car.car_id %>">Detail</a>
+                <a class="btn btn-small" href="/cars/<%= car.car_id %>/edit">Upraviť</a>
+                <form method="POST" action="/cars/<%= car.car_id %>/delete">
+                  <button class="btn btn-small btn-danger" type="submit">Vymazať</button>
+                </form>
+              </div>
+            </div>
+          </article>
+        <% }) %>
+      </div>
+    </div>
+  </section>
 </main>
 
 <%- include("../components/footer") %>

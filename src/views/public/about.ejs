@@ -5,13 +5,14 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>AutoSalón | O nás</title>
   <link rel="stylesheet" href="/assets/css/styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,600;0,700;1,400&family=Epilogue:wght@300;400;500;600;700&display=swap" />
 </head>
 <body data-page="about">
 <%- include("../components/header") %>
 
-
 <main>
-
   <section class="section">
     <div class="container">
       <h1>O nás</h1>
@@ -19,22 +20,22 @@
     </div>
   </section>
 
-  <section class="section section-muted">
+  <section class="section section-alt">
     <div class="container">
       <div class="grid-2">
         <div>
           <h2>Čo robíme</h2>
           <p>Vyberáme autá s čo najjasnejšou históriou, pripravíme ich na predaj a komunikujeme férovo. Keď má auto slabinu, povieme to.</p>
-          <ul class="list-clean">
-            <li>overenie pôvodu a základná kontrola</li>
-            <li>prehľadné informácie a transparentný prístup</li>
-            <li>pomoc s papiermi (prepis, základné rady)</li>
-          </ul>
+          <div class="card" style="margin-top: 18px;">
+            <p>• overenie pôvodu a základná kontrola</p>
+            <p>• prehľadné informácie a transparentný prístup</p>
+            <p>• pomoc s papiermi (prepis, základné rady)</p>
+          </div>
         </div>
 
         <div class="card">
-          <img class="card-img" src="assets/img/about/showroom.svg" alt="Showroom">
-          <p>Showroom ktorý neomrzí</p>
+          <img class="card-img" src="/assets/img/about/showroom.svg" alt="Showroom" />
+          <p>Showroom, ktorý neomrzí a priestor, kde si vieš auto porovnať v pokoji.</p>
         </div>
       </div>
     </div>
@@ -43,7 +44,7 @@
   <section class="section">
     <div class="container">
       <h2>Naše hodnoty</h2>
-      <div class="grid-3" style="margin-top:18px">
+      <div class="grid-3" style="margin-top: 18px;">
         <div class="card">
           <h3>Transparentnosť</h3>
           <p>Stav auta popíšeme tak, aby si vedel, čo kupuješ.</p>
@@ -60,12 +61,11 @@
     </div>
   </section>
 
-  <section class="section section-muted">
+  <section class="section section-alt">
     <div class="container">
       <h2>Krátky príbeh</h2>
       <p class="section-lead">Malá časová os</p>
-
-      <div class="steps" style="max-width:820px">
+      <div class="steps" style="max-width: 820px;">
         <div class="step">
           <div class="step-num">2019</div>
           <div>
@@ -94,36 +94,30 @@
   <section class="section">
     <div class="container">
       <h2>Tím</h2>
-      <p class="section-lead">2 ľudia, ktorí to celé držia pokope. (Fotky si vymeníš za vlastné.)</p>
-
-      <div class="grid-3" style="margin-top:18px">
+      <p class="section-lead">Dvaja ľudia, ktorí to celé držia pokope. Fotky si vieš neskôr vymeniť za vlastné.</p>
+      <div class="grid-3" style="margin-top: 18px;">
         <div class="card">
-          <img class="card-img" src="assets/img/about/team-1.svg" alt="Tím 1">
+          <img class="card-img" src="/assets/img/about/team-1.svg" alt="Michal" />
           <h3>Michal</h3>
           <p>Výber áut, komunikácia, dohody.</p>
         </div>
-
         <div class="card">
-          <img class="card-img" src="assets/img/about/team-2.svg" alt="Tím 2">
+          <img class="card-img" src="/assets/img/about/team-2.svg" alt="Martin" />
           <h3>Martin</h3>
           <p>Kontroly, príprava, základná diagnostika.</p>
         </div>
-
         <div class="card">
           <h3>Chceš obhliadku?</h3>
           <p>Napíš nám a dohodneme termín. Všetko bez nátlaku.</p>
-          <a class="btn btn-primary btn-small" href="contact">Kontakt</a>
+          <a class="btn btn-primary btn-small" href="/contact">Kontakt</a>
         </div>
       </div>
     </div>
   </section>
-
 </main>
+
 <%- include("../components/footer") %>
-
-
 <button id="backToTop" type="button" aria-label="Back to top">↑</button>
-
-<script src="assets/js/app.js"></script>
+<script src="/assets/js/app.js"></script>
 </body>
 </html>

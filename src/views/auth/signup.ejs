@@ -5,29 +5,51 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Registrácia</title>
   <link rel="stylesheet" href="/assets/css/styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,600;0,700;1,400&family=Epilogue:wght@300;400;500;600;700&display=swap" />
 </head>
 <body>
 <%- include("../components/header") %>
 
-<main class="section">
-  <div class="container">
-    <h1>Registrácia</h1>
+<main>
+  <div class="auth-wrap">
+    <div class="auth-card">
+      <h1 class="auth-title">Registrácia</h1>
+      <p class="auth-sub">Vytvor si účet a spravuj svoju ponuku áut.</p>
 
-    <% if (errors && errors.length > 0) { %>
-      <ul>
-        <% errors.forEach((error) => { %>
-          <li><%= error.message %></li>
-        <% }) %>
-      </ul>
-    <% } %>
+      <% if (errors && errors.length > 0) { %>
+        <div class="alert alert-error">
+          <% errors.forEach((error) => { %>
+            <div><%= error.message %></div>
+          <% }) %>
+        </div>
+      <% } %>
 
-    <form method="POST" action="/signup">
-      <input type="text" name="name" placeholder="Meno" value="<%= formData.name || '' %>" />
-      <input type="email" name="email" placeholder="Email" value="<%= formData.email || '' %>" />
-      <input type="password" name="password" placeholder="Heslo" />
-      <input type="password" name="confirmPassword" placeholder="Potvrď heslo" />
-      <button type="submit">Registrovať sa</button>
-    </form>
+      <form method="POST" action="/signup">
+        <div class="form-group">
+          <label class="form-label" for="name">Meno</label>
+          <input class="form-input" id="name" type="text" name="name" placeholder="Meno" value="<%= formData.name || '' %>" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="email">Email</label>
+          <input class="form-input" id="email" type="email" name="email" placeholder="Email" value="<%= formData.email || '' %>" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="password">Heslo</label>
+          <input class="form-input" id="password" type="password" name="password" placeholder="Heslo" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="confirmPassword">Potvrď heslo</label>
+          <input class="form-input" id="confirmPassword" type="password" name="confirmPassword" placeholder="Potvrď heslo" />
+        </div>
+        <button class="btn btn-primary" style="width:100%" type="submit">Registrovať sa</button>
+      </form>
+
+      <div class="auth-footer">
+        <a href="/login">Už máte účet? Prihláste sa</a>
+      </div>
+    </div>
   </div>
 </main>
 

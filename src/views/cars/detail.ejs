@@ -5,26 +5,43 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title><%= car.title %></title>
   <link rel="stylesheet" href="/assets/css/styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,600;0,700;1,400&family=Epilogue:wght@300;400;500;600;700&display=swap" />
 </head>
-<body>
+<body data-page="cars">
 <%- include("../components/header") %>
 
-<main class="section">
-  <div class="container">
-    <h1><%= car.title %></h1>
-
-    <div class="card">
-      <img class="card-img" src="<%= car.image %>" alt="<%= car.title %>" />
-      <p><strong>Značka:</strong> <%= car.brand %></p>
-      <p><strong>Model:</strong> <%= car.model %></p>
-      <p><strong>Rok:</strong> <%= car.year %></p>
-      <p><strong>Cena:</strong> <%= car.price %> €</p>
-      <p><strong>Najazdené km:</strong> <%= car.mileage %></p>
-      <p><strong>Palivo:</strong> <%= car.fuel %></p>
-      <p><strong>Prevodovka:</strong> <%= car.transmission %></p>
-      <p><strong>Popis:</strong> <%= car.description %></p>
+<main>
+  <div class="page-header">
+    <div class="container">
+      <h1><%= car.title %></h1>
     </div>
   </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="grid-2">
+        <div class="car-card">
+          <img class="car-card-img" src="<%= car.image %>" alt="<%= car.title %>" />
+        </div>
+        <div class="card">
+          <div class="car-meta">
+            <span class="car-meta-item"><%= car.brand %> <%= car.model %></span>
+            <span class="car-meta-item"><%= car.year %></span>
+            <span class="car-meta-item"><%= car.mileage %> km</span>
+            <span class="car-meta-item"><%= car.fuel %></span>
+            <span class="car-meta-item"><%= car.transmission %></span>
+          </div>
+          <div class="car-price"><%= car.price %> €</div>
+          <p><%= car.description %></p>
+          <div class="car-actions">
+            <a class="btn btn-small" href="/cars">Späť na ponuku</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </main>
 
 <%- include("../components/footer") %>

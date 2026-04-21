@@ -5,42 +5,86 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title><%= mode === "create" ? "Pridať auto" : "Upraviť auto" %></title>
   <link rel="stylesheet" href="/assets/css/styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,600;0,700;1,400&family=Epilogue:wght@300;400;500;600;700&display=swap" />
 </head>
-<body>
+<body data-page="cars">
 <%- include("../components/header") %>
 
-<main class="section">
-  <div class="container">
-    <h1><%= mode === "create" ? "Pridať auto" : "Upraviť auto" %></h1>
-
-    <% if (errors && errors.length > 0) { %>
-      <ul>
-        <% errors.forEach((error) => { %>
-          <li><%= error.message %></li>
-        <% }) %>
-      </ul>
-    <% } %>
-
-    <form
-      method="POST"
-      action="<%= mode === 'create' ? '/cars/new' : '/cars/' + car.car_id + '/edit' %>"
-    >
-      <input type="text" name="title" placeholder="Názov auta" value="<%= formData.title || '' %>" />
-      <input type="text" name="brand" placeholder="Značka" value="<%= formData.brand || '' %>" />
-      <input type="text" name="model" placeholder="Model" value="<%= formData.model || '' %>" />
-      <input type="number" name="year" placeholder="Rok" value="<%= formData.year || '' %>" />
-      <input type="number" name="price" placeholder="Cena" value="<%= formData.price || '' %>" />
-      <input type="number" name="mileage" placeholder="Najazdené km" value="<%= formData.mileage || '' %>" />
-      <input type="text" name="fuel" placeholder="Palivo" value="<%= formData.fuel || '' %>" />
-      <input type="text" name="transmission" placeholder="Prevodovka" value="<%= formData.transmission || '' %>" />
-      <input type="text" name="image" placeholder="URL alebo cesta k obrázku" value="<%= formData.image || '' %>" />
-      <textarea name="description" placeholder="Popis auta"><%= formData.description || '' %></textarea>
-
-      <button type="submit">
-        <%= mode === "create" ? "Pridať auto" : "Uložiť zmeny" %>
-      </button>
-    </form>
+<main>
+  <div class="page-header">
+    <div class="container">
+      <h1><%= mode === "create" ? "Pridať auto" : "Upraviť auto" %></h1>
+    </div>
   </div>
+
+  <section class="section">
+    <div class="container" style="max-width: 760px;">
+      <% if (errors && errors.length > 0) { %>
+        <div class="alert alert-error">
+          <% errors.forEach((error) => { %>
+            <div><%= error.message %></div>
+          <% }) %>
+        </div>
+      <% } %>
+
+      <div class="card">
+        <form method="POST" action="<%= mode === 'create' ? '/cars/new' : '/cars/' + car.car_id + '/edit' %>">
+          <div class="form-group">
+            <label class="form-label" for="title">Názov auta</label>
+            <input class="form-input" id="title" type="text" name="title" value="<%= formData.title || '' %>" />
+          </div>
+          <div class="grid-2">
+            <div class="form-group">
+              <label class="form-label" for="brand">Značka</label>
+              <input class="form-input" id="brand" type="text" name="brand" value="<%= formData.brand || '' %>" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="model">Model</label>
+              <input class="form-input" id="model" type="text" name="model" value="<%= formData.model || '' %>" />
+            </div>
+          </div>
+          <div class="grid-2">
+            <div class="form-group">
+              <label class="form-label" for="year">Rok</label>
+              <input class="form-input" id="year" type="number" name="year" value="<%= formData.year || '' %>" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="price">Cena</label>
+              <input class="form-input" id="price" type="number" name="price" value="<%= formData.price || '' %>" />
+            </div>
+          </div>
+          <div class="grid-2">
+            <div class="form-group">
+              <label class="form-label" for="mileage">Najazdené km</label>
+              <input class="form-input" id="mileage" type="number" name="mileage" value="<%= formData.mileage || '' %>" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="fuel">Palivo</label>
+              <input class="form-input" id="fuel" type="text" name="fuel" value="<%= formData.fuel || '' %>" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="transmission">Prevodovka</label>
+            <input class="form-input" id="transmission" type="text" name="transmission" value="<%= formData.transmission || '' %>" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="image">URL alebo cesta k obrázku</label>
+            <input class="form-input" id="image" type="text" name="image" value="<%= formData.image || '' %>" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="description">Popis auta</label>
+            <textarea class="form-textarea" id="description" name="description"><%= formData.description || '' %></textarea>
+          </div>
+          <div class="car-actions">
+            <button class="btn btn-primary" type="submit"><%= mode === "create" ? "Pridať auto" : "Uložiť zmeny" %></button>
+            <a class="btn" href="/my-cars">Späť</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
 </main>
 
 <%- include("../components/footer") %>

@@ -5,13 +5,14 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>AutoSalón | Kontakt</title>
   <link rel="stylesheet" href="/assets/css/styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,600;0,700;1,400&family=Epilogue:wght@300;400;500;600;700&display=swap" />
 </head>
 <body data-page="contact">
 <%- include("../components/header") %>
 
-
 <main>
-
   <section class="section">
     <div class="container">
       <h1>Kontakt</h1>
@@ -19,22 +20,19 @@
     </div>
   </section>
 
-  <section class="section section-muted">
+  <section class="section section-alt">
     <div class="container">
       <div class="grid-2">
-        <div>
+        <div class="card">
           <h2>Kde nás nájdeš</h2>
           <p>Námestovo</p>
-          <ul class="list-clean">
-            <li>Tel.: +421 900 000 000</li>
-            <li>E-mail: info@autosalon.sk</li>
-            <li>Po–Pi: 9:00–17:00</li>
-          </ul>
+          <p>Tel.: +421 900 000 000</p>
+          <p>E-mail: info@autosalon.sk</p>
+          <p>Po–Pi: 9:00–17:00</p>
         </div>
 
         <div class="card">
-          <img class="card-img" src="/assets/img/contact-map.svg" alt="Mapa">
-          <script src="/assets/js/app.js"></script>
+          <img class="card-img" src="/assets/img/contact-map.svg" alt="Mapa" />
           <p>Budova OC</p>
         </div>
       </div>
@@ -44,21 +42,20 @@
   <section class="section">
     <div class="container">
       <h2>Nezáväzný dopyt</h2>
-
-      <form id="contactForm" class="form">
-        <div>
-          <div class="label">Meno</div>
-          <input class="input" type="text" name="name" required placeholder="Tvoje meno">
+      <form id="contactForm">
+        <div class="form-group">
+          <label class="form-label" for="contact-name">Meno</label>
+          <input class="form-input" id="contact-name" type="text" name="name" required placeholder="Tvoje meno" />
         </div>
 
-        <div>
-          <div class="label">E-mail</div>
-          <input class="input" type="email" name="email" required placeholder="tvoj@email.sk">
+        <div class="form-group">
+          <label class="form-label" for="contact-email">E-mail</label>
+          <input class="form-input" id="contact-email" type="email" name="email" required placeholder="tvoj@email.sk" />
         </div>
 
-        <div>
-          <div class="label">Zaujíma ma auto</div>
-          <select class="input" name="car">
+        <div class="form-group">
+          <label class="form-label" for="contact-car">Zaujíma ma auto</label>
+          <select class="form-select" id="contact-car" name="car">
             <option value="">— vyber —</option>
             <option>BMW 3 (2020)</option>
             <option>Audi A4 (2019)</option>
@@ -67,27 +64,24 @@
           </select>
         </div>
 
-        <div>
-          <div class="label">Správa</div>
-          <textarea class="input" name="message" required placeholder="Napíš, čo potrebuješ..."></textarea>
+        <div class="form-group">
+          <label class="form-label" for="contact-message">Správa</label>
+          <textarea class="form-textarea" id="contact-message" name="message" required placeholder="Napíš, čo potrebuješ..."></textarea>
         </div>
 
         <button class="btn btn-primary" type="submit">Odoslať</button>
       </form>
 
-      <div id="previewBox" class="preview" hidden>
+      <div id="previewBox" hidden>
         <h3>Preview správy</h3>
         <p id="previewText"></p>
       </div>
     </div>
   </section>
-
 </main>
+
 <%- include("../components/footer") %>
-
-
 <button id="backToTop" type="button" aria-label="Back to top">↑</button>
-
-<script src="assets/js/app.js"></script>
+<script src="/assets/js/app.js"></script>
 </body>
 </html>

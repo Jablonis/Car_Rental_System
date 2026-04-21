@@ -2,16 +2,16 @@
   <div class="container header-inner">
     <a class="brand" href="/">
       <span class="brand-dot"></span>
-      <span class="brand-text">AutoSalón</span>
+      <span class="brand-name">AutoSalón</span>
     </a>
 
     <button class="nav-toggle" type="button" aria-label="Menu">Menu</button>
 
     <nav class="main-nav">
-      <a href="/" class="nav-link">Domov</a>
-      <a href="/cars" class="nav-link">Ponuka áut</a>
-      <a href="/about" class="nav-link">O nás</a>
-      <a href="/contact" class="nav-link">Kontakt</a>
+      <a href="/" class="nav-link" data-page="home">Domov</a>
+      <a href="/cars" class="nav-link" data-page="cars">Ponuka áut</a>
+      <a href="/about" class="nav-link" data-page="about">O nás</a>
+      <a href="/contact" class="nav-link" data-page="contact">Kontakt</a>
 
       <% if (!locals.isAuthenticated) { %>
         <a href="/login" class="nav-link btn-nav">Prihlásenie</a>
@@ -21,17 +21,12 @@
       <% if (locals.isAuthenticated) { %>
         <a href="/my-cars" class="nav-link">Moje autá</a>
         <a href="/cars/new" class="nav-link btn-nav btn-nav-primary">Pridať auto</a>
-      <% } %>
-
-      <% if (locals.isAuthenticated) { %>
         <span class="nav-link user-name"><%= locals.user.name %></span>
-
         <% if (locals.isAdmin) { %>
-          <a href="/admin/users" class="nav-link btn-nav">Admin panel</a>
+          <a href="/admin/users" class="nav-link btn-nav">Admin</a>
         <% } %>
-
         <form method="POST" action="/logout" style="display:inline;">
-          <button type="submit" class="nav-link btn-nav btn-logout">Odhlásiť sa</button>
+          <button type="submit" class="nav-link btn-nav btn-logout">Odhlásiť</button>
         </form>
       <% } %>
     </nav>

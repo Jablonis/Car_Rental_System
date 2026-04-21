@@ -1,50 +1,103 @@
 <!doctype html>
-<html lang="sk">
+<html class="dark" lang="sk">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title><%= car.title %></title>
-  <link rel="stylesheet" href="/assets/css/styles.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,600;0,700;1,400&family=Epilogue:wght@300;400;500;600;700&display=swap" />
+  <%- include('../components/head', { title: car.title + ' | Archive' }) %>
 </head>
-<body data-page="cars">
-<%- include("../components/header") %>
+<body class="bg-surface text-on-surface selection:bg-primary selection:text-primary-container" data-page="cars">
+<%- include('../components/header') %>
 
-<main>
-  <div class="page-header">
-    <div class="container">
-      <h1><%= car.title %></h1>
+<main class="nocturne-shell">
+  <section class="relative h-screen w-full overflow-hidden flex items-end pb-24 md:pb-32">
+    <img class="absolute inset-0 w-full h-full object-cover grayscale-[0.2] brightness-[0.7]" src="<%= car.image %>" alt="<%= car.title %>" />
+    <div class="absolute inset-0 bg-gradient-to-t from-surface via-surface/20 to-transparent"></div>
+    <div class="relative z-10 w-full px-6 md:px-24">
+      <span class="text-xs tracking-[0.4em] uppercase text-primary mb-6 block">Legacy of Displacement</span>
+      <h1 class="font-headline text-5xl md:text-8xl font-black tracking-tighter text-on-surface max-w-5xl leading-[0.9] uppercase">
+        <%= car.brand %> <%= car.model %><br><span class="italic font-normal normal-case"><%= car.title %></span>
+      </h1>
     </div>
-  </div>
+  </section>
 
-  <section class="section">
-    <div class="container">
-      <div class="grid-2">
-        <div class="car-card">
-          <img class="car-card-img" src="<%= car.image %>" alt="<%= car.title %>" />
+  <section class="bg-surface-container-low py-20 md:py-32 px-6 md:px-24">
+    <div class="max-w-[1600px] mx-auto grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-16 items-start">
+      <div class="md:col-span-5 space-y-12">
+        <div class="space-y-6">
+          <h2 class="font-headline text-4xl leading-tight">THE ART OF DISPLACEMENT</h2>
+          <p class="font-body text-lg text-on-surface-variant leading-relaxed max-w-md">
+            <%= car.description %>
+          </p>
         </div>
-        <div class="card">
-          <div class="car-meta">
-            <span class="car-meta-item"><%= car.brand %> <%= car.model %></span>
-            <span class="car-meta-item"><%= car.year %></span>
-            <span class="car-meta-item"><%= car.mileage %> km</span>
-            <span class="car-meta-item"><%= car.fuel %></span>
-            <span class="car-meta-item"><%= car.transmission %></span>
+        <div class="grid grid-cols-2 gap-4">
+          <div class="bg-surface-container-lowest p-8 rounded-lg editorial-shadow">
+            <span class="text-[10px] tracking-widest uppercase text-outline mb-2 block">Year</span>
+            <div class="font-headline text-3xl italic"><%= car.year %></div>
           </div>
-          <div class="car-price"><%= car.price %> €</div>
-          <p><%= car.description %></p>
-          <div class="car-actions">
-            <a class="btn btn-small" href="/cars">Späť na ponuku</a>
+          <div class="bg-surface-container-lowest p-8 rounded-lg editorial-shadow mt-6">
+            <span class="text-[10px] tracking-widest uppercase text-outline mb-2 block">Mileage</span>
+            <div class="font-headline text-3xl italic"><%= car.mileage %> <span class="text-sm font-body not-italic tracking-normal">KM</span></div>
+          </div>
+          <div class="bg-surface-container-lowest p-8 rounded-lg editorial-shadow col-span-2">
+            <span class="text-[10px] tracking-widest uppercase text-outline mb-2 block">Mechanical Soul</span>
+            <div class="font-headline text-4xl"><%= car.price %> <span class="text-primary italic">EUR</span></div>
+            <p class="font-body text-xs text-outline mt-4"><%= car.fuel %> · <%= car.transmission %></p>
+          </div>
+        </div>
+        <div class="flex flex-wrap gap-4">
+          <a href="/cars" class="px-7 py-3 rounded-full border border-outline-variant/20 text-xs uppercase tracking-[0.25em] text-on-surface hover:text-primary hover:border-primary/30 transition-colors">Back to Archive</a>
+          <a href="/contact" class="px-7 py-3 rounded-full bg-gradient-to-br from-primary to-on-primary-container text-on-primary-fixed font-bold text-xs uppercase tracking-[0.25em] hover:scale-105 transition-transform">Inquire</a>
+        </div>
+      </div>
+
+      <div class="md:col-span-7 grid grid-cols-2 gap-6 md:gap-8">
+        <div class="space-y-6 md:space-y-8 pt-0 md:pt-20">
+          <div class="group relative overflow-hidden rounded-lg">
+            <img class="w-full h-64 md:h-80 object-cover grayscale transition-transform duration-700 group-hover:scale-110" src="<%= car.image %>" alt="<%= car.title %>" />
+          </div>
+          <div class="group relative overflow-hidden rounded-lg">
+            <img class="w-full h-[320px] md:h-[500px] object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAx3ObOfiY6m1kEyGJGJSsJvUJv_-IWChcxKQ5_H9cj-SO83QshlHx_BPjg8Tl2J1Zc0TJhVgGE29IjEHfr7h2BeFhxYqWyvbtuCpVArEvFrl2O6oZ1wjvpeB5HSCiMIiz91ROX7MIUhfK9oXP_Vkxet-oLAYPlYY0eA4kEFu_TnhMwxeS2qH5kb3AHE_lhK0k5Hd2J9Dlg7KVpiHtNwByvOyC6RWveNPZFQv86Mzi_L34MkY_Kpcj-_u-67-xVkO2qnIWInB2PKx6tw" alt="Detail study" />
+          </div>
+        </div>
+        <div class="space-y-6 md:space-y-8">
+          <div class="group relative overflow-hidden rounded-lg">
+            <img class="w-full h-[320px] md:h-[500px] object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB20hMZ3V6VxNN1HBPrS3sgDuYk4l-4C6lYycD0bwZe57JqM7u7T8jny7Gsr7ztit4DAuQ-IC0Uh77fB5mDzN5qYteqPk8_DpDtZZZrGffVKeZhoLyjShm1Sd4VYPANxYdHWN5tK8F3prmKZuL9IJHJQh4u1h0jpssPx5T57W_A0n9LND0h-HgIHLVujxW8p3GfYrbQCTQAJ-7kd1nIHYIyTtV2oWccJRs6hjl4mFcBqcJXg2i2-6rjJrjxT_E6lBBgU0-8S9n1" alt="Seat detail" />
+          </div>
+          <div class="group relative overflow-hidden rounded-lg">
+            <img class="w-full h-64 md:h-80 object-cover grayscale transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCaBwwP8QmBS8QiYpHvJ9xqi9Cn5aO7ALbVxf9o5w0mg3ABQOQVmuw2g61EX7H8vq7dAr5Op6Vx2VBi_8W7vWVp2ICxoxzV-PH9dwNQeW0wbwXXxsb88q9QF1-zoBoYFkaKQneTwfJ8uF8x8dUXYXsBv7Czv7SfRrKZ0T0P6rWp-WD5JO2X84d9vi5X4LnIof37paR4gudqOj5jp6WWwIhE0IeJg4-5cqe4W4z_9vSnftv2l4Mhnw68FAIfBO6vTrJx4Soe0Az-" alt="Emblem" />
           </div>
         </div>
       </div>
     </div>
   </section>
+
+  <section class="bg-surface py-24 md:py-40 px-6 md:px-24">
+    <div class="max-w-4xl mx-auto text-center space-y-8">
+      <p class="font-headline italic text-2xl md:text-4xl leading-relaxed text-on-surface">
+        “Driving this machine is a lesson in balance; a dance between physics and feeling.”
+      </p>
+      <div class="w-px h-16 bg-outline-variant/30 mx-auto"></div>
+      <p class="text-xs uppercase tracking-[0.3em] text-outline">Curated Motion // Archive Notes</p>
+    </div>
+  </section>
+
+  <section class="relative h-[560px] md:h-[819px] flex items-center bg-surface-container-high overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-r from-surface to-transparent z-10"></div>
+    <img class="absolute inset-0 w-full h-full object-cover grayscale opacity-50" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9Vzx4vl1aQfR7r2Yyjvf7iRdpQwcCCqkfl7ABc1om-V3u36n0GItCJ6dABPS4hzgQ3qg6iMNqk2M3e7ld0Ht9phVq15w2AV5f1zhe0cM4d7aV79i9OUd1jNl8eY3BNH9slrSg-33XYHSHN6ZyXJw6X6zvN8c-Q9fGNvK-jc3E6vT8fjvSt6xTgEnNUi7BifZzM1pmbh4D4x9WVt4Kju-Tq0r9eYV3s8MLDoOZ6bNqN-m0w0E5FU1fPeKr5Fvx0LkH4z8vT2zF" alt="Engine" />
+    <div class="relative z-20 max-w-7xl mx-auto px-6 md:px-24 grid grid-cols-1 md:grid-cols-2 gap-10 items-center w-full">
+      <div></div>
+      <div class="bg-surface-container-low/80 backdrop-blur-xl p-8 md:p-12 rounded-lg editorial-shadow">
+        <span class="text-[10px] tracking-[0.3em] uppercase text-primary block mb-4">Body of Work</span>
+        <h2 class="font-headline text-4xl md:text-5xl font-bold mb-6">The Air-Cooled Philosophy</h2>
+        <p class="text-on-surface-variant leading-relaxed mb-8">
+          Crafted with patient intent and mechanical purity, this archive piece is presented in a tone that favors restraint over noise and proportion over spectacle.
+        </p>
+        <a href="/contact" class="inline-flex items-center gap-2 text-xs uppercase tracking-[0.28em] text-on-surface hover:text-primary transition-colors group">Step into the archive <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span></a>
+      </div>
+    </div>
+  </section>
 </main>
 
-<%- include("../components/footer") %>
+<%- include('../components/footer') %>
+<button id="backToTop" type="button" aria-label="Back to top">↑</button>
 <script src="/assets/js/app.js"></script>
 </body>
 </html>

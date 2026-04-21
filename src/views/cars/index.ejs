@@ -1,102 +1,89 @@
 <!doctype html>
-<html lang="sk">
+<html class="dark" lang="sk">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Ponuka áut</title>
-  <link rel="stylesheet" href="/assets/css/styles.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,600;0,700;1,400&family=Epilogue:wght@300;400;500;600;700&display=swap" />
+  <%- include('../components/head', { title: 'Archive | Curated Motion' }) %>
 </head>
-<body data-page="cars">
-<%- include("../components/header") %>
+<body class="bg-surface text-on-surface" data-page="cars">
+<%- include('../components/header') %>
 
-<main>
-  <div class="page-header">
-    <div class="container">
-      <h1>Ponuka áut</h1>
+<main class="pt-32 pb-24 px-6 md:px-12 max-w-screen-2xl mx-auto">
+  <section class="mb-16 md:mb-20">
+    <p class="text-primary text-xs tracking-[0.3em] uppercase mb-4">Archive</p>
+    <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-8">
+      <div class="max-w-3xl">
+        <h1 class="font-headline text-5xl md:text-7xl font-black tracking-tighter leading-[0.95]">The Curated Inventory.</h1>
+        <p class="text-on-surface-variant text-lg leading-relaxed mt-6">A premium selection of modern icons and mechanical statements—filtered, restrained, and ready for closer inspection.</p>
+      </div>
+      <button id="filterToggle" type="button" class="lg:hidden px-5 py-3 rounded-full border border-outline-variant/20 text-xs uppercase tracking-[0.24em] text-on-surface">Filters</button>
     </div>
-  </div>
+  </section>
 
-  <section class="section">
-    <div class="container">
-      <form method="GET" action="/cars" class="search-bar" id="filterForm">
-        <input
-          type="text"
-          id="carSearch"
-          name="search"
-          class="form-input"
-          placeholder="Hľadať podľa názvu, značky alebo modelu"
-          value="<%= search || '' %>"
-        />
-        <input
-          type="number"
-          id="minPrice"
-          name="minPrice"
-          class="form-input"
-          placeholder="Cena od"
-          value="<%= minPrice || '' %>"
-          min="0"
-          step="100"
-        />
-        <input
-          type="number"
-          id="maxPrice"
-          name="maxPrice"
-          class="form-input"
-          placeholder="Cena do"
-          value="<%= maxPrice || '' %>"
-          min="0"
-          step="100"
-        />
-        <select id="sort" name="sort" class="form-select">
-          <option value="">Najnovšie</option>
-          <option value="price_asc" <%= sort === "price_asc" ? "selected" : "" %>>Cena od najnižšej</option>
-          <option value="price_desc" <%= sort === "price_desc" ? "selected" : "" %>>Cena od najvyššej</option>
-          <option value="year_desc" <%= sort === "year_desc" ? "selected" : "" %>>Najnovší rok</option>
-          <option value="year_asc" <%= sort === "year_asc" ? "selected" : "" %>>Najstarší rok</option>
-        </select>
-        <button type="submit" class="btn btn-small btn-primary">Filtrovať</button>
-        <a href="/cars" class="btn btn-small">Reset</a>
-      </form>
+  <form method="GET" action="/cars" id="filterForm" class="mb-12 bg-surface-container-low rounded-lg p-6 md:p-8 editorial-shadow">
+    <div class="filter-grid grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 gap-4">
+      <input type="text" id="carSearch" name="search" value="<%= search || '' %>" placeholder="Search by title, brand, model" class="form-input-luxe" />
+      <input type="number" name="minPrice" value="<%= minPrice || '' %>" min="0" step="100" placeholder="Price from" class="form-input-luxe" />
+      <input type="number" name="maxPrice" value="<%= maxPrice || '' %>" min="0" step="100" placeholder="Price to" class="form-input-luxe" />
+      <select name="sort" class="form-select-luxe">
+        <option value="">Latest arrivals</option>
+        <option value="price_asc" <%= sort === 'price_asc' ? 'selected' : '' %>>Price ascending</option>
+        <option value="price_desc" <%= sort === 'price_desc' ? 'selected' : '' %>>Price descending</option>
+        <option value="year_desc" <%= sort === 'year_desc' ? 'selected' : '' %>>Newest year</option>
+        <option value="year_asc" <%= sort === 'year_asc' ? 'selected' : '' %>>Oldest year</option>
+      </select>
+      <div class="filter-actions flex flex-wrap gap-3 items-center">
+        <button type="submit" class="px-6 py-3 rounded-full bg-gradient-to-r from-primary to-primary-container text-on-primary-fixed font-bold text-[10px] uppercase tracking-[0.24em]">Apply</button>
+        <a href="/cars" class="px-6 py-3 rounded-full border border-outline-variant/20 text-[10px] uppercase tracking-[0.24em] text-on-surface">Reset</a>
+      </div>
+    </div>
+  </form>
 
-      <div id="carList" class="grid-3">
-        <% cars.forEach((car) => { %>
-          <article class="car-card" data-name="<%= car.title %> <%= car.brand %> <%= car.model %>">
-            <img class="car-card-img" src="<%= car.image %>" alt="<%= car.title %>" />
-            <div class="car-card-body">
-              <h3 class="car-card-title"><%= car.title %></h3>
-              <div class="car-meta">
-                <span class="car-meta-item"><%= car.brand %> <%= car.model %></span>
-                <span class="car-meta-item"><%= car.year %></span>
-                <span class="car-meta-item"><%= car.mileage %> km</span>
-                <span class="car-meta-item"><%= car.fuel %></span>
-                <span class="car-meta-item"><%= car.transmission %></span>
+  <section>
+    <div id="carList" class="catalog-grid">
+      <% cars.forEach((car, index) => { %>
+        <article class="catalog-card car-card bg-surface-container-low rounded-lg overflow-hidden editorial-shadow group <%= index % 5 === 0 ? 'md:translate-y-12' : index % 3 === 0 ? 'md:-translate-y-6' : '' %>" data-name="<%= car.title %> <%= car.brand %> <%= car.model %>">
+          <div class="relative aspect-[4/3] overflow-hidden">
+            <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 car-card-img" src="<%= car.image %>" alt="<%= car.title %>" />
+            <div class="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent"></div>
+            <div class="absolute top-5 left-5"><span class="px-4 py-1 rounded-full bg-primary/10 text-primary text-[10px] uppercase tracking-[0.24em]">Archive</span></div>
+            <div class="absolute bottom-5 left-5 right-5 flex justify-between items-end gap-4">
+              <div>
+                <p class="text-[10px] tracking-[0.3em] uppercase text-primary mb-2"><%= car.brand %> · <%= car.model %></p>
+                <h2 class="font-headline text-2xl md:text-3xl font-bold tracking-tight car-card-title"><%= car.title %></h2>
               </div>
-              <div class="car-price"><%= car.price %> €</div>
-              <div class="car-actions">
-                <a class="btn btn-small btn-primary" href="/cars/<%= car.car_id %>">Detail</a>
-                <button type="button" class="btn btn-small car-toggle">Zobraziť detaily</button>
-              </div>
-              <div class="car-details">
-                <p><strong>Popis:</strong> <%= car.description %></p>
+              <div class="text-right">
+                <p class="font-headline italic text-2xl text-primary car-price"><%= car.price %> €</p>
               </div>
             </div>
-          </article>
-        <% }) %>
-      </div>
-
-      <% if (cars.length === 0) { %>
-        <p id="noResults">Nenašli sa žiadne autá.</p>
-      <% } else { %>
-        <p id="noResults" hidden>Nenašli sa žiadne autá podľa zadaného filtra.</p>
-      <% } %>
+          </div>
+          <div class="p-6 md:p-7 car-card-body">
+            <div class="car-meta flex flex-wrap gap-2 mb-5">
+              <span class="car-meta-item px-3 py-1 rounded-full bg-surface-container-high text-[10px] tracking-[0.22em] uppercase text-on-surface-variant"><%= car.year %></span>
+              <span class="car-meta-item px-3 py-1 rounded-full bg-surface-container-high text-[10px] tracking-[0.22em] uppercase text-on-surface-variant"><%= car.mileage %> km</span>
+              <span class="car-meta-item px-3 py-1 rounded-full bg-surface-container-high text-[10px] tracking-[0.22em] uppercase text-on-surface-variant"><%= car.fuel %></span>
+              <span class="car-meta-item px-3 py-1 rounded-full bg-surface-container-high text-[10px] tracking-[0.22em] uppercase text-on-surface-variant"><%= car.transmission %></span>
+            </div>
+            <div class="car-actions flex flex-wrap gap-3">
+              <a class="px-4 py-3 rounded-full bg-gradient-to-r from-primary to-primary-container text-on-primary-fixed font-bold text-[10px] uppercase tracking-[0.22em]" href="/cars/<%= car.car_id %>">Detail</a>
+              <button type="button" class="px-4 py-3 rounded-full border border-outline-variant/20 text-[10px] uppercase tracking-[0.22em] text-on-surface car-toggle">Reveal Notes</button>
+            </div>
+            <div class="car-details text-on-surface-variant leading-relaxed text-sm mt-5 pt-5 border-t border-outline-variant/10">
+              <p><%= car.description %></p>
+            </div>
+          </div>
+        </article>
+      <% }) %>
     </div>
+
+    <% if (cars.length === 0) { %>
+      <p id="noResults">No entries in the archive.</p>
+    <% } else { %>
+      <p id="noResults" hidden>No entries matched your search.</p>
+    <% } %>
   </section>
 </main>
 
-<%- include("../components/footer") %>
+<%- include('../components/footer') %>
+<button id="backToTop" type="button" aria-label="Back to top">↑</button>
 <script src="/assets/js/app.js"></script>
 </body>
 </html>

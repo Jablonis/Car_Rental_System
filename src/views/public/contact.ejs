@@ -1,86 +1,109 @@
 <!doctype html>
-<html lang="sk">
+<html class="dark" lang="sk">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>AutoSalón | Kontakt</title>
-  <link rel="stylesheet" href="/assets/css/styles.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,600;0,700;1,400&family=Epilogue:wght@300;400;500;600;700&display=swap" />
+  <%- include('../components/head', { title: 'AutoSalón | Dispatch Inquiry' }) %>
 </head>
-<body data-page="contact">
-<%- include("../components/header") %>
+<body class="bg-surface text-on-surface font-body selection:bg-primary selection:text-primary-container" data-page="contact">
+<%- include('../components/header') %>
 
-<main>
-  <section class="section">
-    <div class="container">
-      <h1>Kontakt</h1>
-      <p class="section-lead">Napíš nám. Odpovieme čo najskôr.</p>
+<main class="min-h-screen pt-32 pb-24 px-6 md:px-12 max-w-screen-2xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16">
+  <section class="lg:col-span-7 flex flex-col justify-center">
+    <div class="mb-12">
+      <h1 class="text-6xl md:text-8xl font-headline font-black italic tracking-tighter text-on-surface leading-none mb-8">
+        Connect with <br>
+        <span class="text-primary italic">the Nocturne.</span>
+      </h1>
+      <p class="max-w-xl text-lg text-on-surface-variant font-body leading-relaxed mb-12">
+        Inquiry is the first gear of an extraordinary journey. Whether you're seeking a rare acquisition or wish to share a story of motion, our curators are waiting in the silence.
+      </p>
+    </div>
+    <div class="relative w-full aspect-[16/9] bg-surface-container-lowest rounded-lg overflow-hidden editorial-shadow group">
+      <img class="w-full h-full object-cover grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-80 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-iuFvVJp5WULWIsGEmBQS4yVL2CONePYyuDugBbj6a6kzyPNNwJzo5HN7-_feU-RIYtJLu6og1wzCB3ML-IjBX_NUMo2uPrLwdrf3P0Gsfr-BoM5G2OdjU6fyBQBXol6gInTgSGjXKVy1byPKtr-OMAFawSntN0zWsNcMJd28c_2CRK059oavXAkdm7oZJByHTBpSJ5l6lroGga_wHtoogVggvWL938_tW6xgOPF-ezBlC49_l35o3mYtKjrBpRWcaUIDImxwNxp2" alt="Headlight detail" />
+      <div class="absolute inset-0 bg-gradient-to-t from-background to-transparent opacity-60"></div>
+      <div class="absolute bottom-6 left-6"><span class="font-headline italic text-sm text-primary-fixed-dim tracking-tight">Ref. Nocturne 911 Detail</span></div>
     </div>
   </section>
 
-  <section class="section section-alt">
-    <div class="container">
-      <div class="grid-2">
-        <div class="card">
-          <h2>Kde nás nájdeš</h2>
-          <p>Námestovo</p>
-          <p>Tel.: +421 900 000 000</p>
-          <p>E-mail: info@autosalon.sk</p>
-          <p>Po–Pi: 9:00–17:00</p>
+  <aside class="lg:col-span-5 flex flex-col justify-center space-y-12 md:space-y-16 mobile-bottom-safe">
+    <div class="bg-surface-container-low p-8 md:p-10 rounded-lg editorial-shadow">
+      <h3 class="font-headline text-2xl italic mb-8 text-white">Archives & Atelier</h3>
+      <div class="space-y-6">
+        <div class="flex items-start gap-4">
+          <span class="material-symbols-outlined text-primary text-xl" style="font-variation-settings:'FILL' 1">location_on</span>
+          <div>
+            <p class="text-[10px] uppercase tracking-widest text-outline mb-1">Studio Location</p>
+            <p class="text-on-surface font-body">Námestovo, Slovakia<br>Curated Motion House</p>
+          </div>
         </div>
-
-        <div class="card">
-          <img class="card-img" src="/assets/img/contact-map.svg" alt="Mapa" />
-          <p>Budova OC</p>
+        <div class="flex items-start gap-4">
+          <span class="material-symbols-outlined text-primary text-xl" style="font-variation-settings:'FILL' 1">call</span>
+          <div>
+            <p class="text-[10px] uppercase tracking-widest text-outline mb-1">Direct Line</p>
+            <p class="text-on-surface font-body">+421 900 000 000</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-4">
+          <span class="material-symbols-outlined text-primary text-xl" style="font-variation-settings:'FILL' 1">mail</span>
+          <div>
+            <p class="text-[10px] uppercase tracking-widest text-outline mb-1">Electronic Mail</p>
+            <p class="text-on-surface font-body">info@autosalon.sk</p>
+          </div>
         </div>
       </div>
     </div>
-  </section>
 
-  <section class="section">
-    <div class="container">
-      <h2>Nezáväzný dopyt</h2>
-      <form id="contactForm">
-        <div class="form-group">
-          <label class="form-label" for="contact-name">Meno</label>
-          <input class="form-input" id="contact-name" type="text" name="name" required placeholder="Tvoje meno" />
+    <div class="space-y-8">
+      <h3 class="font-headline text-2xl italic text-white">Direct Inquiry</h3>
+      <form id="contactForm" class="space-y-8">
+        <div class="relative group">
+          <input id="contact-name" class="input-bottom" placeholder="Name" type="text" name="name" required />
         </div>
-
-        <div class="form-group">
-          <label class="form-label" for="contact-email">E-mail</label>
-          <input class="form-input" id="contact-email" type="email" name="email" required placeholder="tvoj@email.sk" />
+        <div class="relative group">
+          <input id="contact-email" class="input-bottom" placeholder="Email Address" type="email" name="email" required />
         </div>
-
-        <div class="form-group">
-          <label class="form-label" for="contact-car">Zaujíma ma auto</label>
-          <select class="form-select" id="contact-car" name="car">
-            <option value="">— vyber —</option>
+        <div class="relative group">
+          <select id="contact-car" class="input-bottom" name="car">
+            <option value="">Select a focus</option>
             <option>BMW 3 (2020)</option>
             <option>Audi A4 (2019)</option>
             <option>Mercedes C (2021)</option>
             <option>Iné</option>
           </select>
         </div>
-
-        <div class="form-group">
-          <label class="form-label" for="contact-message">Správa</label>
-          <textarea class="form-textarea" id="contact-message" name="message" required placeholder="Napíš, čo potrebuješ..."></textarea>
+        <div class="relative group">
+          <textarea id="contact-message" class="input-bottom min-h-[8rem]" placeholder="Your Message" rows="4" name="message" required></textarea>
         </div>
-
-        <button class="btn btn-primary" type="submit">Odoslať</button>
+        <button class="w-full py-5 px-8 rounded-full bg-gradient-to-r from-primary to-primary-container text-on-primary-fixed font-bold uppercase text-xs tracking-widest hover:scale-[1.02] active:scale-95 transition-all duration-300 editorial-shadow" type="submit">
+          Dispatch Inquiry
+        </button>
       </form>
-
-      <div id="previewBox" hidden>
-        <h3>Preview správy</h3>
-        <p id="previewText"></p>
+      <div id="previewBox" hidden class="bg-surface-container-low p-6 rounded-lg editorial-shadow">
+        <h4 class="font-headline text-2xl italic mb-4">Preview Dispatch</h4>
+        <p id="previewText" class="text-on-surface-variant leading-relaxed"></p>
       </div>
     </div>
-  </section>
+  </aside>
 </main>
 
-<%- include("../components/footer") %>
+<section class="w-full py-24 bg-surface-container-low overflow-hidden">
+  <div class="max-w-screen-2xl mx-auto px-6 md:px-12">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+      <div class="order-2 md:order-1">
+        <div class="aspect-[21/9] rounded-lg overflow-hidden bg-surface-container-lowest editorial-shadow">
+          <img class="w-full h-full object-cover opacity-40 grayscale" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDjkbtakUpZKTkn4FqLvrVIFQ4VmSYb1ssThJUjdp1tfnEMqyfAJnLg4IabhBVgKli89m2V3jgThCcMQvla6DUY6pgJ15jd3Fw2A3rQMTgsxdz4kYg-D3Nch0lIUwDWRotbkU9EL-IZ1VUhOPPD_HKUBNglJBgQewIpVVcWXlTank_7rSLMe2O7tUgoPoArB8gX3RDWEb2lty69alINYdQ6XHL0HhjHoo5yNpcmxcTZXGsNOb0fG4UYFAP8ZECIp8dNG7wBTIL3VXXe" alt="Pacific route" />
+        </div>
+      </div>
+      <div class="order-1 md:order-2 md:pl-12">
+        <h4 class="font-headline text-4xl italic text-on-surface mb-6 tracking-tighter">The Night is Our Canvas.</h4>
+        <p class="text-on-surface-variant leading-relaxed">
+          Curated Motion operates from the shadows of Monterey and the quiet roads of the north. Visits are by appointment only for collectors and serious inquiries.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%- include('../components/footer') %>
 <button id="backToTop" type="button" aria-label="Back to top">↑</button>
 <script src="/assets/js/app.js"></script>
 </body>

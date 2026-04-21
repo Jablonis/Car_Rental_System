@@ -1,184 +1,174 @@
 <!doctype html>
-<html lang="sk">
+<html class="dark" lang="sk">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>AutoSalón | Domov</title>
-  <link rel="stylesheet" href="/assets/css/styles.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,600;0,700;1,400&family=Epilogue:wght@300;400;500;600;700&display=swap" />
+  <%- include('../components/head', { title: 'AutoSalón | Curated Motion' }) %>
 </head>
-<body data-page="home">
-<%- include("../components/header") %>
+<body class="bg-surface selection:bg-primary selection:text-primary-container overflow-x-hidden" data-page="home">
+<%- include('../components/header') %>
 
-<main>
-  <section class="hero">
-    <div class="container">
-      <span class="badge">Predaj & dovoz áut</span>
-      <h1 class="hero-title">Auto, ktoré sadne na prvé otočenie kľúčom.</h1>
-      <p class="section-lead">Jednoduchý výber, férová komunikácia, jasný stav vozidla. Pozri si ponuku a vyberieme spolu to správne.</p>
-      <div class="hero-actions">
-        <a class="btn btn-primary" href="/cars">Pozrieť ponuku áut</a>
-        <a class="btn" href="/contact">Nezáväzný dopyt</a>
+<main class="nocturne-shell">
+  <header class="relative h-screen w-full flex items-center justify-center overflow-hidden">
+    <div class="absolute inset-0 z-0">
+      <img class="w-full h-full object-cover grayscale opacity-60" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBbrpR290ZEt5WOlZJkdOfLGOm4Bpo2T5HuWtrm0kBJjhRSTcE4HmncFkLsar5f9O7A8sDvQSuhNeIPfl5gUUrKPpP7Nxmz6B1Oc2TFJ_QBDcnS54Te6X-3paRcOQekim5XEUVg8QDTXly3niMSFF0uQ4Nwpr63SePWgQKSolpa04K7c9a17Az6vKmJAKLyFBf5aleuMuRR2i6ZajrUiWHHGM6iLAcUp_r9KUofhcnwUOl1tEjM06XQI26Byl98EZU-yqLDYN0sL6Wq" alt="Cinematic Porsche" />
+      <div class="absolute inset-0 bg-gradient-to-b from-surface/20 via-surface/60 to-surface"></div>
+    </div>
+    <div class="relative z-10 w-full px-6 md:px-12 max-w-7xl pt-20">
+      <div class="flex flex-col gap-4">
+        <span class="tracking-[0.4em] uppercase text-primary font-semibold text-[10px] md:text-xs">Volume IV // The Curated Motion</span>
+        <h1 class="text-6xl md:text-9xl font-headline font-bold tracking-tighter leading-none max-w-4xl text-on-surface">
+          Mechanical <br>
+          <span class="italic text-primary/80">Elegance.</span>
+        </h1>
+        <div class="mt-8 flex flex-col md:flex-row md:items-center gap-8 md:gap-12">
+          <div class="flex items-center gap-8 md:gap-12">
+            <div class="flex flex-col">
+              <span class="font-headline text-3xl font-bold">964</span>
+              <span class="text-[10px] uppercase tracking-widest text-on-surface-variant">Generation</span>
+            </div>
+            <div class="w-px h-12 bg-outline-variant/30 hidden md:block"></div>
+            <div class="flex flex-col">
+              <span class="font-headline text-3xl font-bold">1992</span>
+              <span class="text-[10px] uppercase tracking-widest text-on-surface-variant">Epoch</span>
+            </div>
+          </div>
+          <p class="max-w-xs text-sm leading-relaxed text-on-surface-variant">
+            A definitive exploration of the air-cooled era. Curated Motion traverses the boundary between engineering and sculpture.
+          </p>
+        </div>
+        <div class="mt-8 flex flex-wrap gap-4">
+          <a href="/cars" class="bg-gradient-to-br from-primary to-on-primary-container text-on-primary-fixed px-8 py-3 rounded-full font-bold text-xs tracking-[0.24em] uppercase hover:scale-105 transition-transform">View Inventory</a>
+          <a href="/about" class="border border-outline-variant/20 text-on-surface px-8 py-3 rounded-full font-bold text-xs tracking-[0.24em] uppercase hover:border-primary/40 hover:text-primary transition-colors">Our Ethos</a>
+        </div>
       </div>
-      <div class="kpis">
-        <div class="kpi"><strong>50+ áut</strong><span>v ponuke</span></div>
-        <div class="kpi"><strong>Overený pôvod</strong><span>jasná história</span></div>
-        <div class="kpi"><strong>Rýchly kontakt</strong><span>odpoveď do 24h</span></div>
+    </div>
+  </header>
+
+  <section class="bg-surface-container-low py-28 md:py-40 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-6 md:px-12">
+      <div class="flex flex-col md:flex-row items-end justify-between gap-16 md:gap-20 mb-24 md:mb-32">
+        <div class="max-w-md">
+          <h2 class="text-4xl md:text-5xl font-headline font-bold mb-8 leading-tight">Curated <br>Legacy</h2>
+          <p class="text-on-surface-variant text-lg leading-relaxed">
+            We don't just review vehicles; we document the heritage of motion. Each specimen is selected for its soul, its story, and its mechanical purity.
+          </p>
+        </div>
+        <div class="flex-1 grid grid-cols-2 gap-x-8 md:gap-x-12 gap-y-10 md:gap-y-16">
+          <div class="group">
+            <div class="font-headline text-5xl md:text-6xl text-primary font-bold mb-2 transition-transform group-hover:-translate-y-2">124</div>
+            <div class="h-px w-full bg-outline-variant/20 mb-4"></div>
+            <span class="text-[10px] uppercase tracking-[0.3em] font-bold text-on-surface">Unique Archives</span>
+          </div>
+          <div class="group">
+            <div class="font-headline text-5xl md:text-6xl text-on-surface font-bold mb-2 transition-transform group-hover:-translate-y-2">08</div>
+            <div class="h-px w-full bg-outline-variant/20 mb-4"></div>
+            <span class="text-[10px] uppercase tracking-[0.3em] font-bold text-on-surface-variant">Curated Films</span>
+          </div>
+          <div class="group">
+            <div class="font-headline text-5xl md:text-6xl text-on-surface font-bold mb-2 transition-transform group-hover:-translate-y-2">18</div>
+            <div class="h-px w-full bg-outline-variant/20 mb-4"></div>
+            <span class="text-[10px] uppercase tracking-[0.3em] font-bold text-on-surface-variant">Global Meets</span>
+          </div>
+          <div class="group">
+            <div class="font-headline text-5xl md:text-6xl text-primary font-bold mb-2 transition-transform group-hover:-translate-y-2">2M+</div>
+            <div class="h-px w-full bg-outline-variant/20 mb-4"></div>
+            <span class="text-[10px] uppercase tracking-[0.3em] font-bold text-on-surface">Total Miles</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="section small">
-    <div class="container">
-      <h2>Prečo práve my</h2>
-      <p class="section-lead">Nehráme sa na luxusné reči. Chceme, aby si odchádzal spokojný a vedel, čo kupuješ.</p>
-      <div class="grid-3" style="margin-top: 18px;">
-        <div class="card">
-          <h3>Jasný stav</h3>
-          <p>Každé auto má základný popis aj detaily. Nič neskrývame a komunikujeme priamo.</p>
-        </div>
-        <div class="card">
-          <h3>Jednoduchý proces</h3>
-          <p>Výber → kontakt → obhliadka → papiere. Bez chaosu a bez zbytočného tlaku.</p>
-        </div>
-        <div class="card">
-          <h3>Ľudský prístup</h3>
-          <p>Komunikujeme normálne. Keď niečo nevieme, povieme to a nájdeme riešenie.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section section-alt">
-    <div class="container">
-      <div class="grid-2">
+  <section class="py-28 md:py-40 bg-surface">
+    <div class="max-w-7xl mx-auto px-6 md:px-12">
+      <div class="flex items-center justify-between mb-16 md:mb-24 gap-6">
         <div>
-          <h2>Ako to funguje</h2>
-          <p class="section-lead">Tri kroky, ktoré pochopíš na prvý pohľad.</p>
-          <div class="steps">
-            <div class="step">
-              <div class="step-num">1</div>
-              <div>
-                <h3>Vyber si auto</h3>
-                <p>Pozri ponuku, prefiltruj podľa názvu a otvor si detaily, ktoré ťa zaujímajú.</p>
-              </div>
+          <span class="text-primary text-xs tracking-widest uppercase font-bold mb-2 block">The Collection</span>
+          <h2 class="text-5xl md:text-6xl font-headline font-bold">Showroom</h2>
+        </div>
+        <div class="h-px flex-1 mx-8 md:mx-20 bg-outline-variant/10 hidden md:block"></div>
+        <a href="/cars" class="text-on-surface hover:text-primary transition-colors flex items-center gap-2 group shrink-0">
+          <span class="text-xs uppercase tracking-widest font-bold">View Inventory</span>
+          <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-start">
+        <div class="md:col-span-7 bg-surface-container-lowest rounded-lg overflow-hidden group">
+          <div class="relative aspect-[4/5] overflow-hidden">
+            <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBmvfo1aEnkqEyw7TLcp7yH_zcgsJKHlV8atwPYMNTFQPnnHyQkMc6bOWgwWZqqt4Ezc6zunNbPKblFG8fwyjbB1k5UWKKkdI_Uhq7iPwbnSQ1TReB7oxXbDoDpJ3Yvv9Qb4VfZYcbPTAj7kMkhYlzePb-TfpU09cWHekIZm6tOLWKPUFy7eLPNfDhXfy-O1qJbGQiMjvawqh5Whm55pvs-FPwYOZv2G4SMEH35JUFERynyeG112mUW7ZXQk8X6_DOEB4ZF5d3QIwih" alt="Berlinetta" />
+            <div class="absolute top-8 left-8">
+              <span class="px-4 py-1 bg-primary text-on-primary-fixed text-[10px] font-bold tracking-widest uppercase rounded-full">Available</span>
             </div>
-            <div class="step">
-              <div class="step-num">2</div>
-              <div>
-                <h3>Napíš alebo zavolaj</h3>
-                <p>Dohodneme obhliadku, rezerváciu alebo odpovieme na konkrétne otázky.</p>
-              </div>
+          </div>
+          <div class="p-8 md:p-12">
+            <div class="flex justify-between items-start gap-6 mb-6">
+              <h3 class="text-3xl md:text-4xl font-headline font-bold">L-Series Berlinetta</h3>
+              <span class="text-2xl font-headline text-primary">$345,000</span>
             </div>
-            <div class="step">
-              <div class="step-num">3</div>
-              <div>
-                <h3>Hotovo</h3>
-                <p>Pomôžeme s papiermi, prepisom a odporučíme ďalší postup aj servis.</p>
-              </div>
+            <div class="grid grid-cols-3 gap-4 md:gap-8 py-8 border-t border-outline-variant/10">
+              <div><span class="text-[10px] uppercase tracking-widest text-on-surface-variant block mb-1">0-60 MPH</span><span class="font-headline text-lg md:text-xl">2.9 SEC</span></div>
+              <div><span class="text-[10px] uppercase tracking-widest text-on-surface-variant block mb-1">Peak Power</span><span class="font-headline text-lg md:text-xl">620 BHP</span></div>
+              <div><span class="text-[10px] uppercase tracking-widest text-on-surface-variant block mb-1">Weight</span><span class="font-headline text-lg md:text-xl">1,340 KG</span></div>
             </div>
           </div>
         </div>
 
-        <div class="card">
-          <img class="card-img" src="/assets/img/gallery/g-1.jpg" alt="Ukážka showroomu" />
-          <h3>Nocturne drive výber</h3>
-          <p>Autá, ktoré dobre vyzerajú, jazdia bez kompromisov a majú jasný príbeh.</p>
-          <a class="btn btn-small" href="/about">Viac o nás</a>
+        <div class="md:col-span-5 flex flex-col gap-8 md:gap-12 md:mt-32">
+          <div class="bg-surface-container rounded-lg overflow-hidden group">
+            <div class="relative aspect-[3/2] overflow-hidden">
+              <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBeWJ0sEv9jEFJ5bWLtZjzLH4gp211xfV4HVykxrQKMHPD6IumeqDi8tdXrvcYkFolaL9568vArEkMh_0fWQ15XBJV4ANEAMzS9Kvp3bwBIe1vIj5nZ78giEJ7Fv6qL8Bg-Zt7hjFkyVv8LIJhwW4Nw89ps9KGfEKFBMHx1x01GK-t223uwSbVX26B61De3sLTp_mLHFaE9D8tneqfinL11G8SPRkNEFlPmyPGc2fDljbqK4IKkYAPytlV__Ch7aNVIEAHZiLRU3OH-" alt="Touring Concept" />
+            </div>
+            <div class="p-8">
+              <h3 class="text-2xl font-headline font-bold mb-4">Touring Concept II</h3>
+              <div class="flex justify-between items-center text-on-surface-variant">
+                <span class="text-xs uppercase tracking-widest">Heritage Spec</span>
+                <span class="material-symbols-outlined">north_east</span>
+              </div>
+            </div>
+          </div>
+          <div class="bg-surface-container rounded-lg overflow-hidden group">
+            <div class="relative aspect-[3/2] overflow-hidden">
+              <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBaCVJELYGjAxAYpmKrjTyupfTWtNcx4qGOUhbyPlUi_wlYEfWf_jxRKaCqZfL_t2B2A1tYaK9PourVGJ4oCiQbG_fJvcTMPfxzvhFD92M1AW4-sysDq-923QMIrFNweelh8Of5EPTQX122UhGZ5jkSwlTDUH127_ypSJVI-_aGQd7TfASqw2DkhgaoObMcPLeWsqp2BsCz8X8M5NIYM2MWhelFMhCUL8XUmcA6dJSb7p0VDZK3rTc4QH2GZkEyWb4fQZbsVair-QFB" alt="Interior Package" />
+            </div>
+            <div class="p-8">
+              <h3 class="text-2xl font-headline font-bold mb-4">Nocturne Interior Package</h3>
+              <div class="flex justify-between items-center text-on-surface-variant">
+                <span class="text-xs uppercase tracking-widest">Limited Bespoke</span>
+                <span class="material-symbols-outlined">north_east</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="section">
-    <div class="container">
-      <h2>Top výber</h2>
-      <p class="section-lead">Krátka ochutnávka. Celú ponuku nájdeš na stránke Ponuka áut.</p>
-      <div class="grid-3" style="margin-top: 18px;">
-        <article class="car-card">
-          <img class="car-card-img" src="/assets/img/cars/car-1.jpg" alt="BMW 3" />
-          <div class="car-card-body">
-            <h3 class="car-card-title">BMW 3 • 2020</h3>
-            <div class="car-meta">
-              <span class="car-meta-item">Automat</span>
-              <span class="car-meta-item">140 kW</span>
-              <span class="car-meta-item">85 000 km</span>
-            </div>
-            <div class="car-actions">
-              <a class="btn btn-small btn-primary" href="/cars">Pozrieť ponuku</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="car-card">
-          <img class="car-card-img" src="/assets/img/cars/car-2.jpg" alt="Audi A4" />
-          <div class="car-card-body">
-            <h3 class="car-card-title">Audi A4 • 2019</h3>
-            <div class="car-meta">
-              <span class="car-meta-item">Quattro</span>
-              <span class="car-meta-item">150 kW</span>
-              <span class="car-meta-item">92 000 km</span>
-            </div>
-            <div class="car-actions">
-              <a class="btn btn-small btn-primary" href="/cars">Pozrieť ponuku</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="car-card">
-          <img class="car-card-img" src="/assets/img/cars/car-3.svg" alt="Mercedes C" />
-          <div class="car-card-body">
-            <h3 class="car-card-title">Mercedes C • 2021</h3>
-            <div class="car-meta">
-              <span class="car-meta-item">AMG Line</span>
-              <span class="car-meta-item">145 kW</span>
-              <span class="car-meta-item">55 000 km</span>
-            </div>
-            <div class="car-actions">
-              <a class="btn btn-small btn-primary" href="/cars">Pozrieť ponuku</a>
-            </div>
-          </div>
-        </article>
+  <section class="bg-surface-container-lowest py-32 md:py-60">
+    <div class="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-12 gap-16 items-center">
+      <div class="md:col-span-5">
+        <span class="text-primary text-xs tracking-widest uppercase font-bold mb-6 block">The Journal</span>
+        <h2 class="text-4xl md:text-6xl font-headline font-bold leading-[0.95] mb-8">Chasing the <br><span class="italic text-primary/70">Midnight Horizon</span></h2>
+        <p class="text-on-surface-variant text-lg leading-relaxed max-w-md mb-10">
+          An editorial journey through desert plains at the blue hour—where the machine becomes a silhouette and the horizon starts to hum.
+        </p>
+        <a href="/about" class="inline-flex items-center gap-2 text-xs uppercase tracking-widest font-bold text-on-surface hover:text-primary transition-colors group">
+          Read narrative
+          <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+        </a>
       </div>
-    </div>
-  </section>
-
-  <section class="section section-alt">
-    <div class="container">
-      <h2>FAQ</h2>
-      <p class="section-lead">Najčastejšie otázky, ktoré rieši väčšina ľudí pri kúpe auta.</p>
-      <div class="faq">
-        <button class="faq-item" type="button">
-          <span>Máte možnosť rezervácie?</span>
-          <span class="faq-icon">+</span>
-        </button>
-        <div class="faq-content">
-          Rezervácia je možná po dohode. Napíš nám do kontaktu a dohodneme si podmienky.
+      <div class="md:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-8 items-end">
+        <div class="bg-surface-container rounded-lg overflow-hidden md:-translate-y-24">
+          <img class="w-full aspect-[4/5] object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7EKS0J6mUjmgitfrZafH4Qie2HvAb1msbGFC6x8Qm52uXxVKiDbi37P6MtYY4yuBTfL4ZQT_gCMrC6AAUcRnWgkY3Anrrxs5q9qQKK6bMsl3hr1TwR9vsNwSECHLB5VNt-njZ2eLSP7JQjNRiNi4m1v14uUWl3H-b26hjpfSGf3m4Kr43v7f7ZVkdkQjT9SGAHqkq5dVAin8iX3E1q4gnVN5uWw5X7J4to4jZjvL8pVNQoqPfm2F8HxqB4vBGLATUHOM05Ffp5wI" alt="The journal" />
         </div>
-
-        <button class="faq-item" type="button">
-          <span>Dá sa auto preveriť v servise?</span>
-          <span class="faq-icon">+</span>
-        </button>
-        <div class="faq-content">
-          Áno. Odporúčame obhliadku aj v servise – je to najlepšie pre obe strany.
-        </div>
-
-        <button class="faq-item" type="button">
-          <span>Pomôžete s prepisom a papiermi?</span>
-          <span class="faq-icon">+</span>
-        </button>
-        <div class="faq-content">
-          Pomôžeme s papiermi, základným procesom aj ďalším postupom po kúpe.
+        <div class="bg-surface-container rounded-lg overflow-hidden">
+          <img class="w-full aspect-[4/5] object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAq2ZgL8hNksu2yRnhQwaV8vCUZ3mtaZUoNwVgKH8mehfTq0sxL1XMF3DV4Me4ftA4MTGRXvHcP0FojkWaMfgh0gkt1m29s0oKIDdC9-T8_0xmgol6hSkvURglp5DrWV4V9inSYp-MAM3JcPFWMfoIvBqX0KpLYEtXAvynYibRGvS6mYhLwAQ1KCF3uoQMLD-t_kuCCd0zI8F5KSr1ekcxDvhVqlW9sdV5l70k13uIhy9uJbFbD4YgQWGfu8Q2Ji0kb4SXT4QfI" alt="Coastal road" />
         </div>
       </div>
     </div>
   </section>
 </main>
 
-<%- include("../components/footer") %>
+<%- include('../components/footer') %>
 <button id="backToTop" type="button" aria-label="Back to top">↑</button>
 <script src="/assets/js/app.js"></script>
 </body>

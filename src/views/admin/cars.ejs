@@ -1,61 +1,48 @@
 <!doctype html>
-<html lang="sk">
+<html class="dark" lang="sk">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Admin - Autá</title>
-  <link rel="stylesheet" href="/assets/css/styles.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,600;0,700;1,400&family=Epilogue:wght@300;400;500;600;700&display=swap" />
+  <%- include('../components/head', { title: 'Admin Cars | Curated Motion' }) %>
 </head>
-<body>
-<%- include("../components/header") %>
+<body class="bg-surface text-on-surface">
+<%- include('../components/header') %>
 <% const adminCars = typeof cars !== 'undefined' ? cars : []; %>
 
-<main>
-  <div class="page-header">
-    <div class="container">
-      <h1>Správa áut</h1>
-    </div>
-  </div>
+<main class="pt-32 pb-24 px-6 md:px-12 max-w-screen-2xl mx-auto">
+  <section class="mb-14">
+    <p class="text-primary text-xs tracking-[0.3em] uppercase mb-4">Admin Console</p>
+    <h1 class="font-headline text-5xl md:text-7xl font-black tracking-tighter leading-[0.95]">Archive Registry.</h1>
+  </section>
 
-  <section class="section">
-    <div class="container">
-      <div class="card" style="padding: 0; overflow: hidden;">
-        <table class="admin-table">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Názov</th>
-              <th>Značka / model</th>
-              <th>Cena</th>
-              <th>Rok</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% if (adminCars.length === 0) { %>
-              <tr>
-                <td colspan="5">Zatiaľ sa nenašli žiadne autá.</td>
-              </tr>
-            <% } %>
-            <% adminCars.forEach((car) => { %>
-              <tr>
-                <td><%= car.car_id %></td>
-                <td><%= car.title %></td>
-                <td><%= car.brand %> <%= car.model %></td>
-                <td><%= car.price %> €</td>
-                <td><%= car.year %></td>
-              </tr>
-            <% }) %>
-          </tbody>
-        </table>
-      </div>
-    </div>
+  <section class="bg-surface-container-low rounded-lg p-6 md:p-8 editorial-shadow overflow-x-auto">
+    <table class="admin-table-luxe">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Title</th>
+          <th>Brand / Model</th>
+          <th>Price</th>
+          <th>Year</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if (adminCars.length === 0) { %>
+          <tr><td colspan="5">No vehicles in archive.</td></tr>
+        <% } %>
+        <% adminCars.forEach((car) => { %>
+          <tr>
+            <td><%= car.car_id %></td>
+            <td><%= car.title %></td>
+            <td><%= car.brand %> <%= car.model %></td>
+            <td><%= car.price %> €</td>
+            <td><%= car.year %></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
   </section>
 </main>
 
-<%- include("../components/footer") %>
+<%- include('../components/footer') %>
 <script src="/assets/js/app.js"></script>
 </body>
 </html>

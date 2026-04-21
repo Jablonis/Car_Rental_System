@@ -1,62 +1,125 @@
 <!doctype html>
-<html lang="sk">
+<html class="dark" lang="sk">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Moje autá</title>
-  <link rel="stylesheet" href="/assets/css/styles.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,600;0,700;1,400&family=Epilogue:wght@300;400;500;600;700&display=swap" />
+  <%- include('../components/head', { title: 'My Garage | Curated Motion' }) %>
 </head>
-<body data-page="cars">
-<%- include("../components/header") %>
+<body class="bg-surface selection:bg-primary selection:text-primary-container" data-page="cars">
+<%- include('../components/header') %>
 
-<main>
-  <div class="page-header">
-    <div class="container">
-      <h1>Moje autá</h1>
+<main class="pt-32 pb-20 px-6 md:px-24 max-w-[1600px] mx-auto">
+  <section class="mb-20 md:mb-24 flex flex-col md:flex-row md:items-end justify-between gap-8">
+    <div class="max-w-2xl">
+      <p class="text-primary text-xs tracking-[0.3em] uppercase mb-4">Member Portfolio</p>
+      <h1 class="text-5xl md:text-7xl font-black tracking-tighter text-on-surface leading-tight">
+        Welcome back,<br><span class="text-surface-tint"><%= locals.user ? locals.user.name : 'Collector' %>.</span>
+      </h1>
     </div>
-  </div>
-
-  <section class="section">
-    <div class="container">
-      <div class="car-actions" style="margin-bottom: 24px;">
-        <a class="btn btn-primary" href="/cars/new">Pridať nové auto</a>
+    <div class="flex items-center gap-6 group">
+      <div class="text-right">
+        <p class="text-on-surface-variant text-sm font-body uppercase tracking-widest mb-1">Curated Collection</p>
+        <p class="text-on-surface font-headline italic text-lg">Since 2026</p>
       </div>
-
-      <div class="grid-3">
-        <% if (cars.length === 0) { %>
-          <p>Zatiaľ nemáš žiadne autá.</p>
-        <% } %>
-
-        <% cars.forEach((car) => { %>
-          <article class="car-card">
-            <img class="car-card-img" src="<%= car.image %>" alt="<%= car.title %>" />
-            <div class="car-card-body">
-              <h3 class="car-card-title"><%= car.title %></h3>
-              <div class="car-meta">
-                <span class="car-meta-item"><%= car.brand %> <%= car.model %></span>
-                <span class="car-meta-item"><%= car.year %></span>
-                <span class="car-meta-item"><%= car.mileage %> km</span>
-              </div>
-              <div class="car-price"><%= car.price %> €</div>
-              <div class="car-actions">
-                <a class="btn btn-small btn-primary" href="/cars/<%= car.car_id %>">Detail</a>
-                <a class="btn btn-small" href="/cars/<%= car.car_id %>/edit">Upraviť</a>
-                <form method="POST" action="/cars/<%= car.car_id %>/delete">
-                  <button class="btn btn-small btn-danger" type="submit">Vymazať</button>
-                </form>
-              </div>
-            </div>
-          </article>
-        <% }) %>
+      <div class="relative">
+        <div class="w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden border-2 border-outline-variant/20 p-1">
+          <img class="w-full h-full object-cover rounded-full grayscale hover:grayscale-0 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBSYQ1RaM_kWmQcM5Fh7Ra6EqJzO6kQXqfV1c3P8S3pE9TjY7t1utVByvSm5g1w0w7imVFRYd8K6U0NcgRPLOrLodJz1XPR6ujlpQvlKQmD9t-8zzJf1Hm3gwSCOjJVbOyqz7J7aC1tgr6U2Wh0OVgcl0D4jNnxt9aGDoN9XErKPh8L0b4mLidIGlgB7s2E1A7y8a-sA7r4yYz4sJYzQZ1W2o8n2QcZbcwkgj2xbHkA1r3nqg0ORWkVzQK-hz3mGxqVNmF8STQ" alt="Collector avatar" />
+        </div>
       </div>
     </div>
   </section>
+
+  <section class="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-10 items-start">
+    <div class="lg:col-span-8 space-y-8">
+      <div class="bg-surface-container-low rounded-lg p-6 md:p-8 editorial-shadow">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+          <div>
+            <p class="text-[10px] uppercase tracking-[0.3em] text-primary mb-3">My Garage</p>
+            <h2 class="font-headline text-3xl md:text-4xl font-bold tracking-tighter">Private Inventory</h2>
+          </div>
+          <a href="/cars/new" class="bg-primary-container text-on-primary-container px-6 py-3 rounded-full font-bold tracking-tight transition-transform duration-500 ease-out hover:scale-[1.02] text-xs uppercase tracking-[0.25em]">Add New Piece</a>
+        </div>
+
+        <% if (cars.length === 0) { %>
+          <div class="rounded-lg bg-surface-container-lowest p-10 text-center text-on-surface-variant">
+            Zatiaľ nemáš žiadne autá v archíve.
+          </div>
+        <% } else { %>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <% cars.forEach((car) => { %>
+              <article class="bg-surface-container-lowest rounded-lg overflow-hidden group car-card">
+                <div class="relative aspect-[4/3] overflow-hidden">
+                  <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 car-card-img" src="<%= car.image %>" alt="<%= car.title %>" />
+                  <div class="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent"></div>
+                  <div class="absolute bottom-5 left-5 right-5 flex items-end justify-between gap-4">
+                    <div>
+                      <p class="text-[10px] uppercase tracking-[0.3em] text-primary mb-2"><%= car.brand %> · <%= car.year %></p>
+                      <h3 class="font-headline text-2xl font-bold tracking-tight car-card-title"><%= car.title %></h3>
+                    </div>
+                    <div class="text-right">
+                      <p class="font-headline italic text-xl text-primary"><%= car.price %> €</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="p-5 md:p-6 car-card-body">
+                  <div class="flex flex-wrap gap-2 car-meta mb-4">
+                    <span class="px-3 py-1 rounded-full bg-surface-container-high text-[10px] tracking-[0.22em] uppercase text-on-surface-variant car-meta-item"><%= car.model %></span>
+                    <span class="px-3 py-1 rounded-full bg-surface-container-high text-[10px] tracking-[0.22em] uppercase text-on-surface-variant car-meta-item"><%= car.mileage %> km</span>
+                    <span class="px-3 py-1 rounded-full bg-surface-container-high text-[10px] tracking-[0.22em] uppercase text-on-surface-variant car-meta-item"><%= car.transmission %></span>
+                  </div>
+                  <div class="flex flex-wrap gap-3 car-actions">
+                    <a href="/cars/<%= car.car_id %>" class="px-4 py-3 rounded-full bg-gradient-to-r from-primary to-primary-container text-on-primary-fixed font-bold text-[10px] uppercase tracking-[0.22em]">Detail</a>
+                    <a href="/cars/<%= car.car_id %>/edit" class="px-4 py-3 rounded-full border border-outline-variant/20 text-[10px] uppercase tracking-[0.22em] text-on-surface hover:text-primary hover:border-primary/30 transition-colors">Edit</a>
+                    <form method="POST" action="/cars/<%= car.car_id %>/delete">
+                      <button class="px-4 py-3 rounded-full border border-red-300/20 text-[10px] uppercase tracking-[0.22em] text-red-200 hover:bg-red-300/10 transition-colors" type="submit">Delete</button>
+                    </form>
+                  </div>
+                </div>
+              </article>
+            <% }) %>
+          </div>
+        <% } %>
+      </div>
+    </div>
+
+    <aside class="lg:col-span-4 space-y-8">
+      <div class="glass-panel rounded-lg p-6 md:p-8 editorial-shadow">
+        <p class="text-[10px] uppercase tracking-[0.3em] text-primary mb-4">Portfolio Metrics</p>
+        <div class="space-y-5">
+          <div class="flex items-end justify-between">
+            <span class="text-on-surface-variant uppercase text-[10px] tracking-[0.25em]">Vehicles</span>
+            <span class="font-headline text-4xl"><%= cars.length %></span>
+          </div>
+          <div class="flex items-end justify-between">
+            <span class="text-on-surface-variant uppercase text-[10px] tracking-[0.25em]">Status</span>
+            <span class="font-headline italic text-2xl text-primary">Curated</span>
+          </div>
+          <div class="flex items-end justify-between">
+            <span class="text-on-surface-variant uppercase text-[10px] tracking-[0.25em]">Access</span>
+            <span class="font-headline italic text-2xl">Private</span>
+          </div>
+        </div>
+      </div>
+      <div class="bg-surface-container-low rounded-lg p-6 md:p-8 editorial-shadow">
+        <p class="text-[10px] uppercase tracking-[0.3em] text-primary mb-4">Collection Notes</p>
+        <p class="text-on-surface-variant leading-relaxed mb-6">
+          Build your garage as a living archive. Each entry carries its own history, mood, and mechanical signature.
+        </p>
+        <nav class="space-y-4">
+          <a class="flex items-center justify-between group py-2" href="/cars">
+            <span class="text-on-surface group-hover:text-primary transition-colors uppercase text-[10px] tracking-[0.22em]">Browse Archive</span>
+            <span class="material-symbols-outlined text-primary text-sm">arrow_forward</span>
+          </a>
+          <a class="flex items-center justify-between group py-2" href="/contact">
+            <span class="text-on-surface group-hover:text-primary transition-colors uppercase text-[10px] tracking-[0.22em]">Direct Inquiry</span>
+            <span class="material-symbols-outlined text-primary text-sm">arrow_forward</span>
+          </a>
+        </nav>
+      </div>
+    </aside>
+  </section>
 </main>
 
-<%- include("../components/footer") %>
+<%- include('../components/footer') %>
+<button id="backToTop" type="button" aria-label="Back to top">↑</button>
 <script src="/assets/js/app.js"></script>
 </body>
 </html>

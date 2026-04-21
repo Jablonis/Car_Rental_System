@@ -1,59 +1,50 @@
 <!doctype html>
-<html lang="sk">
+<html class="dark" lang="sk">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Registrácia</title>
-  <link rel="stylesheet" href="/assets/css/styles.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,600;0,700;1,400&family=Epilogue:wght@300;400;500;600;700&display=swap" />
+  <%- include('../components/head', { title: 'Membership | Curated Motion' }) %>
 </head>
-<body>
-<%- include("../components/header") %>
+<body class="bg-surface text-on-surface">
+<%- include('../components/header') %>
 
-<main>
-  <div class="auth-wrap">
-    <div class="auth-card">
-      <h1 class="auth-title">Registrácia</h1>
-      <p class="auth-sub">Vytvor si účet a spravuj svoju ponuku áut.</p>
+<main class="min-h-screen pt-32 pb-24 px-6 md:px-12 flex items-center justify-center">
+  <div class="w-full max-w-md bg-surface-container-low rounded-lg p-8 md:p-10 editorial-shadow">
+    <p class="text-primary text-[10px] uppercase tracking-[0.3em] mb-4">Membership</p>
+    <h1 class="font-headline text-4xl md:text-5xl font-bold italic tracking-tighter mb-3">Join the movement.</h1>
+    <p class="text-on-surface-variant mb-8">Create your profile and begin building a private archive of remarkable machines.</p>
 
-      <% if (errors && errors.length > 0) { %>
-        <div class="alert alert-error">
-          <% errors.forEach((error) => { %>
-            <div><%= error.message %></div>
-          <% }) %>
-        </div>
-      <% } %>
-
-      <form method="POST" action="/signup">
-        <div class="form-group">
-          <label class="form-label" for="name">Meno</label>
-          <input class="form-input" id="name" type="text" name="name" placeholder="Meno" value="<%= formData.name || '' %>" />
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="email">Email</label>
-          <input class="form-input" id="email" type="email" name="email" placeholder="Email" value="<%= formData.email || '' %>" />
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="password">Heslo</label>
-          <input class="form-input" id="password" type="password" name="password" placeholder="Heslo" />
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="confirmPassword">Potvrď heslo</label>
-          <input class="form-input" id="confirmPassword" type="password" name="confirmPassword" placeholder="Potvrď heslo" />
-        </div>
-        <button class="btn btn-primary" style="width:100%" type="submit">Registrovať sa</button>
-      </form>
-
-      <div class="auth-footer">
-        <a href="/login">Už máte účet? Prihláste sa</a>
+    <% if (errors && errors.length > 0) { %>
+      <div class="alert-luxe form-error-list mb-8">
+        <% errors.forEach((error) => { %><div><%= error.message %></div><% }) %>
       </div>
+    <% } %>
+
+    <form method="POST" action="/signup" class="space-y-7">
+      <div>
+        <label class="block text-[10px] uppercase tracking-[0.28em] text-outline mb-3">Name</label>
+        <input class="form-input-luxe" id="name" type="text" name="name" value="<%= formData.name || '' %>" placeholder="Name" />
+      </div>
+      <div>
+        <label class="block text-[10px] uppercase tracking-[0.28em] text-outline mb-3">Email</label>
+        <input class="form-input-luxe" id="email" type="email" name="email" value="<%= formData.email || '' %>" placeholder="Email" />
+      </div>
+      <div>
+        <label class="block text-[10px] uppercase tracking-[0.28em] text-outline mb-3">Password</label>
+        <input class="form-input-luxe" id="password" type="password" name="password" placeholder="Password" />
+      </div>
+      <div>
+        <label class="block text-[10px] uppercase tracking-[0.28em] text-outline mb-3">Confirm password</label>
+        <input class="form-input-luxe" id="confirmPassword" type="password" name="confirmPassword" placeholder="Confirm password" />
+      </div>
+      <button class="w-full py-4 rounded-full bg-gradient-to-r from-primary to-primary-container text-on-primary-fixed font-bold text-[10px] uppercase tracking-[0.24em]" type="submit">Create profile</button>
+    </form>
+
+    <div class="mt-8 text-center text-on-surface-variant text-sm">
+      <a href="/login" class="text-primary hover:text-white transition-colors">Already a member? Enter the archive.</a>
     </div>
   </div>
 </main>
 
-<%- include("../components/footer") %>
+<%- include('../components/footer') %>
 <script src="/assets/js/app.js"></script>
 </body>
 </html>

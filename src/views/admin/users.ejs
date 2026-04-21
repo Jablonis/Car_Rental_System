@@ -1,84 +1,69 @@
 <!doctype html>
-<html lang="sk">
+<html class="dark" lang="sk">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Admin - Používatelia</title>
-  <link rel="stylesheet" href="/assets/css/styles.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,600;0,700;1,400&family=Epilogue:wght@300;400;500;600;700&display=swap" />
+  <%- include('../components/head', { title: 'Admin Users | Curated Motion' }) %>
 </head>
-<body>
-<%- include("../components/header") %>
+<body class="bg-surface text-on-surface">
+<%- include('../components/header') %>
 
-<main>
-  <div class="page-header">
-    <div class="container">
-      <h1>Správa používateľov</h1>
-    </div>
-  </div>
+<main class="pt-32 pb-24 px-6 md:px-12 max-w-screen-2xl mx-auto">
+  <section class="mb-14">
+    <p class="text-primary text-xs tracking-[0.3em] uppercase mb-4">Admin Console</p>
+    <h1 class="font-headline text-5xl md:text-7xl font-black tracking-tighter leading-[0.95]">Member Registry.</h1>
+  </section>
 
-  <section class="section">
-    <div class="container">
-      <% if (deleteError) { %>
-        <div class="alert alert-error"><%= deleteError %></div>
-      <% } %>
+  <section class="bg-surface-container-low rounded-lg p-6 md:p-8 editorial-shadow">
+    <% if (deleteError) { %>
+      <div class="alert-luxe mb-8"><%= deleteError %></div>
+    <% } %>
 
-      <form method="GET" action="/admin/users" class="search-bar">
-        <input
-          type="text"
-          name="search"
-          class="form-input"
-          placeholder="Hľadať podľa mena alebo emailu"
-          value="<%= search || '' %>"
-        />
-        <button class="btn btn-small btn-primary" type="submit">Hľadať</button>
-        <a class="btn btn-small" href="/admin/users/new">Vytvoriť používateľa</a>
-      </form>
-
-      <div class="card" style="padding: 0; overflow: hidden; margin-top: 24px;">
-        <table class="admin-table">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Meno</th>
-              <th>Email</th>
-              <th>Admin</th>
-              <th>Akcie</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% if (users.length === 0) { %>
-              <tr>
-                <td colspan="5">Nenašli sa žiadni používatelia.</td>
-              </tr>
-            <% } %>
-
-            <% users.forEach((user) => { %>
-              <tr>
-                <td><%= user.user_id %></td>
-                <td><%= user.name %></td>
-                <td><%= user.email %></td>
-                <td><%= user.isAdmin ? "Áno" : "Nie" %></td>
-                <td>
-                  <div class="car-actions">
-                    <a href="/admin/users/<%= user.user_id %>/edit" class="btn btn-small">Upraviť</a>
-                    <form method="POST" action="/admin/users/<%= user.user_id %>/delete" style="display:inline;">
-                      <button type="submit" class="btn btn-small btn-danger">Vymazať</button>
-                    </form>
-                  </div>
-                </td>
-              </tr>
-            <% }) %>
-          </tbody>
-        </table>
+    <form method="GET" action="/admin/users" class="grid grid-cols-1 md:grid-cols-[1fr_auto_auto] gap-4 items-end mb-8">
+      <div>
+        <label class="block text-[10px] uppercase tracking-[0.28em] text-outline mb-3">Search registry</label>
+        <input type="text" name="search" value="<%= search || '' %>" placeholder="Name or email" class="form-input-luxe" />
       </div>
+      <button class="px-6 py-4 rounded-full bg-gradient-to-r from-primary to-primary-container text-on-primary-fixed font-bold text-[10px] uppercase tracking-[0.24em]" type="submit">Search</button>
+      <a class="px-6 py-4 rounded-full border border-outline-variant/20 text-[10px] uppercase tracking-[0.24em] text-on-surface text-center" href="/admin/users/new">Create member</a>
+    </form>
+
+    <div class="overflow-x-auto">
+      <table class="admin-table-luxe">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Admin</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if (users.length === 0) { %>
+            <tr><td colspan="5">No members found.</td></tr>
+          <% } %>
+          <% users.forEach((user) => { %>
+            <tr>
+              <td><%= user.user_id %></td>
+              <td><%= user.name %></td>
+              <td><%= user.email %></td>
+              <td><%= user.isAdmin ? 'Yes' : 'No' %></td>
+              <td>
+                <div class="flex flex-wrap gap-3">
+                  <a href="/admin/users/<%= user.user_id %>/edit" class="px-4 py-3 rounded-full border border-outline-variant/20 text-[10px] uppercase tracking-[0.22em] text-on-surface">Edit</a>
+                  <form method="POST" action="/admin/users/<%= user.user_id %>/delete">
+                    <button type="submit" class="px-4 py-3 rounded-full border border-red-300/20 text-[10px] uppercase tracking-[0.22em] text-red-200">Delete</button>
+                  </form>
+                </div>
+              </td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
     </div>
   </section>
 </main>
 
-<%- include("../components/footer") %>
+<%- include('../components/footer') %>
 <script src="/assets/js/app.js"></script>
 </body>
 </html>

@@ -1,192 +1,199 @@
 <!doctype html>
 <html class="dark" lang="sk">
 <head>
-  <%- include('../components/head', { title: 'AutoSalón | Curated Motion' }) %>
+  <%- include('../components/head', { title: 'Velocity Rental | Luxury Car Collection' }) %>
 </head>
-<body class="bg-surface selection:bg-primary selection:text-primary-container overflow-x-hidden" data-page="home">
-<%- include('../components/header') %>
+<body class="bg-surface overflow-x-hidden" data-page="home">
+  <div class="karzone-page">
+    <nav class="kar-nav">
+      <div class="kar-nav__inner">
+        <a href="/" class="kar-logo">
+          <span class="kar-logo__mark">K</span>
+          <span class="kar-logo__text">KARZONE</span>
+        </a>
 
-<main class="nocturne-shell">
-  <section class="relative pt-32 pb-20 px-6 md:px-12 bg-surface overflow-hidden">
-    <div class="max-w-[1600px] mx-auto grid grid-cols-12 gap-4 min-h-[820px] lg:h-[870px] home-hero-grid">
-      <div class="hidden lg:block col-span-1 h-full overflow-hidden rounded-lg group reveal-up" data-reveal>
-        <img
-          class="w-full h-full object-cover grayscale brightness-50 transition-all duration-700 hero-parallax"
-          data-parallax="0.08"
-          src="https://lh3.googleusercontent.com/aida-public/AB6AXuBdqaltlOayidu7PICmLM20feKeH36pbU30h3Y2uq8Cbk_VzxoJcHbt-V52W5u9fZ6NjR-szTYNZ-wuFLCBU1Dv3Qd98KM9M4-4hecygYbeahtPn8ycAnxOGNKAPyt-_-VoBv4-VDhuuH7WwrSj2NJVCPlHbZdJeNabr_Z2D7EFmovhIsO1hNkUltfdmEDpubUFy8HXeS39sZB18xQWsvhRPxxADflVHdbsrYAzWkpjQgacfzk5dcLqA4IvSKTNg1AQFMA9emHk40o0"
-          alt="Close-up of a vintage Porsche headlight"
-        />
+        <button class="kar-nav-toggle" type="button" aria-label="Open menu">Menu</button>
+
+        <div class="kar-nav-links">
+          <a href="/cars">Reservations</a>
+          <a href="/cars">Vehicles</a>
+          <a href="#locations">Locations</a>
+          <a href="#style">Car Sales</a>
+          <a href="#business">For Business</a>
+        </div>
+
+        <div class="kar-nav-actions">
+          <% if (!locals.isAuthenticated) { %>
+            <a href="/login" class="kar-nav-link kar-nav-link--ghost">Login</a>
+            <a href="/contact" class="kar-nav-cta">Contact Us</a>
+          <% } else { %>
+            <a href="/my-cars" class="kar-nav-link kar-nav-link--ghost">My Garage</a>
+            <% if (locals.isAdmin) { %>
+              <a href="/admin/users" class="kar-nav-link kar-nav-link--ghost">Admin</a>
+            <% } %>
+            <form method="POST" action="/logout">
+              <button type="submit" class="kar-nav-cta">Log out</button>
+            </form>
+          <% } %>
+        </div>
       </div>
+    </nav>
 
-      <div class="col-span-12 lg:col-span-9 h-full relative flex flex-col justify-end bg-surface-container-lowest rounded-lg overflow-hidden group reveal-up" data-reveal>
-        <div class="absolute inset-0 z-0 overflow-hidden">
-          <img
-            class="w-full h-full object-cover transition-transform duration-[2000ms] hero-parallax hero-main-image"
-            data-parallax="0.12"
-            src="/assets/img/IMG_0286.JPG"
-            alt="Wide shot of a modern Porsche 911 GT3"
-          />
-          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-black/10"></div>
-        </div>
+    <main>
+      <section class="kar-hero">
+        <div class="kar-shell kar-hero__card js-reveal" data-reveal>
+          <div class="kar-hero__meta">
+            <span>NEW YORK, USA</span>
+            <span>Exotic car collection<br/>By Karzone</span>
+            <span>From exotic sports cars to luxury sedans and SUVs,<br/>Karzone offers an exceptional selection.</span>
+          </div>
 
-        <div class="absolute top-12 right-12 z-10 text-right hidden md:block reveal-fade" data-reveal>
-          <div class="font-headline italic text-white/55 text-xl mb-1">Legacy series</div>
-          <div class="font-body text-[10px] tracking-widest uppercase text-white">Issue 042 // Rennsport</div>
-        </div>
-
-        <div class="relative z-10 p-8 md:p-12 pointer-events-none">
-          <h1 class="font-headline font-black tracking-tighter text-white mb-4 leading-[0.85] text-[clamp(4rem,12vw,10rem)] uppercase reveal-fade" data-reveal>
-            NOCTURNE DRIVE
-          </h1>
-          <div class="flex flex-col md:flex-row gap-8 items-start md:items-end reveal-up delay-100" data-reveal>
-            <div class="font-body font-bold text-white text-3xl md:text-5xl tracking-tighter">GT3 RS</div>
-            <div class="font-body text-[10px] tracking-[0.3em] uppercase text-white pb-2 flex gap-4 md:gap-6 flex-wrap">
-              <span>525 HP</span>
-              <span class="opacity-30">|</span>
-              <span>295 KM/H</span>
-              <span class="opacity-30">|</span>
-              <span>3.2S 0-100</span>
+          <div class="kar-hero__visual">
+            <img src="/assets/img/IMG_0286.JPG" alt="Luxury sports car" class="kar-hero__image" data-parallax="0.08"/>
+            <div class="kar-hero__number">001</div>
+            <div class="kar-hero__copy">
+              <h1>Rent the luxury<br/>Own the thrill.</h1>
             </div>
           </div>
-          <div class="mt-8 flex flex-wrap gap-4 reveal-up delay-200" data-reveal>
-            <a href="/cars" class="bg-gradient-to-r from-primary to-primary-container text-on-primary-fixed px-6 py-3 rounded-full font-body uppercase tracking-widest text-[10px] font-bold pointer-events-auto hover:scale-105 transition-all duration-500 ease-in-out">
-              View Archive
-            </a>
-            <a href="/contact" class="border border-white/15 text-white px-6 py-3 rounded-full font-body uppercase tracking-widest text-[10px] font-bold pointer-events-auto hover:border-primary hover:text-primary transition-all duration-500">
-              Bespoke Inquiry
-            </a>
+
+          <div class="kar-hero__actions">
+            <a href="/cars">Rent a car <span>→</span></a>
+            <a href="/cars">Buy a car <span>→</span></a>
           </div>
         </div>
-      </div>
+      </section>
 
-      <div class="hidden lg:block col-span-2 h-full overflow-hidden rounded-lg group relative reveal-up delay-200" data-reveal>
-        <img
-          class="w-full h-full object-cover grayscale brightness-50 transition-all duration-700 hero-parallax"
-          data-parallax="0.06"
-          src="https://lh3.googleusercontent.com/aida-public/AB6AXuATPozCnbvB4W3DI6QP7lVvNdU9LabZr3M-g3o0FPCD20E0xInz8oafTNwTEnRzlsVg1zbIlznc_ttHVz5yF0v1OfySzLxUUtsK6DG9zGc2z96t4_sUVzovXGVtTl5UcSemFXwa9QzLVi2rVhiDduB-VYLccQWTlAITc-8ZQBJU1QH8NzNjU-KE94u9falwARIftvjLa-8EdNddCALSHhtsfhk5QBTrH0O3Lw5FFKHZIljLs7vapRrynyvy2HvEuLTmHeNmggo8_ebv"
-          alt="Side profile detail of a Porsche 911"
-        />
-        <div class="absolute bottom-12 left-1/2 -translate-x-1/2 vertical-text font-body text-[10px] tracking-[0.5em] uppercase text-white/40 transition-colors duration-500">
-          THE ART OF MOTION
+      <section class="kar-intro kar-shell" id="locations">
+        <div class="kar-section-label js-reveal" data-reveal>
+          <span></span>
+          <p>About us</p>
         </div>
-      </div>
-    </div>
-  </section>
+        <div class="kar-intro__grid">
+          <div class="kar-intro__headline js-reveal" data-reveal>
+            <h2>From exotic sports cars to luxury sedans and SUVs, Karzone's Exotic Car Collection offers an exceptional selection and Karzone's trusted, personalised service.</h2>
+          </div>
+          <div class="kar-intro__text js-reveal" data-reveal>
+            <div class="kar-line"></div>
+            <p>We provide selection of finest luxury cars to hire such as various types of Mercedes Benz, Hummer, BMW, Porsche, Alpina, Votix, Mini Cooper, Fortune Land Cruiser, and many types to match and honor your delightful days.</p>
+            <div class="kar-counters">
+              <div class="kar-counter-card">
+                <strong class="js-count" data-count="18">0</strong>
+                <span>years of luxury</span>
+              </div>
+              <div class="kar-counter-card">
+                <strong class="js-count" data-count="42">0</strong>
+                <span>signature vehicles</span>
+              </div>
+              <div class="kar-counter-card">
+                <strong class="js-count" data-count="100">0</strong>
+                <span>tailored events</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-  <section class="bg-surface-container-low py-24 px-6 md:px-12 overflow-hidden">
-    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-12">
-      <div class="text-center md:text-left reveal-up" data-reveal>
-        <div class="font-headline text-5xl font-black mb-2 js-counter" data-counter="1240" data-suffix="+">0</div>
-        <div class="font-body text-[10px] tracking-widest uppercase text-slate-500">Archived Journals</div>
-      </div>
-      <div class="h-12 w-px bg-outline-variant/20 hidden md:block"></div>
-      <div class="text-center md:text-left reveal-up delay-100" data-reveal>
-        <div class="font-headline text-5xl font-black mb-2 js-counter" data-counter="84">0</div>
-        <div class="font-body text-[10px] tracking-widest uppercase text-slate-500">Active Technicals</div>
-      </div>
-      <div class="h-12 w-px bg-outline-variant/20 hidden md:block"></div>
-      <div class="text-center md:text-left reveal-up delay-200" data-reveal>
-        <div class="font-headline text-5xl font-black mb-2 js-counter" data-counter="12" data-suffix="M">0</div>
-        <div class="font-body text-[10px] tracking-widest uppercase text-slate-500">Global Reach</div>
-      </div>
-      <div class="h-12 w-px bg-outline-variant/20 hidden md:block"></div>
-      <div class="text-center md:text-left reveal-up delay-300" data-reveal>
-        <div class="font-headline text-5xl font-black mb-2 js-counter" data-counter="0">0</div>
-        <div class="font-body text-[10px] tracking-widest uppercase text-slate-500">Compromises</div>
-      </div>
-    </div>
-  </section>
+      <section class="kar-showcase kar-shell" id="style">
+        <div class="kar-section-head js-reveal" data-reveal>
+          <div>
+            <div class="kar-section-label kar-section-label--inline">
+              <span></span>
+              <p>Arrive in style</p>
+            </div>
+            <p class="kar-section-small">Choose from our prestigious collection of world class brands.</p>
+          </div>
+          <div class="kar-showcase__cta">
+            <a href="/cars" class="kar-pill kar-pill--ghost">Rent a car</a>
+            <a href="/cars" class="kar-pill">Buy a car</a>
+          </div>
+        </div>
 
-  <section class="py-32 px-6 md:px-12 bg-surface overflow-hidden">
-    <div class="max-w-[1600px] mx-auto">
-      <div class="flex justify-between items-end mb-20 gap-8 flex-wrap reveal-up" data-reveal>
+        <div class="kar-stage js-reveal" data-reveal>
+          <div class="kar-stage__ambient"></div>
+          <div class="kar-stage__type">TYPE R</div>
+          <div class="kar-stage__brand">JAGUAR</div>
+          <img src="/assets/img/cars/car-2.jpg" alt="Featured Jaguar style car" class="kar-stage__car" data-parallax="0.05"/>
+          <img src="/assets/img/cars/car-1.jpg" alt="Side vehicle" class="kar-stage__side kar-stage__side--left"/>
+          <img src="/assets/img/ritual.jpeg" alt="Side vehicle" class="kar-stage__side kar-stage__side--right"/>
+          <div class="kar-stage__footer">
+            <div class="kar-stage__details">
+              <h3>JAGUAR F-TYPE R</h3>
+              <p>Every tap of the accelerator is a ritual. The supercharged line, the premium cabin, the statement silhouette. Nightdrive luxury, distilled.</p>
+            </div>
+            <div class="kar-stage__specs">
+              <div><strong class="js-count" data-count="450">0</strong><span>MILEAGE</span></div>
+              <div><strong class="js-count" data-count="280">0</strong><span>KM/H</span></div>
+              <div><strong class="js-count" data-count="2024">0</strong><span>YEAR</span></div>
+            </div>
+            <a href="/cars" class="kar-pill">View details</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="kar-brands kar-shell" id="business">
+        <div class="kar-section-head js-reveal" data-reveal>
+          <div>
+            <div class="kar-section-label kar-section-label--inline">
+              <span></span>
+              <p>Popular exotic & luxury rental makes</p>
+            </div>
+            <p class="kar-section-small">The finest purveyors of supercars, sports cars and limos.</p>
+          </div>
+          <p class="kar-brands__copy">No automotive brand is as alluring as Lamborghini. Sports drives, V10 and V12 engines, striking exhaust notes — the exotic models are the very definition of sensation.</p>
+        </div>
+
+        <div class="kar-brand-grid js-reveal" data-reveal>
+          <article class="kar-brand-card">Bugatti</article>
+          <article class="kar-brand-card">Ferrari</article>
+          <article class="kar-brand-card kar-brand-card--featured">
+            <div class="kar-brand-card__badge">Lamborghini</div>
+            <a href="/cars" class="kar-pill">Buy a Lamborghini</a>
+          </article>
+          <article class="kar-brand-card">Jaguar</article>
+          <article class="kar-brand-card">Bentley</article>
+        </div>
+      </section>
+
+      <section class="kar-service kar-shell">
+        <div class="kar-service__grid">
+          <div class="kar-service__visual js-reveal" data-reveal>
+            <img src="/assets/img/coastal.jpeg" alt="Premium customer service" data-parallax="0.04"/>
+          </div>
+          <div class="kar-service__content js-reveal" data-reveal>
+            <h2>Superior<br/>Customer<br/>Service</h2>
+            <p>Experience exotic car rentals from the brand known for award-winning customer service. Our goal is to meet your needs and exceed your expectations. We’ll even deliver and collect your exotic vehicle at your convenience.</p>
+            <a href="/contact" class="kar-pill">View details</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="kar-footer">
+      <div class="kar-shell kar-footer__top">
         <div>
-          <span class="font-body text-[10px] tracking-[0.4em] uppercase text-primary mb-4 block">Selected Works</span>
-          <h2 class="font-headline text-5xl md:text-6xl font-bold tracking-tighter">The Showroom</h2>
+          <a href="/" class="kar-logo kar-logo--footer">
+            <span class="kar-logo__mark">K</span>
+            <span class="kar-logo__text">KARZONE</span>
+          </a>
+          <p>Enjoy top of the accelerator in a premium fleet. For a special engine, all little details have lasting freedom and true highlights of daily life.</p>
+          <a href="/contact" class="kar-footer__button">Contact us <span>→</span></a>
         </div>
-        <a class="font-body text-[10px] tracking-widest uppercase border-b border-outline-variant/40 pb-2 hover:border-primary transition-colors" href="/cars">Explore Full Collection</a>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
-        <div class="md:col-span-8 bg-surface-container rounded-lg overflow-hidden relative group aspect-[16/9] reveal-up" data-reveal>
-          <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVJeEPL3qIBr0k6uulbiObZBPSGb4fXsXTe49tUutt3vDqjcVEBcucPKRhltwn8ECU73hp6CS6QcoGICFp4cjKuB0il3tZlIxcnuafO0uix94MRCMtzQI9DQckXvlYwassf_S0OAeIl5Vy8R5mtkptldxNjAINBTun9xRQCV9j68uJQ_wnE3gu3hd1_Otuu5ZH-ayVeLWGaxKRB8RJ-Zv758JeRVr0aPyzbr00ls1A3cPHc51pYLTBcja4ZGQPRYvbB0SQYdRCBuJy" alt="Carrera RS 73" />
-          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60"></div>
-          <div class="absolute bottom-10 left-10">
-            <div class="font-headline text-3xl font-bold text-white mb-2">Carrera RS '73</div>
-            <div class="font-body text-[10px] tracking-widest uppercase text-primary">Preservation Project</div>
-          </div>
+        <div>
+          <span class="kar-footer__eyebrow">Address</span>
+          <p>224 W 79th St, New York, NY 10024, USA</p>
         </div>
-        <div class="md:col-span-4 bg-surface-container rounded-lg overflow-hidden group aspect-square md:aspect-auto reveal-up delay-100" data-reveal>
-          <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC8vn18YdTYSUozjLTB5yoxSUiEpI1rLwUul3xXBzXFMUPyNa5jKWJ9z3kwWueZAslMIUTb4QAagXSjQjVaQ-8EiwocrItV43l5Y5XuK4Swyxd5-kgRKO93mygcbIvrop2ir_70mS9BAMxjVjBWsY8zsiRFqVo5Vw_fYQYzPETmD4nuDyKR6dkbh8OPwxVEofUXx_E76K158N_jzxn4f4L3m4KIXWAGKNN21Doh-9XbOn5HBIgM8D2nt2oQT8cKqzcZak_I01fAZOD5" alt="Porsche interior" />
+        <div>
+          <span class="kar-footer__eyebrow">Contact us</span>
+          <p>+62 9384 3478<br/>Karzone@gmail.com</p>
         </div>
-        <div class="md:col-span-4 bg-surface-container rounded-lg overflow-hidden group aspect-square reveal-up delay-200" data-reveal>
-          <img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAIY4NhF7cZYnGMkfvtKaIxu0ns03GTfcjyc-GweSQT4ApNdsgQzXuZnCtgiDuTu0coyrDykUHuzl4c2bzsXTeGQpg33F1I5plP7HA8Hs9UPPax9DRO-S8nsdKIxxFvCmZOXZ8MHCxONPg9Ie2zFNihKGHDTcbPfGLV4gITWwFjtwrfqGMd-QEh0u1g7Fs_ANQd0rIetjGqIM42hGoGEy4vjk3_fAowskBy2KlzlpCxET4pxKrbf9WdZ6K81z8VQ5s1Th7uUBn12bFz" alt="Forest road drive" />
-        </div>
-        <div class="md:col-span-8 bg-surface-container rounded-lg overflow-hidden relative group aspect-video md:aspect-auto reveal-up delay-300" data-reveal>
-          <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_juSYhsm74mwd7-3mo4Y7OB01XryI6te90ZujqzWphVUWjbheTsGBdQqnuxXMAvTUV8yQnPdfk9Ej7z2_3AONbdc7PIMBhs235AkqPZTfp3tHaahOfAyGTHEKjGw8dEIDN1hFJKZkwhfEkyFzLzA0M_X3mKD2HiaanlqvYXbxt-Q-KOwjFocw_dM3apKUQwlG8In2lzVpfdswieBsyUX-NotoTWGSOys3KfyUNb5m7CV6pqjj62FG2mIWql1Ja8Z8ankIbMGl_lXs" alt="Turbo S rear view" />
-          <div class="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent"></div>
-          <div class="absolute inset-y-0 left-0 flex items-center p-12">
-            <div class="max-w-xs">
-              <h3 class="font-headline text-4xl font-bold mb-4">Turbo S</h3>
-              <p class="font-body text-xs text-slate-400 leading-relaxed mb-6">The ultimate cross-continental machine, refined for the modern collector.</p>
-              <a href="/cars" class="bg-white text-black px-6 py-3 rounded-full font-body uppercase tracking-widest text-[10px] font-bold inline-flex">View Specs</a>
-            </div>
-          </div>
+        <div class="kar-footer__back">
+          <button id="backToTop" aria-label="Back to top">↑</button>
+          <span>Back to top</span>
         </div>
       </div>
-    </div>
-  </section>
+    </footer>
+  </div>
 
-  <section class="py-32 bg-surface-container-lowest overflow-hidden">
-    <div class="max-w-7xl mx-auto px-6 md:px-12">
-      <div class="text-center mb-24 reveal-up" data-reveal>
-        <span class="font-body text-[10px] tracking-[0.5em] uppercase text-primary mb-4 block">The Journal</span>
-        <h2 class="font-headline text-5xl font-bold mb-8">Stories of Motion</h2>
-        <div class="w-12 h-1 bg-primary mx-auto"></div>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-16">
-        <article class="flex flex-col reveal-up" data-reveal>
-          <div class="aspect-[4/5] overflow-hidden rounded-lg mb-8">
-            <img class="w-full h-full object-cover hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVLGBZI_6YsqZublXvZfwmrfyklWWUuKtblY2yi7Fh4ileW4FXw060MtorV2OT27SctMMC0owkjEO-qZj9kwiVY6j_8HULtCTogqW-YmA4mM2YE-jsPq_nths1lic-IvJLgvl00UoEx3o9slW0JHkGR9NB5uxnrEE45w68KjvX30u0dbX5Aq6Om7QJBtzU2NBprmdBiXZj-2rMxuU6lg7hUAIAGnunidiS-ckH2DRWCoEBWfCh-0pH5UVXlKNxwVv78KgF5mXeo2EA" alt="Air cooled aesthetic" />
-          </div>
-          <span class="font-body text-[10px] tracking-widest uppercase text-slate-500 mb-4">September 12, 2024</span>
-          <h3 class="font-headline text-2xl font-bold mb-4 leading-tight">The Air-Cooled Aesthetic: Why We Still Look Back</h3>
-          <p class="font-body text-sm text-slate-400 leading-relaxed mb-6">Tracing the mechanical purity of the flat-six engine and its enduring influence on car culture.</p>
-          <a class="text-primary font-body uppercase tracking-widest text-[10px] font-bold flex items-center gap-2 group" href="/about">
-            Read Story
-            <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
-          </a>
-        </article>
-        <article class="flex flex-col mt-0 md:mt-24 reveal-up delay-100" data-reveal>
-          <div class="aspect-[4/5] overflow-hidden rounded-lg mb-8">
-            <img class="w-full h-full object-cover hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDlV_PkXQDlrrRmyVJA0DsQuXwNfyXTi-H3AokbiYh06stacbsuvjfy4pxrfMiH4PeyItznZFqVXbi9n-sPOglFqJYKcHiN_3YJnqAvv_x9l_RFCVb9NsgonSermrzE0LEkY0y_1sgAQxupkbpyyBPqmVQYB7r-1hydVAsEjyiaMZN5A-5vyol3_Zk2jAk4xkDaw9bUu9WbpDVRglVOuP3RLiTpOc6cJV_gxbC4SXxBgYbHdCD7Ivg3Wz-TykE-zywCd1pNnlSFh-xT" alt="Midnight in Tokyo" />
-          </div>
-          <span class="font-body text-[10px] tracking-widest uppercase text-slate-500 mb-4">August 28, 2024</span>
-          <h3 class="font-headline text-2xl font-bold mb-4 leading-tight">Midnight in Tokyo: A RWB Pilgrimage</h3>
-          <p class="font-body text-sm text-slate-400 leading-relaxed mb-6">An intimate look at Nakai-San's workshop and the philosophy of wide-body craftsmanship.</p>
-          <a class="text-primary font-body uppercase tracking-widest text-[10px] font-bold flex items-center gap-2 group" href="/contact">
-            Read Story
-            <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
-          </a>
-        </article>
-        <article class="flex flex-col reveal-up delay-200" data-reveal>
-          <div class="aspect-[4/5] overflow-hidden rounded-lg mb-8">
-            <img class="w-full h-full object-cover hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAo4aRsiJVPIHVtjPfYhMpm5Vi2rsJ18ql-fFKxVx3gwevlQDdNLZ46JIFRjvsubef4vTtFJgAIFQWj2dJyQ6YCviA9FI5ofVX7NGiRJPqXMYrMK123OQ-wWTnYCv819kjkU2Ayu-Bm5ZhyqKv3Ru2S_IO7gav723z_y4Vslwn4_6dRdyiCXddSiM3F-iHjNYPcXH9XWVxmiyKYupv8TX2XEw5AIKHD70iPeshFOF6fsWgoswAYeH98AuMErE3UpNktnAgwGwSKFket" alt="Stelvio pass" />
-          </div>
-          <span class="font-body text-[10px] tracking-widest uppercase text-slate-500 mb-4">August 15, 2024</span>
-          <h3 class="font-headline text-2xl font-bold mb-4 leading-tight">Stelvio: The Ultimate Test of Man and Machine</h3>
-          <p class="font-body text-sm text-slate-400 leading-relaxed mb-6">48 hairpins, 9,000 feet of elevation, and one perfect morning drive.</p>
-          <a class="text-primary font-body uppercase tracking-widest text-[10px] font-bold flex items-center gap-2 group" href="/cars">
-            Read Story
-            <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
-          </a>
-        </article>
-      </div>
-    </div>
-  </section>
-</main>
-
-<%- include('../components/footer') %>
-<button id="backToTop" type="button" aria-label="Back to top">↑</button>
-<script src="/assets/js/app.js"></script>
+  <script src="/assets/js/app.js"></script>
 </body>
 </html>

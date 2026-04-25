@@ -1,32 +1,31 @@
-<header class="fixed top-0 left-0 w-full z-50 bg-[#111417]/80 backdrop-blur-2xl shadow-[0_20px_40px_rgba(0,0,0,0.4)]">
-  <div class="flex justify-between items-center w-full px-6 md:px-12 py-6 max-w-screen-2xl mx-auto gap-6">
-    <a href="/" class="text-2xl md:text-[1.7rem] font-black italic tracking-tighter text-white uppercase font-headline shrink-0">
-      CURATED MOTION
+<header class="site-header">
+  <div class="site-header__inner">
+    <a href="/" class="site-brand">
+      <span class="site-brand__mark">K</span>
+      <span class="site-brand__text">KARZONE</span>
     </a>
 
-    <button class="nav-toggle hidden md:hidden text-primary border border-primary/20 rounded-full px-4 py-2 text-xs uppercase tracking-[0.28em]" type="button" aria-label="Menu">
-      Menu
-    </button>
+    <button class="nav-toggle" type="button" aria-label="Open menu">Menu</button>
 
-    <nav class="main-nav hidden md:flex items-center space-x-10 lg:space-x-12 text-center">
-      <a href="/" data-page="home" class="nav-link nav-link-underlined text-[#45474b] hover:text-white transition-colors font-body uppercase text-[10px] tracking-widest">Journal</a>
-      <a href="/cars" data-page="cars" class="nav-link nav-link-underlined text-[#45474b] hover:text-white transition-colors font-body uppercase text-[10px] tracking-widest">Archive</a>
-      <a href="/about" data-page="about" class="nav-link nav-link-underlined text-[#45474b] hover:text-white transition-colors font-body uppercase text-[10px] tracking-widest">Ethos</a>
-      <a href="/contact" data-page="contact" class="nav-link nav-link-underlined text-[#45474b] hover:text-white transition-colors font-body uppercase text-[10px] tracking-widest">Dispatch</a>
+    <nav class="main-nav">
+      <a href="/" data-page="home" class="nav-link">Home</a>
+      <a href="/cars" data-page="cars" class="nav-link">Vehicles</a>
+      <a href="/about" data-page="about" class="nav-link">About</a>
+      <a href="/contact" data-page="contact" class="nav-link">Contact</a>
 
       <% if (locals.isAuthenticated) { %>
-        <a href="/my-cars" class="nav-link text-[#45474b] hover:text-white transition-colors font-body uppercase text-[10px] tracking-widest">Garage</a>
-        <a href="/cars/new" class="text-on-primary-fixed bg-gradient-to-r from-primary to-primary-container px-5 py-3 rounded-full text-[10px] font-bold tracking-[0.24em] uppercase hover:scale-[1.02] transition-transform">Acquire</a>
+        <a href="/my-cars" class="nav-link">My Garage</a>
+        <a href="/cars/new" class="site-header__cta site-header__cta--ghost">Add listing</a>
         <% if (locals.isAdmin) { %>
-          <a href="/admin/users" class="nav-link text-[#45474b] hover:text-white transition-colors font-body uppercase text-[10px] tracking-widest">Admin</a>
+          <a href="/admin/users" class="nav-link">Admin</a>
         <% } %>
-        <span class="text-primary font-body uppercase text-[10px] tracking-[0.24em]"><%= locals.user.name %></span>
-        <form method="POST" action="/logout" class="inline-block">
-          <button type="submit" class="text-white/80 hover:text-white transition-colors font-body uppercase text-[10px] tracking-widest">Exit</button>
+        <span class="site-header__user"><%= locals.user.name %></span>
+        <form method="POST" action="/logout" class="site-header__logout-form">
+          <button type="submit" class="site-header__cta">Log out</button>
         </form>
       <% } else { %>
-        <a href="/login" class="nav-link text-[#45474b] hover:text-white transition-colors font-body uppercase text-[10px] tracking-widest">Entry</a>
-        <a href="/signup" class="text-on-primary-fixed bg-gradient-to-r from-primary to-primary-container px-5 py-3 rounded-full text-[10px] font-bold tracking-[0.24em] uppercase hover:scale-[1.02] transition-transform">Membership</a>
+        <a href="/login" class="nav-link">Login</a>
+        <a href="/signup" class="site-header__cta site-header__cta--ghost">Sign up</a>
       <% } %>
     </nav>
   </div>

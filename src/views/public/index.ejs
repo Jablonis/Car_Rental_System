@@ -1,199 +1,211 @@
 <!doctype html>
-<html class="dark" lang="sk">
+<html class="dark" lang="en">
 <head>
-  <%- include('../components/head', { title: 'Velocity Rental | Luxury Car Collection' }) %>
+  <%- include('../components/head', { title: 'KARZONE | Luxury Rentals' }) %>
 </head>
-<body class="bg-surface overflow-x-hidden" data-page="home">
-  <div class="karzone-page">
-    <nav class="kar-nav">
-      <div class="kar-nav__inner">
-        <a href="/" class="kar-logo">
-          <span class="kar-logo__mark">K</span>
-          <span class="kar-logo__text">KARZONE</span>
-        </a>
+<body class="bg-surface text-on-surface" data-page="home">
+  <main class="karzone-page">
+    <section class="kar-hero">
+      <div class="kar-shell">
+        <article class="kar-hero-card js-reveal" data-reveal>
+          <header class="kar-hero-bar">
+            <a href="/" class="kar-logo">
+              <span class="kar-logo__mark">K</span>
+              <span class="kar-logo__text">KARZONE</span>
+            </a>
 
-        <button class="kar-nav-toggle" type="button" aria-label="Open menu">Menu</button>
+            <button class="kar-nav-toggle" type="button" aria-label="Open menu">Menu</button>
 
-        <div class="kar-nav-links">
-          <a href="/cars">Reservations</a>
-          <a href="/cars">Vehicles</a>
-          <a href="#locations">Locations</a>
-          <a href="#style">Car Sales</a>
-          <a href="#business">For Business</a>
-        </div>
+            <nav class="kar-hero-nav">
+              <div class="kar-hero-nav__links">
+                <a href="/cars">Reservations</a>
+                <a href="/cars">Vehicles</a>
+                <a href="/about">Locations</a>
+                <a href="/cars">Car Sales</a>
+                <a href="/contact">For Business</a>
+              </div>
+              <div class="kar-hero-nav__actions">
+                <% if (!locals.isAuthenticated) { %>
+                  <a href="/login" class="kar-nav-link kar-nav-link--ghost">Login</a>
+                  <a href="/contact" class="kar-nav-cta">Contact us</a>
+                <% } else { %>
+                  <a href="/my-cars" class="kar-nav-link kar-nav-link--ghost">My garage</a>
+                  <% if (locals.isAdmin) { %>
+                    <a href="/admin/users" class="kar-nav-link kar-nav-link--ghost">Admin</a>
+                  <% } %>
+                  <form method="POST" action="/logout">
+                    <button type="submit" class="kar-nav-cta">Log out</button>
+                  </form>
+                <% } %>
+              </div>
+            </nav>
+          </header>
 
-        <div class="kar-nav-actions">
-          <% if (!locals.isAuthenticated) { %>
-            <a href="/login" class="kar-nav-link kar-nav-link--ghost">Login</a>
-            <a href="/contact" class="kar-nav-cta">Contact Us</a>
-          <% } else { %>
-            <a href="/my-cars" class="kar-nav-link kar-nav-link--ghost">My Garage</a>
-            <% if (locals.isAdmin) { %>
-              <a href="/admin/users" class="kar-nav-link kar-nav-link--ghost">Admin</a>
-            <% } %>
-            <form method="POST" action="/logout">
-              <button type="submit" class="kar-nav-cta">Log out</button>
-            </form>
-          <% } %>
-        </div>
-      </div>
-    </nav>
-
-    <main>
-      <section class="kar-hero">
-        <div class="kar-shell kar-hero__card js-reveal" data-reveal>
           <div class="kar-hero__meta">
             <span>NEW YORK, USA</span>
             <span>Exotic car collection<br/>By Karzone</span>
-            <span>From exotic sports cars to luxury sedans and SUVs,<br/>Karzone offers an exceptional selection.</span>
+            <span>From exotic sports cars to luxury sedans and SUVs,<br/>Karzone offers an exceptional selection and personalised service.</span>
           </div>
 
-          <div class="kar-hero__visual">
-            <img src="/assets/img/IMG_0286.JPG" alt="Luxury sports car" class="kar-hero__image" data-parallax="0.08"/>
-            <div class="kar-hero__number">001</div>
-            <div class="kar-hero__copy">
-              <h1>Rent the luxury<br/>Own the thrill.</h1>
+          <div class="kar-hero__stage">
+            <aside class="kar-hero__slice kar-hero__slice--left">
+              <img src="/assets/img/cars/car-1.jpg" alt="Headlight detail" />
+            </aside>
+
+            <div class="kar-hero__main">
+              <img src="/assets/img/IMG_0286.JPG" alt="Luxury coupe" class="kar-hero__image" data-parallax="0.04" />
+              <span class="kar-hero__series">001</span>
+              <div class="kar-hero__headline">
+                <h1>Rent the luxury<br/>Own the thrill.</h1>
+              </div>
+              <div class="kar-hero__badge">
+                <p>Exotic car collection<br/>By Karzone</p>
+                <div>
+                  <span>GT3 inspired edition</span>
+                  <strong>Legacy line</strong>
+                </div>
+              </div>
+              <span class="kar-hero__wheel-ring" aria-hidden="true"></span>
             </div>
+
+            <aside class="kar-hero__slice kar-hero__slice--right">
+              <img src="/assets/img/ritual.jpeg" alt="Wheel detail" />
+              <span>THE ART OF MOTION</span>
+            </aside>
           </div>
 
           <div class="kar-hero__actions">
             <a href="/cars">Rent a car <span>→</span></a>
             <a href="/cars">Buy a car <span>→</span></a>
           </div>
-        </div>
-      </section>
+        </article>
+      </div>
+    </section>
 
-      <section class="kar-intro kar-shell" id="locations">
-        <div class="kar-section-label js-reveal" data-reveal>
-          <span></span>
-          <p>About us</p>
+    <section class="kar-intro kar-shell" id="locations">
+      <div class="kar-section-label js-reveal" data-reveal>
+        <span></span>
+        <p>About us</p>
+      </div>
+      <div class="kar-intro__grid">
+        <div class="kar-intro__headline js-reveal" data-reveal>
+          <h2 data-word-reveal>From exotic sports cars to luxury sedans and SUVs, Karzone's Exotic Car Collection offers an exceptional selection and Karzone's trusted, personalised service.</h2>
         </div>
-        <div class="kar-intro__grid">
-          <div class="kar-intro__headline js-reveal" data-reveal>
-            <h2>From exotic sports cars to luxury sedans and SUVs, Karzone's Exotic Car Collection offers an exceptional selection and Karzone's trusted, personalised service.</h2>
-          </div>
-          <div class="kar-intro__text js-reveal" data-reveal>
-            <div class="kar-line"></div>
-            <p>We provide selection of finest luxury cars to hire such as various types of Mercedes Benz, Hummer, BMW, Porsche, Alpina, Votix, Mini Cooper, Fortune Land Cruiser, and many types to match and honor your delightful days.</p>
-            <div class="kar-counters">
-              <div class="kar-counter-card">
-                <strong class="js-count" data-count="18">0</strong>
-                <span>years of luxury</span>
-              </div>
-              <div class="kar-counter-card">
-                <strong class="js-count" data-count="42">0</strong>
-                <span>signature vehicles</span>
-              </div>
-              <div class="kar-counter-card">
-                <strong class="js-count" data-count="100">0</strong>
-                <span>tailored events</span>
-              </div>
+        <div class="kar-intro__text js-reveal" data-reveal>
+          <div class="kar-line"></div>
+          <p>We provide the finest luxury cars to hire, from Mercedes-Benz and Porsche to Range Rover, Jaguar and Bentley, carefully matched to your occasion, your route, and your rhythm.</p>
+          <div class="kar-counters">
+            <div class="kar-counter-card">
+              <strong class="js-count" data-count="18">0</strong>
+              <span>years of luxury</span>
+            </div>
+            <div class="kar-counter-card">
+              <strong class="js-count" data-count="42">0</strong>
+              <span>signature vehicles</span>
+            </div>
+            <div class="kar-counter-card">
+              <strong class="js-count" data-count="100">0</strong>
+              <span>tailored events</span>
             </div>
           </div>
-        </div>
-      </section>
-
-      <section class="kar-showcase kar-shell" id="style">
-        <div class="kar-section-head js-reveal" data-reveal>
-          <div>
-            <div class="kar-section-label kar-section-label--inline">
-              <span></span>
-              <p>Arrive in style</p>
-            </div>
-            <p class="kar-section-small">Choose from our prestigious collection of world class brands.</p>
-          </div>
-          <div class="kar-showcase__cta">
-            <a href="/cars" class="kar-pill kar-pill--ghost">Rent a car</a>
-            <a href="/cars" class="kar-pill">Buy a car</a>
-          </div>
-        </div>
-
-        <div class="kar-stage js-reveal" data-reveal>
-          <div class="kar-stage__ambient"></div>
-          <div class="kar-stage__type">TYPE R</div>
-          <div class="kar-stage__brand">JAGUAR</div>
-          <img src="/assets/img/cars/car-2.jpg" alt="Featured Jaguar style car" class="kar-stage__car" data-parallax="0.05"/>
-          <img src="/assets/img/cars/car-1.jpg" alt="Side vehicle" class="kar-stage__side kar-stage__side--left"/>
-          <img src="/assets/img/ritual.jpeg" alt="Side vehicle" class="kar-stage__side kar-stage__side--right"/>
-          <div class="kar-stage__footer">
-            <div class="kar-stage__details">
-              <h3>JAGUAR F-TYPE R</h3>
-              <p>Every tap of the accelerator is a ritual. The supercharged line, the premium cabin, the statement silhouette. Nightdrive luxury, distilled.</p>
-            </div>
-            <div class="kar-stage__specs">
-              <div><strong class="js-count" data-count="450">0</strong><span>MILEAGE</span></div>
-              <div><strong class="js-count" data-count="280">0</strong><span>KM/H</span></div>
-              <div><strong class="js-count" data-count="2024">0</strong><span>YEAR</span></div>
-            </div>
-            <a href="/cars" class="kar-pill">View details</a>
-          </div>
-        </div>
-      </section>
-
-      <section class="kar-brands kar-shell" id="business">
-        <div class="kar-section-head js-reveal" data-reveal>
-          <div>
-            <div class="kar-section-label kar-section-label--inline">
-              <span></span>
-              <p>Popular exotic & luxury rental makes</p>
-            </div>
-            <p class="kar-section-small">The finest purveyors of supercars, sports cars and limos.</p>
-          </div>
-          <p class="kar-brands__copy">No automotive brand is as alluring as Lamborghini. Sports drives, V10 and V12 engines, striking exhaust notes — the exotic models are the very definition of sensation.</p>
-        </div>
-
-        <div class="kar-brand-grid js-reveal" data-reveal>
-          <article class="kar-brand-card">Bugatti</article>
-          <article class="kar-brand-card">Ferrari</article>
-          <article class="kar-brand-card kar-brand-card--featured">
-            <div class="kar-brand-card__badge">Lamborghini</div>
-            <a href="/cars" class="kar-pill">Buy a Lamborghini</a>
-          </article>
-          <article class="kar-brand-card">Jaguar</article>
-          <article class="kar-brand-card">Bentley</article>
-        </div>
-      </section>
-
-      <section class="kar-service kar-shell">
-        <div class="kar-service__grid">
-          <div class="kar-service__visual js-reveal" data-reveal>
-            <img src="/assets/img/coastal.jpeg" alt="Premium customer service" data-parallax="0.04"/>
-          </div>
-          <div class="kar-service__content js-reveal" data-reveal>
-            <h2>Superior<br/>Customer<br/>Service</h2>
-            <p>Experience exotic car rentals from the brand known for award-winning customer service. Our goal is to meet your needs and exceed your expectations. We’ll even deliver and collect your exotic vehicle at your convenience.</p>
-            <a href="/contact" class="kar-pill">View details</a>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <footer class="kar-footer">
-      <div class="kar-shell kar-footer__top">
-        <div>
-          <a href="/" class="kar-logo kar-logo--footer">
-            <span class="kar-logo__mark">K</span>
-            <span class="kar-logo__text">KARZONE</span>
-          </a>
-          <p>Enjoy top of the accelerator in a premium fleet. For a special engine, all little details have lasting freedom and true highlights of daily life.</p>
-          <a href="/contact" class="kar-footer__button">Contact us <span>→</span></a>
-        </div>
-        <div>
-          <span class="kar-footer__eyebrow">Address</span>
-          <p>224 W 79th St, New York, NY 10024, USA</p>
-        </div>
-        <div>
-          <span class="kar-footer__eyebrow">Contact us</span>
-          <p>+62 9384 3478<br/>Karzone@gmail.com</p>
-        </div>
-        <div class="kar-footer__back">
-          <button id="backToTop" aria-label="Back to top">↑</button>
-          <span>Back to top</span>
         </div>
       </div>
-    </footer>
-  </div>
+    </section>
 
+    <section class="kar-showcase kar-shell" id="style">
+      <div class="kar-section-head js-reveal" data-reveal>
+        <div>
+          <div class="kar-section-label kar-section-label--inline">
+            <span></span>
+            <p>Arrive in style</p>
+          </div>
+          <p class="kar-section-small">Choose from our prestigious collection of world class brands and cinematic silhouettes.</p>
+        </div>
+        <div class="kar-showcase__cta">
+          <a href="/cars" class="kar-pill kar-pill--ghost">Rent a car</a>
+          <a href="/cars" class="kar-pill">Buy a car</a>
+        </div>
+      </div>
+
+      <div class="kar-signature js-reveal" data-reveal>
+        <div class="kar-signature__label">SIGNATURE DRIVE</div>
+        <div class="kar-signature__wordmark">PORSCHE</div>
+        <div class="kar-signature__halo"></div>
+        <img src="/assets/img/IMG_0286.JPG" alt="Signature coupe" class="kar-signature__car" data-parallax="0.03" />
+
+        <div class="kar-signature__panel kar-signature__panel--left">
+          <span>Selected edition</span>
+          <h3>911 Carrera S</h3>
+          <p>A private collection icon with midnight bodywork, carbon restraint, and enough composure to feel effortless at any speed.</p>
+        </div>
+
+        <div class="kar-signature__panel kar-signature__panel--right">
+          <div>
+            <strong class="js-count" data-count="450">0</strong>
+            <span>horsepower</span>
+          </div>
+          <div>
+            <strong class="js-count" data-count="308">0</strong>
+            <span>km/h</span>
+          </div>
+          <div>
+            <strong class="js-count" data-count="2024">0</strong>
+            <span>year</span>
+          </div>
+        </div>
+
+        <div class="kar-signature__rail kar-signature__rail--left">
+          <img src="/assets/img/cars/car-1.jpg" alt="Lighting detail" />
+          <img src="/assets/img/coastal.jpeg" alt="Drive atmosphere" />
+        </div>
+
+        <div class="kar-signature__rail kar-signature__rail--right">
+          <img src="/assets/img/ritual.jpeg" alt="Interior ritual" />
+          <a href="/cars" class="kar-pill">View details</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="kar-brands kar-shell" id="business">
+      <div class="kar-section-head js-reveal" data-reveal>
+        <div>
+          <div class="kar-section-label kar-section-label--inline">
+            <span></span>
+            <p>Popular exotic & luxury rental makes</p>
+          </div>
+          <p class="kar-section-small">The finest purveyors of supercars, sports cars and limos.</p>
+        </div>
+        <p class="kar-brands__copy">No automotive brand is as alluring as Lamborghini. Sports drives, V10 and V12 engines, striking exhaust notes — the exotic models are the very definition of sensation.</p>
+      </div>
+
+      <div class="kar-brand-grid js-reveal" data-reveal>
+        <article class="kar-brand-card">Bugatti</article>
+        <article class="kar-brand-card">Ferrari</article>
+        <article class="kar-brand-card kar-brand-card--featured">
+          <div class="kar-brand-card__badge">Lamborghini</div>
+          <a href="/cars" class="kar-pill">Buy a Lamborghini</a>
+        </article>
+        <article class="kar-brand-card">Jaguar</article>
+        <article class="kar-brand-card">Bentley</article>
+      </div>
+    </section>
+
+    <section class="kar-service kar-shell">
+      <div class="kar-service__grid">
+        <div class="kar-service__visual js-reveal" data-reveal>
+          <img src="/assets/img/coastal.jpeg" alt="Premium customer service" data-parallax="0.03" />
+        </div>
+        <div class="kar-service__content js-reveal" data-reveal>
+          <h2>Superior<br/>Customer<br/>Service</h2>
+          <p>Experience exotic car rentals from the brand known for award-winning customer service. Our goal is to meet your needs and exceed your expectations. We’ll even deliver and collect your exotic vehicle at your convenience.</p>
+          <a href="/contact" class="kar-pill">View details</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <%- include('../components/footer') %>
+  <button id="backToTop" type="button" aria-label="Back to top">↑</button>
   <script src="/assets/js/app.js"></script>
 </body>
 </html>

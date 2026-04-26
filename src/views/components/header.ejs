@@ -9,13 +9,15 @@
       <a href="/" data-page="home" class="nav-link">Home</a>
       <a href="/cars" data-page="cars" class="nav-link">Vehicles</a>
       <a href="/about" data-page="about" class="nav-link">About</a>
-      <a href="/about#journal-preview" class="nav-link">Journal</a>
+      <a href="/journal" data-page="journal" class="nav-link">Journal</a>
       <a href="/contact" data-page="contact" class="nav-link">Contact</a>
 
       <% if (locals.isAuthenticated) { %>
         <a href="/my-cars" class="nav-link">My Garage</a>
         <% if (locals.isAdmin) { %>
-          <a href="/admin/users" class="nav-link">Admin</a>
+          <a href="/admin/users" class="nav-link">Users</a>
+          <a href="/admin/cars" class="nav-link">Cars</a>
+          <a href="/admin/blogs" class="nav-link">Blogs</a>
         <% } %>
       <% } %>
     </nav>

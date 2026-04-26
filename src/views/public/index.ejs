@@ -67,54 +67,48 @@
       </div>
     </section>
 
-    <section class="kz-atelier kz-shell" id="atelier">
+    <section class="kz-arrivals kz-shell" id="latest-arrivals">
       <div class="kz-section-head js-reveal" data-reveal>
         <div>
           <div class="kz-section-label kz-section-label--inline">
             <span></span>
-            <p>Arrive in style</p>
+            <p>Latest arrivals</p>
           </div>
-          <p class="kz-section-copy">A darker, cleaner signature section designed to feel more cinematic than a standard featured card.</p>
+          <p class="kz-section-copy">A slow-moving gallery of the newest cars added by Karzone members—less static, more alive.</p>
         </div>
-        <div class="kz-section-cta">
-          <a href="/cars" class="kz-pill kz-pill--ghost">Rent a car</a>
-          <a href="/cars" class="kz-pill">View inventory</a>
-        </div>
+        <a href="/cars" class="kz-pill">Browse inventory</a>
       </div>
 
-      <div class="kz-atelier__stage js-reveal" data-reveal>
-        <div class="kz-atelier__column kz-atelier__column--copy">
-          <span class="kz-atelier__eyebrow">Night Atelier</span>
-          <h3>Performance, edited with restraint.</h3>
-          <p>Instead of a single boxed spotlight, this section behaves more like an editorial feature—image, data, and atmosphere working together in one continuous scene.</p>
-          <div class="kz-atelier__stats">
-            <div>
-              <strong class="js-count" data-count="450">0</strong>
-              <span>horsepower</span>
-            </div>
-            <div>
-              <strong class="js-count" data-count="280">0</strong>
-              <span>km/h</span>
-            </div>
-            <div>
-              <strong class="js-count" data-count="2024">0</strong>
-              <span>atelier series</span>
-            </div>
+      <div class="kz-arrivals__marquee js-reveal" data-reveal>
+        <% const showcaseCars = (latestCars && latestCars.length ? latestCars : []).slice(0, 8); %>
+        <% const showcaseLoop = showcaseCars.length ? showcaseCars.concat(showcaseCars) : []; %>
+        <% if (showcaseLoop.length) { %>
+          <div class="kz-arrivals__track">
+            <% showcaseLoop.forEach((car, index) => { %>
+              <article class="kz-arrival-card" aria-hidden="<%= index >= showcaseCars.length ? 'true' : 'false' %>">
+                <a href="/cars/<%= car.car_id %>" class="kz-arrival-card__media">
+                  <img src="<%= car.image %>" alt="<%= car.title %>">
+                </a>
+                <div class="kz-arrival-card__body">
+                  <div>
+                    <span class="kz-arrival-card__eyebrow">Latest by members</span>
+                    <h3><%= car.title %></h3>
+                    <p><%= car.brand %> <%= car.model %> · <%= car.year %> · <%= Number(car.price).toLocaleString('en-US') %> €<% if (car.owner_name) { %> · added by <%= car.owner_name %><% } %></p>
+                  </div>
+                  <div class="kz-arrival-card__meta">
+                    <span><%= car.mileage %> km</span>
+                    <span><%= car.fuel %></span>
+                    <span><%= car.transmission %></span>
+                  </div>
+                </div>
+              </article>
+            <% }) %>
           </div>
-          <a href="/cars" class="kz-pill">View details</a>
-        </div>
-
-        <div class="kz-atelier__column kz-atelier__column--visual">
-          <span class="kz-atelier__title">NOCTURNE</span>
-          <div class="kz-atelier__halo"></div>
-          <img src="/assets/img/IMG_0286.JPG" alt="Featured Porsche" class="kz-atelier__car" data-parallax="0.015" />
-          <div class="kz-atelier__float kz-atelier__float--left">
-            <img src="/assets/img/ritual.jpeg" alt="Interior ritual" />
+        <% } else { %>
+          <div class="kz-arrivals__empty">
+            <p>No latest cars yet. Add the first listing and it will appear here automatically.</p>
           </div>
-          <div class="kz-atelier__float kz-atelier__float--right">
-            <img src="/assets/img/coastal.jpeg" alt="Night drive atmosphere" />
-          </div>
-        </div>
+        <% } %>
       </div>
     </section>
 
@@ -188,36 +182,33 @@
         <div>
           <div class="kz-section-label kz-section-label--inline">
             <span></span>
-            <p>Journal preparation</p>
+            <p>Journal</p>
           </div>
-          <p class="kz-section-copy">A future-ready section for blog/editorial stories, already aligned with the homepage style.</p>
+          <p class="kz-section-copy">Live editorial entries written by the admin. Publish once and the homepage updates automatically.</p>
         </div>
+        <a href="/journal" class="kz-pill kz-pill--ghost">Open journal</a>
       </div>
       <div class="kz-journal__grid">
-        <article class="kz-story-card js-reveal" data-reveal>
-          <img src="/assets/img/ritual.jpeg" alt="Midnight ritual">
-          <div>
-            <span>Story 001</span>
-            <h3>Midnight rituals in the city garage.</h3>
-            <p>Prepared as a future blog card component for long-form editorial pieces.</p>
-          </div>
-        </article>
-        <article class="kz-story-card js-reveal" data-reveal>
-          <img src="/assets/img/coastal.jpeg" alt="Coastal route">
-          <div>
-            <span>Story 002</span>
-            <h3>Coastal runs and early light.</h3>
-            <p>Reusable for journal previews, launch posts, and curation notes.</p>
-          </div>
-        </article>
-        <article class="kz-story-card js-reveal" data-reveal>
-          <img src="/assets/img/cars/car-1.jpg" alt="Performance detail">
-          <div>
-            <span>Story 003</span>
-            <h3>Mechanical notes for collectors.</h3>
-            <p>A flexible system you can extend into a full blog page later.</p>
-          </div>
-        </article>
+        <% if (!latestBlogs || !latestBlogs.length) { %>
+          <article class="kz-story-card js-reveal" data-reveal>
+            <img src="/assets/img/ritual.jpeg" alt="Journal placeholder">
+            <div>
+              <span>Awaiting first post</span>
+              <h3>The journal is live—now publish the first story.</h3>
+              <p>Open the admin console and create the first blog entry. It will appear here immediately after publishing.</p>
+            </div>
+          </article>
+        <% } %>
+        <% (latestBlogs || []).forEach((post) => { %>
+          <article class="kz-story-card js-reveal" data-reveal>
+            <a href="/journal/<%= post.slug %>"><img src="<%= post.image %>" alt="<%= post.title %>"></a>
+            <div>
+              <span><%= new Date(post.created_at || Date.now()).toLocaleDateString('en-GB') %></span>
+              <h3><a href="/journal/<%= post.slug %>"><%= post.title %></a></h3>
+              <p><%= post.excerpt %></p>
+            </div>
+          </article>
+        <% }) %>
       </div>
     </section>
   </main>

@@ -1,0 +1,54 @@
+<!doctype html>
+<html class="dark" lang="en">
+<head>
+  <%- include('../components/head', { title: 'Karzone | Journal' }) %>
+</head>
+<body class="bg-surface text-on-surface" data-page="journal" id="top">
+<%- include('../components/header') %>
+
+<main class="kz-subpage kz-subpage--journal">
+  <section class="kz-page-hero kz-page-hero--journal">
+    <div class="kz-page-hero__media">
+      <img src="/assets/img/rana-singh.jpg" alt="Night journal cover" data-parallax="0.015" />
+      <div class="kz-page-hero__overlay"></div>
+    </div>
+    <div class="kz-shell kz-page-hero__content">
+      <span class="kz-page-hero__eyebrow">Journal</span>
+      <h1>Stories, routes, and collector notes—published live.</h1>
+      <p>The journal now pulls directly from admin-managed posts, so the editorial layer feels alive instead of hardcoded.</p>
+    </div>
+  </section>
+
+  <section class="kz-journal kz-shell kz-journal-page">
+    <div class="kz-journal__grid">
+      <% if (!posts.length) { %>
+        <article class="kz-story-card js-reveal" data-reveal>
+          <img src="/assets/img/ritual.jpeg" alt="No journal entries yet">
+          <div>
+            <span>Coming soon</span>
+            <h3>The journal is ready for its first entry.</h3>
+            <p>Open the admin journal desk to publish the first story and it will appear here automatically.</p>
+          </div>
+        </article>
+      <% } %>
+      <% posts.forEach((post) => { %>
+        <article class="kz-story-card js-reveal" data-reveal>
+          <a href="/journal/<%= post.slug %>">
+            <img src="<%= post.image %>" alt="<%= post.title %>">
+          </a>
+          <div>
+            <span><%= new Date(post.created_at || Date.now()).toLocaleDateString('en-GB') %></span>
+            <h3><a href="/journal/<%= post.slug %>"><%= post.title %></a></h3>
+            <p><%= post.excerpt %></p>
+          </div>
+        </article>
+      <% }) %>
+    </div>
+  </section>
+</main>
+
+<%- include('../components/footer') %>
+<button id="backToTop" type="button" aria-label="Back to top">↑</button>
+<script src="/assets/js/app.js"></script>
+</body>
+</html>

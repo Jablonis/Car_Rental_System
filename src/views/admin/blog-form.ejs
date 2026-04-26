@@ -1,0 +1,52 @@
+<!doctype html>
+<html class="dark" lang="sk">
+<head>
+  <%- include('../components/head', { title: mode === 'create' ? 'Create Journal Entry | Karzone' : 'Edit Journal Entry | Karzone' }) %>
+</head>
+<body class="bg-surface text-on-surface">
+<%- include('../components/header') %>
+
+<main class="pt-32 pb-24 px-6 md:px-12 max-w-screen-xl mx-auto">
+  <section class="mb-14">
+    <p class="text-primary text-xs tracking-[0.3em] uppercase mb-4">Admin Journal</p>
+    <h1 class="font-headline text-5xl md:text-7xl font-black tracking-tighter leading-[0.95]"><%= mode === 'create' ? 'New journal entry.' : 'Refine the story.' %></h1>
+  </section>
+
+  <section class="bg-surface-container-low rounded-lg p-6 md:p-8 editorial-shadow">
+    <% if (errors.length) { %>
+      <div class="alert-luxe mb-8">
+        <% errors.forEach((error) => { %>
+          <div><%= error.message %></div>
+        <% }) %>
+      </div>
+    <% } %>
+
+    <form method="POST" class="grid gap-6">
+      <div>
+        <label class="block text-[10px] uppercase tracking-[0.28em] text-outline mb-3">Title</label>
+        <input class="form-input-luxe" type="text" name="title" value="<%= formData.title || '' %>" required>
+      </div>
+      <div>
+        <label class="block text-[10px] uppercase tracking-[0.28em] text-outline mb-3">Excerpt</label>
+        <textarea class="form-input-luxe min-h-[8rem]" name="excerpt" required><%= formData.excerpt || '' %></textarea>
+      </div>
+      <div>
+        <label class="block text-[10px] uppercase tracking-[0.28em] text-outline mb-3">Content</label>
+        <textarea class="form-input-luxe min-h-[18rem]" name="content" required><%= formData.content || '' %></textarea>
+      </div>
+      <div>
+        <label class="block text-[10px] uppercase tracking-[0.28em] text-outline mb-3">Cover image</label>
+        <input class="form-input-luxe" type="text" name="image" value="<%= formData.image || '/assets/img/ritual.jpeg' %>">
+      </div>
+      <div class="flex flex-wrap gap-4">
+        <button class="px-6 py-4 rounded-full bg-gradient-to-r from-primary to-primary-container text-on-primary-fixed font-bold text-[10px] uppercase tracking-[0.24em]" type="submit"><%= mode === 'create' ? 'Publish entry' : 'Save changes' %></button>
+        <a href="/admin/blogs" class="px-6 py-4 rounded-full border border-outline-variant/20 text-[10px] uppercase tracking-[0.24em] text-on-surface">Back to desk</a>
+      </div>
+    </form>
+  </section>
+</main>
+
+<%- include('../components/footer') %>
+<script src="/assets/js/app.js"></script>
+</body>
+</html>

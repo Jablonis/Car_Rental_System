@@ -3,7 +3,8 @@ import {
   getHomePage,
   getAboutPage,
   getContactPage,
-  // getCarsPage,
+  getJournalPage,
+  getJournalDetailPage,
 } from "../controllers/public.controller.js";
 
 const router = express.Router();
@@ -11,6 +12,7 @@ const router = express.Router();
 router.get("/", getHomePage);
 router.get("/about", getAboutPage);
 router.get("/contact", getContactPage);
-// router.get("/cars", getCarsPage);
+router.get("/journal", getJournalPage);
+router.get("/journal/:slug", getJournalDetailPage);
 
 export default router;

@@ -151,8 +151,11 @@ document.addEventListener('DOMContentLoaded', function () {
       el.classList.add('word-reveal');
       words.forEach(function (word, idx) {
         var span = document.createElement('span');
-        span.textContent = word + (idx === words.length - 1 ? '' : ' ');
+        span.textContent = word;
         el.appendChild(span);
+        if (idx !== words.length - 1) {
+          el.appendChild(document.createTextNode(' '));
+        }
       });
       el.dataset.prepared = 'true';
     }

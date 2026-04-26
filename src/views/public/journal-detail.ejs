@@ -1,0 +1,55 @@
+<!doctype html>
+<html class="dark" lang="en">
+<head>
+  <%- include('../components/head', { title: `Karzone | ${post.title}` }) %>
+</head>
+<body class="bg-surface text-on-surface" data-page="journal" id="top">
+<%- include('../components/header') %>
+
+<main class="kz-subpage kz-subpage--journal-detail kz-shell">
+  <article class="kz-article-hero">
+    <div class="kz-article-hero__media">
+      <img src="<%= post.image %>" alt="<%= post.title %>">
+    </div>
+    <div class="kz-article-hero__copy">
+      <span class="kz-page-hero__eyebrow">Journal entry</span>
+      <h1><%= post.title %></h1>
+      <p><%= post.excerpt %></p>
+      <div class="kz-article-hero__meta"><%= new Date(post.created_at || Date.now()).toLocaleDateString('en-GB') %></div>
+    </div>
+  </article>
+
+  <section class="kz-article-body">
+    <% String(post.content || '').split(/\n\n+/).forEach((paragraph) => { %>
+      <p><%= paragraph %></p>
+    <% }) %>
+  </section>
+
+  <% if (relatedPosts.length) { %>
+    <section class="kz-journal kz-related-posts">
+      <div class="kz-section-head">
+        <div>
+          <div class="kz-section-label kz-section-label--inline"><span></span><p>Related reading</p></div>
+        </div>
+      </div>
+      <div class="kz-journal__grid">
+        <% relatedPosts.forEach((entry) => { %>
+          <article class="kz-story-card">
+            <a href="/journal/<%= entry.slug %>"><img src="<%= entry.image %>" alt="<%= entry.title %>"></a>
+            <div>
+              <span><%= new Date(entry.created_at || Date.now()).toLocaleDateString('en-GB') %></span>
+              <h3><a href="/journal/<%= entry.slug %>"><%= entry.title %></a></h3>
+              <p><%= entry.excerpt %></p>
+            </div>
+          </article>
+        <% }) %>
+      </div>
+    </section>
+  <% } %>
+</main>
+
+<%- include('../components/footer') %>
+<button id="backToTop" type="button" aria-label="Back to top">↑</button>
+<script src="/assets/js/app.js"></script>
+</body>
+</html>

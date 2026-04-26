@@ -1,0 +1,63 @@
+<!doctype html>
+<html class="dark" lang="sk">
+<head>
+  <%- include('../components/head', { title: 'Admin Journal | Karzone' }) %>
+</head>
+<body class="bg-surface text-on-surface">
+<%- include('../components/header') %>
+
+<main class="pt-32 pb-24 px-6 md:px-12 max-w-screen-2xl mx-auto">
+  <section class="mb-14">
+    <p class="text-primary text-xs tracking-[0.3em] uppercase mb-4">Admin Console</p>
+    <h1 class="font-headline text-5xl md:text-7xl font-black tracking-tighter leading-[0.95]">Journal Desk.</h1>
+  </section>
+
+  <section class="bg-surface-container-low rounded-lg p-6 md:p-8 editorial-shadow">
+    <div class="flex flex-col md:flex-row gap-4 md:items-center md:justify-between mb-8">
+      <p class="text-on-surface-variant max-w-xl">Write, refine, and delete journal entries. Published posts flow directly into the homepage and About journal sections.</p>
+      <a class="px-6 py-4 rounded-full bg-gradient-to-r from-primary to-primary-container text-on-primary-fixed font-bold text-[10px] uppercase tracking-[0.24em] text-center" href="/admin/blogs/new">Create entry</a>
+    </div>
+
+    <div class="overflow-x-auto">
+      <table class="admin-table-luxe">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Slug</th>
+            <th>Created</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if (!posts.length) { %>
+            <tr><td colspan="4">No journal entries yet.</td></tr>
+          <% } %>
+          <% posts.forEach((post) => { %>
+            <tr>
+              <td>
+                <strong class="text-white"><%= post.title %></strong>
+                <div class="text-xs text-on-surface-variant mt-2"><%= post.excerpt %></div>
+              </td>
+              <td><%= post.slug %></td>
+              <td><%= new Date(post.created_at || Date.now()).toLocaleDateString('en-GB') %></td>
+              <td>
+                <div class="flex flex-wrap gap-3">
+                  <a href="/journal/<%= post.slug %>" class="px-4 py-3 rounded-full border border-outline-variant/20 text-[10px] uppercase tracking-[0.22em] text-on-surface">View</a>
+                  <a href="/admin/blogs/<%= post.blog_id %>/edit" class="px-4 py-3 rounded-full border border-outline-variant/20 text-[10px] uppercase tracking-[0.22em] text-on-surface">Edit</a>
+                  <form method="POST" action="/admin/blogs/<%= post.blog_id %>/delete">
+                    <button type="submit" class="px-4 py-3 rounded-full border border-red-300/20 text-[10px] uppercase tracking-[0.22em] text-red-200">Delete</button>
+                  </form>
+                </div>
+              </td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</main>
+
+<%- include('../components/footer') %>
+<script src="/assets/js/app.js"></script>
+</body>
+</html>

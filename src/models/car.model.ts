@@ -14,6 +14,7 @@ type CarRow = {
   image: string;
   user_id: number;
   created_at: Date;
+  owner_name?: string;
 };
 
 class Car {
@@ -30,6 +31,7 @@ class Car {
   image!: string;
   user_id!: number;
   created_at?: Date;
+  owner_name?: string;
 
   constructor(
     data: {
@@ -45,6 +47,7 @@ class Car {
       image: string;
       user_id: number;
       created_at?: Date;
+      owner_name?: string;
     },
     car_id?: number,
   ) {
@@ -61,6 +64,7 @@ class Car {
     this.image = data.image;
     this.user_id = data.user_id;
     this.created_at = data.created_at;
+    this.owner_name = data.owner_name;
   }
 
   async save(): Promise<void> {
@@ -178,6 +182,42 @@ class Car {
             image: row.image,
             user_id: row.user_id,
             created_at: row.created_at,
+            owner_name: row.owner_name,
+          },
+          row.car_id,
+        ),
+    );
+  }
+
+
+
+  static async findLatestWithOwner(limit = 6): Promise<Car[]> {
+    const result = await pool.query<CarRow>(
+      `SELECT c.*, u.name as owner_name
+       FROM cars c
+       LEFT JOIN users u ON u.user_id = c.user_id
+       ORDER BY c.created_at DESC
+       LIMIT $1`,
+      [limit],
+    );
+
+    return result.rows.map(
+      (row) =>
+        new Car(
+          {
+            title: row.title,
+            brand: row.brand,
+            model: row.model,
+            year: row.year,
+            price: Number(row.price),
+            mileage: row.mileage,
+            fuel: row.fuel,
+            transmission: row.transmission,
+            description: row.description,
+            image: row.image,
+            user_id: row.user_id,
+            created_at: row.created_at,
+            owner_name: row.owner_name,
           },
           row.car_id,
         ),
@@ -235,6 +275,7 @@ class Car {
             image: row.image,
             user_id: row.user_id,
             created_at: row.created_at,
+            owner_name: row.owner_name,
           },
           row.car_id,
         ),

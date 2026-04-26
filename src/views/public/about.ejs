@@ -9,7 +9,7 @@
 <main class="kz-subpage kz-subpage--about">
   <section class="kz-page-hero kz-page-hero--about">
     <div class="kz-page-hero__media">
-      <img src="/assets/img/hero-garage.jpg" alt="Karzone collection" data-parallax="0.015" />
+      <img src="/assets/img/rana-singh.jpg" alt="Karzone collection" data-parallax="0.015" />
       <div class="kz-page-hero__overlay"></div>
     </div>
     <div class="kz-shell kz-page-hero__content">
@@ -48,8 +48,8 @@
       <img src="/assets/img/coastal.jpeg" alt="The route" />
       <div>
         <span>The route</span>
-        <h3>Prepared to evolve into a full journal.</h3>
-        <p>This layout already includes a blog-ready component system: hero, story cards, editorial image blocks, quotes, and cross-links. You can plug a future blog route into this system without redesigning the whole page.</p>
+        <h3>The journal now evolves live.</h3>
+        <p>The journal area is no longer a placeholder. Admin-written posts now publish directly into the site and flow through the same visual language as the homepage.</p>
       </div>
     </article>
   </section>
@@ -65,36 +65,33 @@
       <div>
         <div class="kz-section-label kz-section-label--inline">
           <span></span>
-          <p>Journal preview</p>
+          <p>Journal</p>
         </div>
-        <p class="kz-section-copy">Prepared components for a future blog page without needing backend changes right now.</p>
+        <p class="kz-section-copy">Published from the admin desk and rendered here automatically.</p>
       </div>
+      <a href="/journal" class="kz-pill kz-pill--ghost">View all</a>
     </div>
       <div class="kz-journal__grid">
-        <article class="kz-story-card js-reveal" data-reveal>
-          <img src="/assets/img/ritual.jpeg" alt="Story preview one">
-          <div>
-            <span>Editorial 001</span>
-            <h3>The ritual before the ignition.</h3>
-            <p>Story card styling prepared for future CMS or backend content integration.</p>
-          </div>
-        </article>
-        <article class="kz-story-card js-reveal" data-reveal>
-          <img src="/assets/img/coastal.jpeg" alt="Story preview two">
-          <div>
-            <span>Editorial 002</span>
-            <h3>The route matters as much as the machine.</h3>
-            <p>Same visual system as the homepage, so the experience feels unified.</p>
-          </div>
-        </article>
-        <article class="kz-story-card js-reveal" data-reveal>
-          <img src="/assets/img/cars/car-2.jpg" alt="Story preview three">
-          <div>
-            <span>Editorial 003</span>
-            <h3>Collector notes from the atelier.</h3>
-            <p>Ready to become a real blog grid later with minimal structural changes.</p>
-          </div>
-        </article>
+        <% if (!latestBlogs || !latestBlogs.length) { %>
+          <article class="kz-story-card js-reveal" data-reveal>
+            <img src="/assets/img/ritual.jpeg" alt="Story preview one">
+            <div>
+              <span>Editorial ready</span>
+              <h3>The journal is waiting for its first published story.</h3>
+              <p>Use the admin journal desk to write, edit, and publish live entries.</p>
+            </div>
+          </article>
+        <% } %>
+        <% (latestBlogs || []).forEach((post) => { %>
+          <article class="kz-story-card js-reveal" data-reveal>
+            <a href="/journal/<%= post.slug %>"><img src="<%= post.image %>" alt="<%= post.title %>"></a>
+            <div>
+              <span><%= new Date(post.created_at || Date.now()).toLocaleDateString('en-GB') %></span>
+              <h3><a href="/journal/<%= post.slug %>"><%= post.title %></a></h3>
+              <p><%= post.excerpt %></p>
+            </div>
+          </article>
+        <% }) %>
       </div>
   </section>
 </main>

@@ -10,7 +10,7 @@
 <main class="pt-32 pb-24 px-6 md:px-12 max-w-screen-2xl mx-auto">
   <section class="mb-14">
     <p class="text-primary text-xs tracking-[0.3em] uppercase mb-4">Admin Console</p>
-    <h1 class="font-headline text-5xl md:text-7xl font-black tracking-tighter leading-[0.95]">Archive Registry.</h1>
+    <h1 class="font-headline text-5xl md:text-7xl font-black tracking-tighter leading-[0.95]">Vehicle Registry.</h1>
   </section>
 
   <section class="bg-surface-container-low rounded-lg p-6 md:p-8 editorial-shadow overflow-x-auto">
@@ -22,11 +22,12 @@
           <th>Brand / Model</th>
           <th>Price</th>
           <th>Year</th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
         <% if (adminCars.length === 0) { %>
-          <tr><td colspan="5">No vehicles in archive.</td></tr>
+          <tr><td colspan="6">No vehicles in archive.</td></tr>
         <% } %>
         <% adminCars.forEach((car) => { %>
           <tr>
@@ -35,6 +36,15 @@
             <td><%= car.brand %> <%= car.model %></td>
             <td><%= car.price %> €</td>
             <td><%= car.year %></td>
+            <td>
+              <div class="flex flex-wrap gap-3">
+                <a href="/cars/<%= car.car_id %>" class="px-4 py-3 rounded-full border border-outline-variant/20 text-[10px] uppercase tracking-[0.22em] text-on-surface">View</a>
+                <a href="/cars/<%= car.car_id %>/edit" class="px-4 py-3 rounded-full border border-outline-variant/20 text-[10px] uppercase tracking-[0.22em] text-on-surface">Edit</a>
+                <form method="POST" action="/cars/<%= car.car_id %>/delete">
+                  <button type="submit" class="px-4 py-3 rounded-full border border-red-300/20 text-[10px] uppercase tracking-[0.22em] text-red-200">Delete</button>
+                </form>
+              </div>
+            </td>
           </tr>
         <% }) %>
       </tbody>

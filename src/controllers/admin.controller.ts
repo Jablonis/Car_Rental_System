@@ -10,6 +10,9 @@ import {
   deleteAdminUser,
   getUserById,
 } from "../services/admin-user.service.js";
+import Car from "../models/car.model.js";
+import Blog from "../models/blog.model.js";
+import { blogSchema } from "../validators/blog.validator.js";
 
 async function getAdminUsers(req: Request, res: Response) {
   const search =
@@ -128,6 +131,106 @@ async function postDeleteUser(req: Request, res: Response) {
   }
 }
 
+async function getAdminCars(req: Request, res: Response) {
+  const cars = await Car.findAll();
+
+  return res.render("admin/cars", {
+    cars,
+  });
+}
+
+async function getAdminBlogs(req: Request, res: Response) {
+  const posts = await Blog.findAll();
+  return res.render("admin/blogs", { posts });
+}
+
+function getCreateBlog(req: Request, res: Response) {
+  return res.render("admin/blog-form", {
+    mode: "create",
+    post: null,
+    errors: [],
+    formData: {
+      title: "",
+      excerpt: "",
+      content: "",
+      image: "/assets/img/ritual.jpeg",
+    },
+  });
+}
+
+async function postCreateBlog(req: Request, res: Response) {
+  const parsed = blogSchema.safeParse(req.body);
+
+  if (!parsed.success) {
+    return res.status(400).render("admin/blog-form", {
+      mode: "create",
+      post: null,
+      errors: parsed.error.issues,
+      formData: req.body,
+    });
+  }
+
+  const post = new Blog(parsed.data);
+  await post.save();
+
+  return res.redirect("/admin/blogs");
+}
+
+async function getEditBlog(req: Request, res: Response) {
+  const blogId = Number(req.params.id);
+  const post = await Blog.findById(blogId);
+
+  if (!post) {
+    return res.status(404).send("Journal entry not found");
+  }
+
+  return res.render("admin/blog-form", {
+    mode: "edit",
+    post,
+    errors: [],
+    formData: {
+      title: post.title,
+      excerpt: post.excerpt,
+      content: post.content,
+      image: post.image,
+    },
+  });
+}
+
+async function postEditBlog(req: Request, res: Response) {
+  const blogId = Number(req.params.id);
+  const post = await Blog.findById(blogId);
+
+  if (!post) {
+    return res.status(404).send("Journal entry not found");
+  }
+
+  const parsed = blogSchema.safeParse(req.body);
+
+  if (!parsed.success) {
+    return res.status(400).render("admin/blog-form", {
+      mode: "edit",
+      post,
+      errors: parsed.error.issues,
+      formData: req.body,
+    });
+  }
+
+  post.title = parsed.data.title;
+  post.excerpt = parsed.data.excerpt;
+  post.content = parsed.data.content;
+  post.image = parsed.data.image;
+  await post.save();
+
+  return res.redirect("/admin/blogs");
+}
+
+async function postDeleteBlog(req: Request, res: Response) {
+  const blogId = Number(req.params.id);
+  await Blog.deleteById(blogId);
+  return res.redirect("/admin/blogs");
+}
+
 export {
   getAdminUsers,
   getCreateUser,
@@ -135,4 +238,11 @@ export {
   getEditUser,
   postEditUser,
   postDeleteUser,
+  getAdminCars,
+  getAdminBlogs,
+  getCreateBlog,
+  postCreateBlog,
+  getEditBlog,
+  postEditBlog,
+  postDeleteBlog,
 };

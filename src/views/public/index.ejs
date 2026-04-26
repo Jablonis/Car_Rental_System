@@ -3,108 +3,63 @@
 <head>
   <%- include('../components/head', { title: 'KARZONE | Luxury Rentals' }) %>
 </head>
-<body class="bg-surface text-on-surface" data-page="home">
-  <main class="karzone-page">
-    <section class="kar-hero">
-      <div class="kar-shell">
-        <article class="kar-hero-card js-reveal" data-reveal>
-          <header class="kar-hero-bar">
-            <a href="/" class="kar-logo">
-              <span class="kar-logo__mark">K</span>
-              <span class="kar-logo__text">KARZONE</span>
-            </a>
+<body class="bg-surface text-on-surface" data-page="home" id="top">
+  <%- include('../components/header') %>
 
-            <button class="kar-nav-toggle" type="button" aria-label="Open menu">Menu</button>
+  <main class="kz-home">
+    <section class="kz-hero">
+      <div class="kz-hero__bleed">
+        <img src="/assets/img/hero-garage.jpg" alt="Luxury garage lineup" class="kz-hero__bg" data-parallax="0.02" />
+        <div class="kz-hero__overlay"></div>
+      </div>
 
-            <nav class="kar-hero-nav">
-              <div class="kar-hero-nav__links">
-                <a href="/cars">Reservations</a>
-                <a href="/cars">Vehicles</a>
-                <a href="/about">Locations</a>
-                <a href="/cars">Car Sales</a>
-                <a href="/contact">For Business</a>
-              </div>
-              <div class="kar-hero-nav__actions">
-                <% if (!locals.isAuthenticated) { %>
-                  <a href="/login" class="kar-nav-link kar-nav-link--ghost">Login</a>
-                  <a href="/contact" class="kar-nav-cta">Contact us</a>
-                <% } else { %>
-                  <a href="/my-cars" class="kar-nav-link kar-nav-link--ghost">My garage</a>
-                  <% if (locals.isAdmin) { %>
-                    <a href="/admin/users" class="kar-nav-link kar-nav-link--ghost">Admin</a>
-                  <% } %>
-                  <form method="POST" action="/logout">
-                    <button type="submit" class="kar-nav-cta">Log out</button>
-                  </form>
-                <% } %>
-              </div>
-            </nav>
-          </header>
+      <div class="kz-shell kz-hero__shell">
+        <div class="kz-hero__meta js-reveal" data-reveal>
+          <span>NEW YORK, USA</span>
+          <span>Exotic car collection<br>By Karzone</span>
+          <span>From exotic sports cars to luxury sedans and SUVs, Karzone offers an exceptional selection and personalised service.</span>
+        </div>
 
-          <div class="kar-hero__meta">
-            <span>NEW YORK, USA</span>
-            <span>Exotic car collection<br/>By Karzone</span>
-            <span>From exotic sports cars to luxury sedans and SUVs,<br/>Karzone offers an exceptional selection and personalised service.</span>
+        <div class="kz-hero__copy js-reveal" data-reveal>
+          <span class="kz-hero__edition">001</span>
+          <h1>Rent the luxury<br>Own the thrill.</h1>
+          <div class="kz-hero__specs">
+            <span>Private collection</span>
+            <span>Performance grade</span>
+            <span>Concierge delivery</span>
           </div>
+        </div>
+      </div>
 
-          <div class="kar-hero__stage">
-            <aside class="kar-hero__slice kar-hero__slice--left">
-              <img src="/assets/img/cars/car-1.jpg" alt="Headlight detail" />
-            </aside>
-
-            <div class="kar-hero__main">
-              <img src="/assets/img/IMG_0286.JPG" alt="Luxury coupe" class="kar-hero__image" data-parallax="0.04" />
-              <span class="kar-hero__series">001</span>
-              <div class="kar-hero__headline">
-                <h1>Rent the luxury<br/>Own the thrill.</h1>
-              </div>
-              <div class="kar-hero__badge">
-                <p>Exotic car collection<br/>By Karzone</p>
-                <div>
-                  <span>GT3 inspired edition</span>
-                  <strong>Legacy line</strong>
-                </div>
-              </div>
-              <span class="kar-hero__wheel-ring" aria-hidden="true"></span>
-            </div>
-
-            <aside class="kar-hero__slice kar-hero__slice--right">
-              <img src="/assets/img/ritual.jpeg" alt="Wheel detail" />
-              <span>THE ART OF MOTION</span>
-            </aside>
-          </div>
-
-          <div class="kar-hero__actions">
-            <a href="/cars">Rent a car <span>→</span></a>
-            <a href="/cars">Buy a car <span>→</span></a>
-          </div>
-        </article>
+      <div class="kz-shell kz-hero__actions js-reveal" data-reveal>
+        <a href="/cars">Rent a car <span>→</span></a>
+        <a href="/cars">Buy a car <span>→</span></a>
       </div>
     </section>
 
-    <section class="kar-intro kar-shell" id="locations">
-      <div class="kar-section-label js-reveal" data-reveal>
+    <section class="kz-intro kz-shell" id="intro">
+      <div class="kz-section-label js-reveal" data-reveal>
         <span></span>
         <p>About us</p>
       </div>
-      <div class="kar-intro__grid">
-        <div class="kar-intro__headline js-reveal" data-reveal>
+      <div class="kz-intro__grid">
+        <div class="kz-intro__headline js-reveal" data-reveal>
           <h2 data-word-reveal>From exotic sports cars to luxury sedans and SUVs, Karzone's Exotic Car Collection offers an exceptional selection and Karzone's trusted, personalised service.</h2>
         </div>
-        <div class="kar-intro__text js-reveal" data-reveal>
-          <div class="kar-line"></div>
+        <div class="kz-intro__aside js-reveal" data-reveal>
+          <div class="kz-intro__line"></div>
           <p>We provide the finest luxury cars to hire, from Mercedes-Benz and Porsche to Range Rover, Jaguar and Bentley, carefully matched to your occasion, your route, and your rhythm.</p>
-          <div class="kar-counters">
-            <div class="kar-counter-card">
+          <div class="kz-counter-grid">
+            <div class="kz-counter-card">
               <strong class="js-count" data-count="18">0</strong>
               <span>years of luxury</span>
             </div>
-            <div class="kar-counter-card">
+            <div class="kz-counter-card">
               <strong class="js-count" data-count="42">0</strong>
               <span>signature vehicles</span>
             </div>
-            <div class="kar-counter-card">
-              <strong class="js-count" data-count="100">0</strong>
+            <div class="kz-counter-card">
+              <strong class="js-count" data-count="100" data-suffix="+">0</strong>
               <span>tailored events</span>
             </div>
           </div>
@@ -112,94 +67,157 @@
       </div>
     </section>
 
-    <section class="kar-showcase kar-shell" id="style">
-      <div class="kar-section-head js-reveal" data-reveal>
+    <section class="kz-atelier kz-shell" id="atelier">
+      <div class="kz-section-head js-reveal" data-reveal>
         <div>
-          <div class="kar-section-label kar-section-label--inline">
+          <div class="kz-section-label kz-section-label--inline">
             <span></span>
             <p>Arrive in style</p>
           </div>
-          <p class="kar-section-small">Choose from our prestigious collection of world class brands and cinematic silhouettes.</p>
+          <p class="kz-section-copy">A darker, cleaner signature section designed to feel more cinematic than a standard featured card.</p>
         </div>
-        <div class="kar-showcase__cta">
-          <a href="/cars" class="kar-pill kar-pill--ghost">Rent a car</a>
-          <a href="/cars" class="kar-pill">Buy a car</a>
+        <div class="kz-section-cta">
+          <a href="/cars" class="kz-pill kz-pill--ghost">Rent a car</a>
+          <a href="/cars" class="kz-pill">View inventory</a>
         </div>
       </div>
 
-      <div class="kar-signature js-reveal" data-reveal>
-        <div class="kar-signature__label">SIGNATURE DRIVE</div>
-        <div class="kar-signature__wordmark">PORSCHE</div>
-        <div class="kar-signature__halo"></div>
-        <img src="/assets/img/IMG_0286.JPG" alt="Signature coupe" class="kar-signature__car" data-parallax="0.03" />
-
-        <div class="kar-signature__panel kar-signature__panel--left">
-          <span>Selected edition</span>
-          <h3>911 Carrera S</h3>
-          <p>A private collection icon with midnight bodywork, carbon restraint, and enough composure to feel effortless at any speed.</p>
+      <div class="kz-atelier__stage js-reveal" data-reveal>
+        <div class="kz-atelier__column kz-atelier__column--copy">
+          <span class="kz-atelier__eyebrow">Night Atelier</span>
+          <h3>Performance, edited with restraint.</h3>
+          <p>Instead of a single boxed spotlight, this section behaves more like an editorial feature—image, data, and atmosphere working together in one continuous scene.</p>
+          <div class="kz-atelier__stats">
+            <div>
+              <strong class="js-count" data-count="450">0</strong>
+              <span>horsepower</span>
+            </div>
+            <div>
+              <strong class="js-count" data-count="280">0</strong>
+              <span>km/h</span>
+            </div>
+            <div>
+              <strong class="js-count" data-count="2024">0</strong>
+              <span>atelier series</span>
+            </div>
+          </div>
+          <a href="/cars" class="kz-pill">View details</a>
         </div>
 
-        <div class="kar-signature__panel kar-signature__panel--right">
-          <div>
-            <strong class="js-count" data-count="450">0</strong>
-            <span>horsepower</span>
+        <div class="kz-atelier__column kz-atelier__column--visual">
+          <span class="kz-atelier__title">NOCTURNE</span>
+          <div class="kz-atelier__halo"></div>
+          <img src="/assets/img/IMG_0286.JPG" alt="Featured Porsche" class="kz-atelier__car" data-parallax="0.015" />
+          <div class="kz-atelier__float kz-atelier__float--left">
+            <img src="/assets/img/ritual.jpeg" alt="Interior ritual" />
           </div>
-          <div>
-            <strong class="js-count" data-count="308">0</strong>
-            <span>km/h</span>
+          <div class="kz-atelier__float kz-atelier__float--right">
+            <img src="/assets/img/coastal.jpeg" alt="Night drive atmosphere" />
           </div>
-          <div>
-            <strong class="js-count" data-count="2024">0</strong>
-            <span>year</span>
-          </div>
-        </div>
-
-        <div class="kar-signature__rail kar-signature__rail--left">
-          <img src="/assets/img/cars/car-1.jpg" alt="Lighting detail" />
-          <img src="/assets/img/coastal.jpeg" alt="Drive atmosphere" />
-        </div>
-
-        <div class="kar-signature__rail kar-signature__rail--right">
-          <img src="/assets/img/ritual.jpeg" alt="Interior ritual" />
-          <a href="/cars" class="kar-pill">View details</a>
         </div>
       </div>
     </section>
 
-    <section class="kar-brands kar-shell" id="business">
-      <div class="kar-section-head js-reveal" data-reveal>
+    <section class="kz-brands kz-shell" id="brands">
+      <div class="kz-section-head js-reveal" data-reveal>
         <div>
-          <div class="kar-section-label kar-section-label--inline">
+          <div class="kz-section-label kz-section-label--inline">
             <span></span>
             <p>Popular exotic & luxury rental makes</p>
           </div>
-          <p class="kar-section-small">The finest purveyors of supercars, sports cars and limos.</p>
+          <p class="kz-section-copy">A logo-ready strip you can later replace with official SVG marks without changing the layout.</p>
         </div>
-        <p class="kar-brands__copy">No automotive brand is as alluring as Lamborghini. Sports drives, V10 and V12 engines, striking exhaust notes — the exotic models are the very definition of sensation.</p>
+        <p class="kz-brands__copy">This band is intentionally more fluid and less static than the old card set—closer to a premium automotive partner wall.</p>
       </div>
 
-      <div class="kar-brand-grid js-reveal" data-reveal>
-        <article class="kar-brand-card">Bugatti</article>
-        <article class="kar-brand-card">Ferrari</article>
-        <article class="kar-brand-card kar-brand-card--featured">
-          <div class="kar-brand-card__badge">Lamborghini</div>
-          <a href="/cars" class="kar-pill">Buy a Lamborghini</a>
-        </article>
-        <article class="kar-brand-card">Jaguar</article>
-        <article class="kar-brand-card">Bentley</article>
+      <div class="kz-brand-marquee js-reveal" data-reveal>
+        <div class="kz-brand-track">
+          <% ['Bugatti', 'Ferrari', 'Lamborghini', 'Jaguar', 'Bentley', 'Porsche', 'Aston Martin', 'Range Rover'].forEach(function(brand) { %>
+            <article class="kz-brand-pill">
+              <span class="kz-brand-mark"><%= brand.charAt(0) %></span>
+              <span class="kz-brand-name"><%= brand %></span>
+            </article>
+          <% }) %>
+        </div>
+        <div class="kz-brand-track kz-brand-track--clone" aria-hidden="true">
+          <% ['Bugatti', 'Ferrari', 'Lamborghini', 'Jaguar', 'Bentley', 'Porsche', 'Aston Martin', 'Range Rover'].forEach(function(brand) { %>
+            <article class="kz-brand-pill">
+              <span class="kz-brand-mark"><%= brand.charAt(0) %></span>
+              <span class="kz-brand-name"><%= brand %></span>
+            </article>
+          <% }) %>
+        </div>
       </div>
     </section>
 
-    <section class="kar-service kar-shell">
-      <div class="kar-service__grid">
-        <div class="kar-service__visual js-reveal" data-reveal>
-          <img src="/assets/img/coastal.jpeg" alt="Premium customer service" data-parallax="0.03" />
+    <section class="kz-service kz-shell" id="service">
+      <div class="kz-service__grid">
+        <div class="kz-service__visual js-reveal" data-reveal>
+          <img src="/assets/img/coastal.jpeg" alt="Superior customer service" data-parallax="0.03" />
+          <div class="kz-service__floating-card">
+            <span>Concierge</span>
+            <strong>24/7 Route planning</strong>
+            <p>Airport handoff, event delivery, white-glove return.</p>
+          </div>
         </div>
-        <div class="kar-service__content js-reveal" data-reveal>
-          <h2>Superior<br/>Customer<br/>Service</h2>
-          <p>Experience exotic car rentals from the brand known for award-winning customer service. Our goal is to meet your needs and exceed your expectations. We’ll even deliver and collect your exotic vehicle at your convenience.</p>
-          <a href="/contact" class="kar-pill">View details</a>
+        <div class="kz-service__content js-reveal" data-reveal>
+          <span class="kz-service__eyebrow">Superior customer service</span>
+          <h2>More than a rental.<br>A fully staged arrival.</h2>
+          <p>Experience exotic car rentals from a team that treats logistics as part of the luxury. We handle route planning, timed delivery, on-location handoff, and discreet collection with the same care as the vehicle itself.</p>
+          <div class="kz-service__cards">
+            <article>
+              <strong>01</strong>
+              <span>Private concierge line</span>
+            </article>
+            <article>
+              <strong>02</strong>
+              <span>Flexible collection windows</span>
+            </article>
+            <article>
+              <strong>03</strong>
+              <span>Event-ready vehicle prep</span>
+            </article>
+          </div>
+          <a href="/contact" class="kz-pill">View details</a>
         </div>
+      </div>
+    </section>
+
+    <section class="kz-journal kz-shell" id="journal-preview">
+      <div class="kz-section-head js-reveal" data-reveal>
+        <div>
+          <div class="kz-section-label kz-section-label--inline">
+            <span></span>
+            <p>Journal preparation</p>
+          </div>
+          <p class="kz-section-copy">A future-ready section for blog/editorial stories, already aligned with the homepage style.</p>
+        </div>
+      </div>
+      <div class="kz-journal__grid">
+        <article class="kz-story-card js-reveal" data-reveal>
+          <img src="/assets/img/ritual.jpeg" alt="Midnight ritual">
+          <div>
+            <span>Story 001</span>
+            <h3>Midnight rituals in the city garage.</h3>
+            <p>Prepared as a future blog card component for long-form editorial pieces.</p>
+          </div>
+        </article>
+        <article class="kz-story-card js-reveal" data-reveal>
+          <img src="/assets/img/coastal.jpeg" alt="Coastal route">
+          <div>
+            <span>Story 002</span>
+            <h3>Coastal runs and early light.</h3>
+            <p>Reusable for journal previews, launch posts, and curation notes.</p>
+          </div>
+        </article>
+        <article class="kz-story-card js-reveal" data-reveal>
+          <img src="/assets/img/cars/car-1.jpg" alt="Performance detail">
+          <div>
+            <span>Story 003</span>
+            <h3>Mechanical notes for collectors.</h3>
+            <p>A flexible system you can extend into a full blog page later.</p>
+          </div>
+        </article>
       </div>
     </section>
   </main>

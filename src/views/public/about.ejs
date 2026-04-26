@@ -1,107 +1,101 @@
 <!doctype html>
 <html class="dark" lang="sk">
 <head>
-  <%- include('../components/head', { title: 'Karzone | Ethos' }) %>
+  <%- include('../components/head', { title: 'Karzone | About' }) %>
 </head>
-<body class="bg-background text-on-surface" data-page="about">
+<body class="bg-surface text-on-surface" data-page="about" id="top">
 <%- include('../components/header') %>
 
-<main class="pt-40 md:pt-48 pb-24 md:pb-32">
-  <section class="max-w-[1440px] mx-auto px-6 md:px-8 mb-32 md:mb-40 text-center">
-    <p class="text-primary tracking-[0.3em] uppercase text-[10px] mb-8">Karzone</p>
-    <h1 class="font-headline text-5xl md:text-7xl font-bold italic tracking-tighter mb-12 leading-none">The Art of Drive</h1>
-    <p class="font-headline text-xl md:text-2xl text-on-surface-variant max-w-2xl mx-auto leading-relaxed italic">
-      A commitment to the machine, the moment, and the movement that defines us.
-    </p>
-  </section>
-
-  <section class="w-full mb-32 md:mb-40 overflow-hidden">
-    <div clasols="h-[460px] md:h-[716px] w-full bg-surface-container-low relative">
-      <img class="w-full h-full object-cover opacity-60 mix-blend-luminosity" src="/assets/img/coastal.jpeg" alt="Coastal road at dusk" />
-      <div class="absolute inset-0 bg-gradient-to-t from-surface via-surface/70 to-transparent"></div>
+<main class="kz-subpage kz-subpage--about">
+  <section class="kz-page-hero kz-page-hero--about">
+    <div class="kz-page-hero__media">
+      <img src="/assets/img/hero-garage.jpg" alt="Karzone collection" data-parallax="0.015" />
+      <div class="kz-page-hero__overlay"></div>
+    </div>
+    <div class="kz-shell kz-page-hero__content">
+      <span class="kz-page-hero__eyebrow">About us</span>
+      <h1>The same cinematic language,<br>translated into every drive.</h1>
+      <p>Karzone is not built like a marketplace. It behaves like a private collection—with fewer distractions, cleaner curation, and a stronger point of view.</p>
     </div>
   </section>
 
-  <section class="max-w-[1440px] mx-auto px-6 md:px-8 mb-40 md:mb-56 grid grid-cols-1 md:grid-cols-12 gap-16 items-start">
-    <div class="md:col-span-5">
-      <span class="text-primary tracking-[0.3em] uppercase text-[10px] mb-6 block">Mechanical Soul</span>
-      <h2 class="font-headline text-4xl md:text-5xl font-bold tracking-tighter mb-8">We curate movement, not inventory.</h2>
+  <section class="kz-editorial kz-shell">
+    <div class="kz-section-label js-reveal" data-reveal>
+      <span></span>
+      <p>Our ethos</p>
     </div>
-    <div class="md:col-span-7 text-on-surface-variant text-lg leading-relaxed space-y-8 max-w-3xl">
-      <p>
-        Karzone was built as an antidote to generic automotive catalogs. We treat every vehicle as an editorial object—where provenance, texture, engineering, and restraint matter as much as outright speed.
-      </p>
-      <p>
-        Our studio is guided by atmosphere, not urgency. We favor fewer stories, stronger curation, and the kind of quiet confidence that only craftsmanship can command.
-      </p>
-    </div>
-  </section>
-
-  <section class="max-w-[1440px] mx-auto px-6 md:px-8 mb-40 md:mb-56 flex flex-col md:flex-row-reverse gap-12 md:gap-20 items-start">
-    <div class="md:w-[44%] w-full bg-surface-container-lowest rounded-lg overflow-hidden editorial-shadow">
-      <img class="w-full aspect-[4/5] object-cover grayscale opacity-80" src="/assets/img/ritual.jpeg" alt="The ritual" />
-    </div>
-    <div class="md:flex-1 space-y-10 max-w-2xl">
-      <span class="text-primary tracking-[0.3em] uppercase text-[10px] block">The Ritual</span>
-      <h2 class="font-headline text-4xl md:text-5xl font-bold tracking-tighter leading-tight">A slower gaze. A sharper standard.</h2>
-      <p class="text-on-surface-variant text-lg leading-relaxed">
-        We study every panel gap, every tonal reflection, every mechanical note. The goal is not volume—it is resonance. A car should feel inevitable in its presence.
-      </p>
-      <p class="text-on-surface-variant text-lg leading-relaxed">
-        This is a collection shaped by silence, precision, and the poetry of displacement. The details are not decoration; they are the reason the object endures.
-      </p>
-    </div>
-  </section>
-
-  <section class="w-full bg-surface-container-low py-28 md:py-40 mb-40 md:mb-56">
-    <div class="max-w-[1440px] mx-auto px-6 md:px-8 text-center">
-      <p class="font-headline italic text-2xl md:text-4xl max-w-4xl mx-auto leading-relaxed text-on-surface">
-        “Speed is merely a metric. Style is an identity. But the motion between them? That is where we live.”
-      </p>
-    </div>
-  </section>
-
-  <section class="max-w-[1440px] mx-auto px-6 md:px-8 mb-40 md:mb-56">
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-start">
-      <div class="space-y-6">
-        <span class="text-primary tracking-[0.3em] uppercase text-[10px] block">Atmosphere</span>
-        <h2 class="font-headline text-4xl md:text-5xl font-bold tracking-tighter">Curated to feel lived in, not launched.</h2>
-        <p class="text-on-surface-variant text-lg leading-relaxed">
-          Negative space, restrained typography, and images that breathe. The system is designed to feel like a gallery wall or a premium journal spread.
-        </p>
+    <div class="kz-editorial__grid">
+      <div class="kz-editorial__headline js-reveal" data-reveal>
+        <h2 data-word-reveal>We curate movement, not inventory. Every car, every arrival, and every line of the experience is designed to feel intentional.</h2>
       </div>
-      <div class="grid grid-cols-2 gap-4">
-        <div class="bg-surface-container-high aspect-[4/5] rounded-lg overflow-hidden relative group">
-          <img class="w-full h-full object-cover grayscale opacity-50 group-hover:scale-110 transition-transform duration-1000" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTbPIXjIosn_S0a4c5DGe_ulVuVv6rYEOvPbDBhemGYrKJ3OnzrBltrVu5pOiYzAg8US-7-0i_EbfRGUKV3Ro92R5eFgUCG1a3P8YJ2HgYM-fDR72ECD2pDwKqacb1h_0jZJkHno0rdky96s4hXlS7lAUIotPUEETwwvVJ-Dn2IXKaPMzdN50ebNECMD27qftsLpkqKYaer5wmM7n2o25Oc8gNTXVA9hGT5vQ4EXSMPOruLybzxiTbAxYnwfHkA41-eFxIMNkd2KVG" alt="Touch" />
-          <div class="absolute bottom-8 left-8"><span class="text-[10px] tracking-widest text-primary uppercase">The Touch</span></div>
-        </div>
-        <div class="grid grid-rows-2 gap-4">
-          <div class="bg-surface-container-lowest rounded-lg overflow-hidden flex items-center justify-center p-8 md:p-12">
-            <p class="font-headline italic text-xl md:text-2xl text-on-surface-variant text-center leading-relaxed">
-              Every mechanical interaction should feel like a handshake between engineers.
-            </p>
-          </div>
-          <div class="bg-surface-container-high rounded-lg overflow-hidden">
-            <img class="w-full h-full object-cover grayscale opacity-40" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCnMpqdh7vUtZmcG9TQtv17fOFmUbp5zcjAqwyC9GtySsgvCA1SxsqHjkSIL4pH84cM3L2tj9_yEvbJc1tE3w6iU_tbryZ1jQAhTpAXbZ6mJbTVoSxvg-3_5kIUDXG7451scvMrl9TgA0rZPd_4uCuGrHnH_2VJKy4bbKtk80i7vFg8zNbj2kvB8KTc64rpxZ6ptdsMFAO2ll-SFVuZWxI8d3LpXA9_xULpRPMM1_dBy6ldGU2MY6mp2Z14WxxdA6yIA6KqYmW4Qnll" alt="Atmospheric car" />
-          </div>
-        </div>
+      <div class="kz-editorial__copy js-reveal" data-reveal>
+        <p>Karzone was built as an antidote to generic automotive catalogs. We treat every vehicle as an editorial object—where provenance, texture, engineering, and restraint matter as much as outright speed.</p>
+        <p>Our studio is guided by atmosphere, not urgency. We favor fewer stories, stronger curation, and the kind of quiet confidence that only craftsmanship can command.</p>
       </div>
     </div>
   </section>
 
-  <section class="max-w-[1440px] mx-auto px-6 md:px-8 text-center">
-    <h3 class="font-headline text-4xl font-bold tracking-tighter mb-12">Join the Movement</h3>
-    <div class="flex flex-col md:flex-row items-center justify-center gap-8">
-      <a class="group flex items-center space-x-4" href="/cars">
-        <span class="text-xs tracking-widest uppercase text-on-surface group-hover:text-primary transition-colors">Visit the Showroom</span>
-        <span class="material-symbols-outlined text-primary text-sm">arrow_forward</span>
-      </a>
-      <div class="hidden md:block w-px h-12 bg-outline-variant/30"></div>
-      <a class="group flex items-center space-x-4" href="/contact">
-        <span class="text-xs tracking-widest uppercase text-on-surface group-hover:text-primary transition-colors">Contact the Atelier</span>
-        <span class="material-symbols-outlined text-primary text-sm">arrow_forward</span>
-      </a>
+  <section class="kz-about-panels kz-shell">
+    <article class="kz-about-panel js-reveal" data-reveal>
+      <img src="/assets/img/ritual.jpeg" alt="The ritual" />
+      <div>
+        <span>The ritual</span>
+        <h3>A slower gaze. A sharper standard.</h3>
+        <p>We study every panel gap, every tonal reflection, every mechanical note. The goal is not volume—it is resonance. A car should feel inevitable in its presence.</p>
+      </div>
+    </article>
+    <article class="kz-about-panel kz-about-panel--reverse js-reveal" data-reveal>
+      <img src="/assets/img/coastal.jpeg" alt="The route" />
+      <div>
+        <span>The route</span>
+        <h3>Prepared to evolve into a full journal.</h3>
+        <p>This layout already includes a blog-ready component system: hero, story cards, editorial image blocks, quotes, and cross-links. You can plug a future blog route into this system without redesigning the whole page.</p>
+      </div>
+    </article>
+  </section>
+
+  <section class="kz-quote-band">
+    <div class="kz-shell">
+      <p>“Speed is merely a metric. Style is identity. The motion between them is where Karzone lives.”</p>
     </div>
+  </section>
+
+  <section class="kz-journal kz-shell" id="journal-preview">
+    <div class="kz-section-head js-reveal" data-reveal>
+      <div>
+        <div class="kz-section-label kz-section-label--inline">
+          <span></span>
+          <p>Journal preview</p>
+        </div>
+        <p class="kz-section-copy">Prepared components for a future blog page without needing backend changes right now.</p>
+      </div>
+    </div>
+      <div class="kz-journal__grid">
+        <article class="kz-story-card js-reveal" data-reveal>
+          <img src="/assets/img/ritual.jpeg" alt="Story preview one">
+          <div>
+            <span>Editorial 001</span>
+            <h3>The ritual before the ignition.</h3>
+            <p>Story card styling prepared for future CMS or backend content integration.</p>
+          </div>
+        </article>
+        <article class="kz-story-card js-reveal" data-reveal>
+          <img src="/assets/img/coastal.jpeg" alt="Story preview two">
+          <div>
+            <span>Editorial 002</span>
+            <h3>The route matters as much as the machine.</h3>
+            <p>Same visual system as the homepage, so the experience feels unified.</p>
+          </div>
+        </article>
+        <article class="kz-story-card js-reveal" data-reveal>
+          <img src="/assets/img/cars/car-2.jpg" alt="Story preview three">
+          <div>
+            <span>Editorial 003</span>
+            <h3>Collector notes from the atelier.</h3>
+            <p>Ready to become a real blog grid later with minimal structural changes.</p>
+          </div>
+        </article>
+      </div>
   </section>
 </main>
 

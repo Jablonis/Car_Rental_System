@@ -9,11 +9,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
     btn.addEventListener('click', function () {
       nav.classList.toggle('is-open');
+      btn.classList.toggle('is-open');
     });
 
     nav.querySelectorAll('a').forEach(function (link) {
       link.addEventListener('click', function () {
         nav.classList.remove('is-open');
+        btn.classList.remove('is-open');
       });
     });
   }
@@ -26,6 +28,15 @@ document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('.nav-link').forEach(function (link) {
       if (link.getAttribute('data-page') === page) link.classList.add('is-active');
     });
+  }
+
+  var header = document.querySelector('.site-header');
+  if (header) {
+    var updateHeader = function () {
+      header.classList.toggle('is-scrolled', (window.scrollY || window.pageYOffset) > 20);
+    };
+    updateHeader();
+    window.addEventListener('scroll', updateHeader, { passive: true });
   }
 
   document.querySelectorAll('.faq-item').forEach(function (button) {
@@ -133,26 +144,38 @@ document.addEventListener('DOMContentLoaded', function () {
 
   var wordRevealEls = document.querySelectorAll('[data-word-reveal]');
   wordRevealEls.forEach(function (el) {
-    var words = (el.textContent || '').trim().split(/\s+/).filter(Boolean);
-    if (!words.length) return;
-    el.innerHTML = '';
-    el.classList.add('word-reveal');
-    words.forEach(function (word, idx) {
-      var span = document.createElement('span');
-      span.textContent = word + (idx === words.length - 1 ? '' : ' ');
-      el.appendChild(span);
-    });
+    if (!el.dataset.prepared) {
+      var words = (el.textContent || '').trim().split(/\s+/).filter(Boolean);
+      if (!words.length) return;
+      el.innerHTML = '';
+      el.classList.add('word-reveal');
+      words.forEach(function (word, idx) {
+        var span = document.createElement('span');
+        span.textContent = word + (idx === words.length - 1 ? '' : ' ');
+        el.appendChild(span);
+      });
+      el.dataset.prepared = 'true';
+    }
+
     var spans = Array.from(el.querySelectorAll('span'));
     var updateWords = function () {
       var rect = el.getBoundingClientRect();
       var viewH = window.innerHeight || document.documentElement.clientHeight;
       var progress = (viewH - rect.top) / (viewH + rect.height * 0.35);
       progress = Math.max(0, Math.min(1, progress));
-      var activeCount = Math.floor(progress * spans.length);
+      var revealValue = progress * spans.length;
+
       spans.forEach(function (span, index) {
-        span.classList.toggle('is-on', index <= activeCount);
+        var local = Math.max(0, Math.min(1, revealValue - index));
+        var gray = 110;
+        var white = 245;
+        var channel = Math.round(gray + (white - gray) * local);
+        span.style.color = 'rgb(' + channel + ',' + channel + ',' + channel + ')';
+        span.style.opacity = String(0.34 + local * 0.66);
+        span.style.transform = 'translateY(' + ((1 - local) * 10) + 'px)';
       });
     };
+
     updateWords();
     window.addEventListener('scroll', updateWords, { passive: true });
     window.addEventListener('resize', updateWords);

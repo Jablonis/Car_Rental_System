@@ -1,107 +1,86 @@
 <!doctype html>
 <html class="dark" lang="sk">
 <head>
-  <%- include('../components/head', { title: 'Karzone | Dispatch Inquiry' }) %>
+  <%- include('../components/head', { title: 'Karzone | Contact us' }) %>
 </head>
-<body class="bg-surface text-on-surface font-body selection:bg-primary selection:text-primary-container" data-page="contact">
+<body class="bg-surface text-on-surface" data-page="contact" id="top">
 <%- include('../components/header') %>
 
-<main class="min-h-screen pt-32 pb-24 px-6 md:px-12 max-w-screen-2xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16">
-  <section class="lg:col-span-7 flex flex-col justify-center">
-    <div class="mb-12">
-      <h1 class="text-6xl md:text-8xl font-headline font-black italic tracking-tighter text-on-surface leading-none mb-8">
-        Connect with <br>
-        <span class="text-primary italic">Karzone.</span>
-      </h1>
-      <p class="max-w-xl text-lg text-on-surface-variant font-body leading-relaxed mb-12">
-        Inquiry is the first gear of an extraordinary journey. Whether you're seeking a rare acquisition or wish to share a story of motion, our curators are waiting in the silence.
-      </p>
-    </div>
-    <div class="relative w-full aspect-[16/9] bg-surface-container-lowest rounded-lg overflow-hidden editorial-shadow group">
-      <img class="w-full h-full object-cover grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-80 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-iuFvVJp5WULWIsGEmBQS4yVL2CONePYyuDugBbj6a6kzyPNNwJzo5HN7-_feU-RIYtJLu6og1wzCB3ML-IjBX_NUMo2uPrLwdrf3P0Gsfr-BoM5G2OdjU6fyBQBXol6gInTgSGjXKVy1byPKtr-OMAFawSntN0zWsNcMJd28c_2CRK059oavXAkdm7oZJByHTBpSJ5l6lroGga_wHtoogVggvWL938_tW6xgOPF-ezBlC49_l35o3mYtKjrBpRWcaUIDImxwNxp2" alt="Headlight detail" />
-      <div class="absolute inset-0 bg-gradient-to-t from-background to-transparent opacity-60"></div>
-      <div class="absolute bottom-6 left-6"><span class="font-headline italic text-sm text-primary-fixed-dim tracking-tight">Ref. Karzone Signature Detail</span></div>
-    </div>
-  </section>
+<main class="kz-subpage kz-subpage--contact kz-shell">
+  <section class="kz-contact-hero">
+    <div class="kz-contact-hero__copy js-reveal" data-reveal>
+      <span class="kz-page-hero__eyebrow">Contact us</span>
+      <h1>Connect with<br>Karzone.</h1>
+      <p>Inquiry is the first gear of an extraordinary journey. Whether you are seeking a rare acquisition, a short-term arrival, or a private event handoff, our curators are ready to respond.</p>
 
-  <aside class="lg:col-span-5 flex flex-col justify-center space-y-12 md:space-y-16 mobile-bottom-safe">
-    <div class="bg-surface-container-low p-8 md:p-10 rounded-lg editorial-shadow">
-      <h3 class="font-headline text-2xl italic mb-8 text-white">Archives & Atelier</h3>
-      <div class="space-y-6">
-        <div class="flex items-start gap-4">
-          <span class="material-symbols-outlined text-primary text-xl" style="font-variation-settings:'FILL' 1">location_on</span>
-          <div>
-            <p class="text-[10px] uppercase tracking-widest text-outline mb-1">Studio Location</p>
-            <p class="text-on-surface font-body">Námestovo, Slovakia<br>Karzone House</p>
-          </div>
-        </div>
-        <div class="flex items-start gap-4">
-          <span class="material-symbols-outlined text-primary text-xl" style="font-variation-settings:'FILL' 1">call</span>
-          <div>
-            <p class="text-[10px] uppercase tracking-widest text-outline mb-1">Direct Line</p>
-            <p class="text-on-surface font-body">+421 900 000 000</p>
-          </div>
-        </div>
-        <div class="flex items-start gap-4">
-          <span class="material-symbols-outlined text-primary text-xl" style="font-variation-settings:'FILL' 1">mail</span>
-          <div>
-            <p class="text-[10px] uppercase tracking-widest text-outline mb-1">Electronic Mail</p>
-            <p class="text-on-surface font-body">info@autosalon.sk</p>
-          </div>
-        </div>
+      <div class="kz-contact-cards">
+        <article>
+          <span>Studio location</span>
+          <strong>Námestovo, Slovakia</strong>
+          <p>Appointments by arrangement only.</p>
+        </article>
+        <article>
+          <span>Direct line</span>
+          <strong>+421 900 000 000</strong>
+          <p>Private concierge & vehicle requests.</p>
+        </article>
+        <article>
+          <span>Email</span>
+          <strong>info@autosalon.sk</strong>
+          <p>Editorial, business and collection inquiries.</p>
+        </article>
       </div>
     </div>
 
-    <div class="space-y-8">
-      <h3 class="font-headline text-2xl italic text-white">Direct Inquiry</h3>
-      <form id="contactForm" class="space-y-8">
-        <div class="relative group">
+    <div class="kz-contact-hero__visual js-reveal" data-reveal>
+      <img src="/assets/img/hero-garage.jpg" alt="Karzone garage detail" data-parallax="0.02" />
+      <div class="kz-contact-hero__note">
+        <span>Private collection</span>
+        <strong>Concierge response within 24h</strong>
+      </div>
+    </div>
+  </section>
+
+  <section class="kz-contact-grid">
+    <div class="kz-contact-panel js-reveal" data-reveal>
+      <h3>Direct inquiry</h3>
+      <form id="contactForm" class="kz-contact-form">
+        <div class="kz-form-row">
           <input id="contact-name" class="input-bottom" placeholder="Name" type="text" name="name" required />
-        </div>
-        <div class="relative group">
           <input id="contact-email" class="input-bottom" placeholder="Email Address" type="email" name="email" required />
         </div>
-        <div class="relative group">
+        <div class="kz-form-row kz-form-row--single">
           <select id="contact-car" class="input-bottom" name="car">
             <option value="">Select a focus</option>
             <option>BMW 3 (2020)</option>
             <option>Audi A4 (2019)</option>
             <option>Mercedes C (2021)</option>
-            <option>Iné</option>
+            <option>Other</option>
           </select>
         </div>
-        <div class="relative group">
-          <textarea id="contact-message" class="input-bottom min-h-[8rem]" placeholder="Your Message" rows="4" name="message" required></textarea>
+        <div class="kz-form-row kz-form-row--single">
+          <textarea id="contact-message" class="input-bottom min-h-[10rem]" placeholder="Your Message" rows="5" name="message" required></textarea>
         </div>
-        <button class="w-full py-5 px-8 rounded-full bg-gradient-to-r from-primary to-primary-container text-on-primary-fixed font-bold uppercase text-xs tracking-widest hover:scale-[1.02] active:scale-95 transition-all duration-300 editorial-shadow" type="submit">
-          Dispatch Inquiry
-        </button>
+        <button class="kz-submit" type="submit">Dispatch Inquiry</button>
       </form>
-      <div id="previewBox" hidden class="bg-surface-container-low p-6 rounded-lg editorial-shadow">
-        <h4 class="font-headline text-2xl italic mb-4">Preview Dispatch</h4>
-        <p id="previewText" class="text-on-surface-variant leading-relaxed"></p>
+      <div id="previewBox" hidden class="kz-preview-box">
+        <h4>Preview dispatch</h4>
+        <p id="previewText"></p>
       </div>
     </div>
-  </aside>
-</main>
 
-<section class="w-full py-24 bg-surface-container-low overflow-hidden">
-  <div class="max-w-screen-2xl mx-auto px-6 md:px-12">
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-      <div class="order-2 md:order-1">
-        <div class="aspect-[21/9] rounded-lg overflow-hidden bg-surface-container-lowest editorial-shadow">
-          <img class="w-full h-full object-cover opacity-40 grayscale" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDjkbtakUpZKTkn4FqLvrVIFQ4VmSYb1ssThJUjdp1tfnEMqyfAJnLg4IabhBVgKli89m2V3jgThCcMQvla6DUY6pgJ15jd3Fw2A3rQMTgsxdz4kYg-D3Nch0lIUwDWRotbkU9EL-IZ1VUhOPPD_HKUBNglJBgQewIpVVcWXlTank_7rSLMe2O7tUgoPoArB8gX3RDWEb2lty69alINYdQ6XHL0HhjHoo5yNpcmxcTZXGsNOb0fG4UYFAP8ZECIp8dNG7wBTIL3VXXe" alt="Pacific route" />
-        </div>
-      </div>
-      <div class="order-1 md:order-2 md:pl-12">
-        <h4 class="font-headline text-4xl italic text-on-surface mb-6 tracking-tighter">The Night is Our Canvas.</h4>
-        <p class="text-on-surface-variant leading-relaxed">
-          Karzone operates from the shadows of Monterey and the quiet roads of the north. Visits are by appointment only for collectors and serious inquiries.
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
+    <aside class="kz-contact-side js-reveal" data-reveal>
+      <article class="kz-contact-side__card">
+        <span>Why Karzone</span>
+        <h3>Less friction. More atmosphere.</h3>
+        <p>We do not simply hand over keys. We shape the route, the timing, and the feeling around your arrival.</p>
+      </article>
+      <article class="kz-contact-side__image">
+        <img src="/assets/img/coastal.jpeg" alt="Night route">
+      </article>
+    </aside>
+  </section>
+</main>
 
 <%- include('../components/footer') %>
 <button id="backToTop" type="button" aria-label="Back to top">↑</button>

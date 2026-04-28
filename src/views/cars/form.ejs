@@ -42,14 +42,18 @@
           </div>
           <div>
             <label class="block text-[10px] uppercase tracking-[0.28em] text-outline mb-3">Year</label>
-            <select class="form-input-luxe" id="year" name="year">
-              <option value="">Select year</option>
-              <% for (let y = new Date().getFullYear() + 1; y >= 1950; y--) { %>
-                <option value="<%= y %>" <%= String(formData.year || '') === String(y) ? 'selected' : '' %>>
-                  <%= y %>
-                </option>
-              <% } %>
-            </select>
+            <input
+              class="form-input-luxe"
+              id="year"
+              type="number"
+              name="year"
+              min="1950"
+              max="<%= new Date().getFullYear() + 1 %>"
+              step="1"
+              inputmode="numeric"
+              placeholder="2024"
+              value="<%= formData.year || '' %>"
+            />
           </div>
           <div>
             <label class="block text-[10px] uppercase tracking-[0.28em] text-outline mb-3">Price</label>

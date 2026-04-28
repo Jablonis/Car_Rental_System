@@ -42,11 +42,13 @@
           </div>
           <div>
             <label class="block text-[10px] uppercase tracking-[0.28em] text-outline mb-3">Year</label>
-            <select class="form-select-luxe" id="year" name="year">
+            <select class="form-input-luxe" id="year" name="year">
               <option value="">Select year</option>
-              <% yearOptions.forEach((optionYear) => { %>
-                <option value="<%= optionYear %>" <%= String(formData.year || '') === String(optionYear) ? 'selected' : '' %>><%= optionYear %></option>
-              <% }) %>
+              <% for (let y = new Date().getFullYear() + 1; y >= 1950; y--) { %>
+                <option value="<%= y %>" <%= String(formData.year || '') === String(y) ? 'selected' : '' %>>
+                  <%= y %>
+                </option>
+              <% } %>
             </select>
           </div>
           <div>

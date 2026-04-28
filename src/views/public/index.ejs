@@ -124,18 +124,11 @@
         <p class="kz-brands__copy">This band is intentionally more fluid and less static than the old card set—closer to a premium automotive partner wall.</p>
       </div>
 
+      <% const featuredBrands = ['Bugatti', 'Ferrari', 'Lamborghini', 'Jaguar', 'Bentley', 'Porsche', 'Aston Martin', 'Range Rover']; %>
       <div class="kz-brand-marquee js-reveal" data-reveal>
         <div class="kz-brand-track">
-          <% ['Bugatti', 'Ferrari', 'Lamborghini', 'Jaguar', 'Bentley', 'Porsche', 'Aston Martin', 'Range Rover'].forEach(function(brand) { %>
-            <article class="kz-brand-pill">
-              <span class="kz-brand-mark"><%= brand.charAt(0) %></span>
-              <span class="kz-brand-name"><%= brand %></span>
-            </article>
-          <% }) %>
-        </div>
-        <div class="kz-brand-track kz-brand-track--clone" aria-hidden="true">
-          <% ['Bugatti', 'Ferrari', 'Lamborghini', 'Jaguar', 'Bentley', 'Porsche', 'Aston Martin', 'Range Rover'].forEach(function(brand) { %>
-            <article class="kz-brand-pill">
+          <% featuredBrands.concat(featuredBrands).forEach(function(brand, index) { %>
+            <article class="kz-brand-pill" aria-hidden="<%= index >= featuredBrands.length ? 'true' : 'false' %>">
               <span class="kz-brand-mark"><%= brand.charAt(0) %></span>
               <span class="kz-brand-name"><%= brand %></span>
             </article>

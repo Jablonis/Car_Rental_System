@@ -79,21 +79,33 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  var form = document.getElementById('contactForm');
   var previewBox = document.getElementById('previewBox');
   var previewText = document.getElementById('previewText');
-  if (form && previewBox && previewText) {
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      var name = form.elements['name'] ? form.elements['name'].value : '';
-      var email = form.elements['email'] ? form.elements['email'].value : '';
-      var car = form.elements['car'] ? form.elements['car'].value : '';
-      var msg = form.elements['message'] ? form.elements['message'].value : '';
+  if (previewBox && previewText) {
+    var nameField = document.getElementById('contact-name');
+    var emailField = document.getElementById('contact-email');
+    var carField = document.getElementById('contact-car');
+    var messageField = document.getElementById('contact-message');
+
+    var updatePreview = function () {
+      var name = nameField && 'value' in nameField ? nameField.value : '';
+      var email = emailField && 'value' in emailField ? emailField.value : '';
+      var car = carField && 'value' in carField ? carField.value : '';
+      var msg = messageField && 'value' in messageField ? messageField.value : '';
+      var hasContent = name || email || car || msg;
+      previewBox.hidden = !hasContent;
+      if (!hasContent) return;
       previewText.style.whiteSpace = 'pre-line';
-      previewText.textContent = 'Meno: ' + name + '\nE-mail: ' + email + '\n' + (car ? 'Auto: ' + car + '\n' : '') + '\nSpráva: ' + msg;
-      previewBox.hidden = false;
-      form.reset();
+      previewText.textContent = 'Name: ' + name + '\nE-mail: ' + email + '\n' + (car ? 'Focus: ' + car + '\n' : '') + '\nMessage: ' + msg;
+    };
+
+    [nameField, emailField, carField, messageField].forEach(function (field) {
+      if (!field) return;
+      field.addEventListener('input', updatePreview);
+      field.addEventListener('change', updatePreview);
     });
+
+    updatePreview();
   }
 
   var revealEls = document.querySelectorAll('[data-reveal], .reveal-up, .reveal-fade');
@@ -142,7 +154,8 @@ document.addEventListener('DOMContentLoaded', function () {
     counterEls.forEach(animateCount);
   }
 
-  var wordRevealEls = document.querySelectorAll('[data-word-reveal]');
+  var wordRevealEls = Array.from(document.querySelectorAll('[data-word-reveal]'));
+  var preparedWordRevealEls = [];
   wordRevealEls.forEach(function (el) {
     if (!el.dataset.prepared) {
       var words = (el.textContent || '').trim().split(/\s+/).filter(Boolean);
@@ -153,22 +166,23 @@ document.addEventListener('DOMContentLoaded', function () {
         var span = document.createElement('span');
         span.textContent = word;
         el.appendChild(span);
-        if (idx !== words.length - 1) {
-          el.appendChild(document.createTextNode(' '));
-        }
+        if (idx !== words.length - 1) el.appendChild(document.createTextNode(' '));
       });
       el.dataset.prepared = 'true';
     }
+    preparedWordRevealEls.push({ el: el, spans: Array.from(el.querySelectorAll('span')) });
+  });
 
-    var spans = Array.from(el.querySelectorAll('span'));
-    var updateWords = function () {
-      var rect = el.getBoundingClientRect();
+  var wordRevealTicking = false;
+  var updateWords = function () {
+    preparedWordRevealEls.forEach(function (entry) {
+      var rect = entry.el.getBoundingClientRect();
       var viewH = window.innerHeight || document.documentElement.clientHeight;
       var progress = (viewH - rect.top) / (viewH + rect.height * 0.35);
       progress = Math.max(0, Math.min(1, progress));
-      var revealValue = progress * spans.length;
+      var revealValue = progress * entry.spans.length;
 
-      spans.forEach(function (span, index) {
+      entry.spans.forEach(function (span, index) {
         var local = Math.max(0, Math.min(1, revealValue - index));
         var gray = 110;
         var white = 245;
@@ -177,12 +191,17 @@ document.addEventListener('DOMContentLoaded', function () {
         span.style.opacity = String(0.34 + local * 0.66);
         span.style.transform = 'translateY(' + ((1 - local) * 10) + 'px)';
       });
-    };
-
-    updateWords();
-    window.addEventListener('scroll', updateWords, { passive: true });
-    window.addEventListener('resize', updateWords);
-  });
+    });
+    wordRevealTicking = false;
+  };
+  var requestWordRevealUpdate = function () {
+    if (wordRevealTicking) return;
+    wordRevealTicking = true;
+    window.requestAnimationFrame(updateWords);
+  };
+  requestWordRevealUpdate();
+  window.addEventListener('scroll', requestWordRevealUpdate, { passive: true });
+  window.addEventListener('resize', requestWordRevealUpdate);
 
   var parallaxEls = document.querySelectorAll('[data-parallax]');
   if (parallaxEls.length) {

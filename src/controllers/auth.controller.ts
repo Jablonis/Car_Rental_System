@@ -83,6 +83,7 @@ req.session.user = {
   name: user.name,
   email: user.email,
   isAdmin: user.isAdmin,
+  avatar: user.avatar ?? null,
 };
 
 req.session.save((err) => {

@@ -44,36 +44,45 @@
   <section class="kz-contact-grid">
     <div class="kz-contact-panel js-reveal" data-reveal>
       <h3>Direct inquiry</h3>
-      <form id="contactForm" class="kz-contact-form">
+
+      <% if (success) { %>
+        <div class="alert-luxe mb-6">Your inquiry has been sent. We will get back to you shortly.</div>
+      <% } %>
+
+      <% if (errors && errors.length) { %>
+        <div class="alert-luxe form-error-list mb-6">
+          <% errors.forEach((error) => { %>
+            <div><%= error.message %></div>
+          <% }) %>
+        </div>
+      <% } %>
+
+      <form id="contactForm" class="kz-contact-form" method="POST" action="/contact">
         <div class="kz-form-row">
-          <input id="contact-name" class="input-bottom" placeholder="Name" type="text" name="name" required />
-          <input id="contact-email" class="input-bottom" placeholder="Email Address" type="email" name="email" required />
+          <input id="contact-name" class="input-bottom" placeholder="Name" type="text" name="name" value="<%= formData?.name || '' %>" required />
+          <input id="contact-email" class="input-bottom" placeholder="Email Address" type="email" name="email" value="<%= formData?.email || '' %>" required />
         </div>
         <div class="kz-form-row kz-form-row--single">
           <select id="contact-car" class="input-bottom" name="car">
             <option value="">Select a focus</option>
-            <option>BMW 3 (2020)</option>
-            <option>Audi A4 (2019)</option>
-            <option>Mercedes C (2021)</option>
-            <option>Other</option>
+            <% cars.forEach((car) => { %>
+              <option value="<%= car.title %>" <%= formData?.car === car.title ? 'selected' : '' %>><%= car.brand %> <%= car.model %> — <%= car.title %></option>
+            <% }) %>
+            <option value="Other" <%= formData?.car === 'Other' ? 'selected' : '' %>>Other</option>
           </select>
         </div>
         <div class="kz-form-row kz-form-row--single">
-          <textarea id="contact-message" class="input-bottom min-h-[10rem]" placeholder="Your Message" rows="5" name="message" required></textarea>
+          <textarea id="contact-message" class="input-bottom min-h-[10rem]" placeholder="Your Message" rows="5" name="message" required><%= formData?.message || '' %></textarea>
         </div>
         <button class="kz-submit" type="submit">Dispatch Inquiry</button>
       </form>
-      <div id="previewBox" hidden class="kz-preview-box">
-        <h4>Preview dispatch</h4>
-        <p id="previewText"></p>
-      </div>
     </div>
 
     <aside class="kz-contact-side js-reveal" data-reveal>
       <article class="kz-contact-side__card">
-        <span>Why Velocity</span>
-        <h3>Less friction. More atmosphere.</h3>
-        <p>We do not simply hand over keys. We shape the route, the timing, and the feeling around your arrival.</p>
+        <span>Available focus</span>
+        <h3>Live cars from the archive.</h3>
+        <p>The inquiry category now pulls real vehicles from the site instead of static placeholder options.</p>
       </article>
       <article class="kz-contact-side__image">
         <img src="/assets/img/coastal.jpeg" alt="Night route">

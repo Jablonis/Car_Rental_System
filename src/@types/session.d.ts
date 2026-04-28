@@ -8,6 +8,7 @@ declare module "express-session" {
       name: string;
       email: string;
       isAdmin: boolean;
+      avatar?: string | null;
     } | null;
   }
 }

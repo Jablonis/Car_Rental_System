@@ -42,7 +42,12 @@
           </div>
           <div>
             <label class="block text-[10px] uppercase tracking-[0.28em] text-outline mb-3">Year</label>
-            <input class="form-input-luxe" id="year" type="number" name="year" value="<%= formData.year || '' %>" />
+            <select class="form-select-luxe" id="year" name="year">
+              <option value="">Select year</option>
+              <% yearOptions.forEach((optionYear) => { %>
+                <option value="<%= optionYear %>" <%= String(formData.year || '') === String(optionYear) ? 'selected' : '' %>><%= optionYear %></option>
+              <% }) %>
+            </select>
           </div>
           <div>
             <label class="block text-[10px] uppercase tracking-[0.28em] text-outline mb-3">Price</label>
@@ -54,16 +59,28 @@
           </div>
           <div>
             <label class="block text-[10px] uppercase tracking-[0.28em] text-outline mb-3">Fuel</label>
-            <input class="form-input-luxe" id="fuel" type="text" name="fuel" value="<%= formData.fuel || '' %>" />
+            <select class="form-select-luxe" id="fuel" name="fuel">
+              <option value="Gasoline" <%= (formData.fuel || '') === 'Gasoline' ? 'selected' : '' %>>Gasoline</option>
+              <option value="Diesel" <%= (formData.fuel || '') === 'Diesel' ? 'selected' : '' %>>Diesel</option>
+            </select>
           </div>
           <div>
             <label class="block text-[10px] uppercase tracking-[0.28em] text-outline mb-3">Transmission</label>
-            <input class="form-input-luxe" id="transmission" type="text" name="transmission" value="<%= formData.transmission || '' %>" />
+            <select class="form-select-luxe" id="transmission" name="transmission">
+              <option value="Automatic" <%= (formData.transmission || '') === 'Automatic' ? 'selected' : '' %>>Automatic</option>
+              <option value="Manual" <%= (formData.transmission || '') === 'Manual' ? 'selected' : '' %>>Manual</option>
+              <option value="Semi-automatic" <%= (formData.transmission || '') === 'Semi-automatic' ? 'selected' : '' %>>Semi-automatic</option>
+            </select>
           </div>
         </div>
         <div>
-          <label class="block text-[10px] uppercase tracking-[0.28em] text-outline mb-3">Image URL</label>
+          <label class="block text-[10px] uppercase tracking-[0.28em] text-outline mb-3">Main image URL</label>
           <input class="form-input-luxe" id="image" type="text" name="image" value="<%= formData.image || '' %>" />
+        </div>
+        <div>
+          <label class="block text-[10px] uppercase tracking-[0.28em] text-outline mb-3">Additional image URLs</label>
+          <textarea class="form-textarea-luxe" id="galleryImages" name="galleryImages" placeholder="One image URL per line"><%= formData.galleryImages || '' %></textarea>
+          <p class="text-xs text-on-surface-variant mt-3">Add extra photos one per line. They will appear in the detail gallery instead of the current static placeholders.</p>
         </div>
         <div>
           <label class="block text-[10px] uppercase tracking-[0.28em] text-outline mb-3">Editorial Notes</label>

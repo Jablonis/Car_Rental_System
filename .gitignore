@@ -5,9 +5,7 @@ dist/
 !.env.example
 
 .DS_Store
-.claude/
 coverage/
 *.log
 npm-debug.log*
 yarn-error.log*
-CLAUDE.md

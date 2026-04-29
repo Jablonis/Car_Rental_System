@@ -13,6 +13,7 @@ import {
 import Car from "../models/car.model.js";
 import Blog from "../models/blog.model.js";
 import { blogSchema } from "../validators/blog.validator.js";
+import BlogComment, { BlogCommentStatus } from "../models/blog-comment.model.js";
 
 async function getAdminUsers(req: Request, res: Response) {
   const search =
@@ -231,6 +232,40 @@ async function postDeleteBlog(req: Request, res: Response) {
   return res.redirect("/admin/blogs");
 }
 
+
+async function getAdminComments(req: Request, res: Response) {
+  const status = typeof req.query.status === "string" && ["pending", "approved", "declined"].includes(req.query.status)
+    ? (req.query.status as BlogCommentStatus)
+    : undefined;
+
+  const [comments, pendingCount, approvedCount, declinedCount] = await Promise.all([
+    BlogComment.findAllForAdmin(status),
+    BlogComment.countByStatus("pending"),
+    BlogComment.countByStatus("approved"),
+    BlogComment.countByStatus("declined"),
+  ]);
+
+  return res.render("admin/comments", {
+    comments,
+    status: status ?? "",
+    counts: { pending: pendingCount, approved: approvedCount, declined: declinedCount },
+  });
+}
+
+async function postUpdateCommentStatus(req: Request, res: Response) {
+  const commentId = Number(req.params.id);
+  const status = typeof req.body.status === "string" && ["approved", "declined"].includes(req.body.status)
+    ? (req.body.status as BlogCommentStatus)
+    : null;
+
+  if (!status) {
+    return res.status(400).send("Invalid status");
+  }
+
+  await BlogComment.updateStatus(commentId, status);
+  return res.redirect("/admin/comments");
+}
+
 export {
   getAdminUsers,
   getCreateUser,
@@ -245,4 +280,6 @@ export {
   getEditBlog,
   postEditBlog,
   postDeleteBlog,
+  getAdminComments,
+  postUpdateCommentStatus,
 };

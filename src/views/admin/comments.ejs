@@ -1,0 +1,78 @@
+<!doctype html>
+<html class="dark" lang="en">
+<head>
+  <%- include('../components/head', { title: 'Comment Moderation | Velocity' }) %>
+</head>
+<body class="bg-surface text-on-surface">
+<%- include('../components/header') %>
+
+<main class="pt-32 pb-24 px-6 md:px-12 max-w-screen-2xl mx-auto">
+  <section class="mb-14">
+    <p class="text-primary text-xs tracking-[0.3em] uppercase mb-4">Admin Console</p>
+    <h1 class="font-headline text-5xl md:text-7xl font-black tracking-tighter leading-[0.95]">Comment moderation.</h1>
+  </section>
+
+  <section class="bg-surface-container-low rounded-lg p-6 md:p-8 editorial-shadow">
+    <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between mb-8">
+      <div class="flex flex-wrap gap-3">
+        <a href="/admin/comments" class="px-4 py-3 rounded-full border <%= !status ? 'border-primary/40 text-white bg-white/5' : 'border-outline-variant/20 text-on-surface' %> text-[10px] uppercase tracking-[0.22em]">All</a>
+        <a href="/admin/comments?status=pending" class="px-4 py-3 rounded-full border <%= status === 'pending' ? 'border-primary/40 text-white bg-white/5' : 'border-outline-variant/20 text-on-surface' %> text-[10px] uppercase tracking-[0.22em]">Pending (<%= counts.pending %>)</a>
+        <a href="/admin/comments?status=approved" class="px-4 py-3 rounded-full border <%= status === 'approved' ? 'border-primary/40 text-white bg-white/5' : 'border-outline-variant/20 text-on-surface' %> text-[10px] uppercase tracking-[0.22em]">Approved (<%= counts.approved %>)</a>
+        <a href="/admin/comments?status=declined" class="px-4 py-3 rounded-full border <%= status === 'declined' ? 'border-primary/40 text-white bg-white/5' : 'border-outline-variant/20 text-on-surface' %> text-[10px] uppercase tracking-[0.22em]">Declined (<%= counts.declined %>)</a>
+      </div>
+      <p class="text-on-surface-variant max-w-xl">Review comments submitted under journal entries. You can only approve or decline them.</p>
+    </div>
+
+    <div class="overflow-x-auto">
+      <table class="admin-table-luxe">
+        <thead>
+          <tr>
+            <th>Comment</th>
+            <th>Author</th>
+            <th>Entry</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if (!comments.length) { %>
+            <tr><td colspan="5">No comments in this filter.</td></tr>
+          <% } %>
+          <% comments.forEach((comment) => { %>
+            <tr>
+              <td>
+                <div class="text-white max-w-[32rem] whitespace-pre-line"><%= comment.content %></div>
+                <div class="text-xs text-on-surface-variant mt-2"><%= new Date(comment.created_at || Date.now()).toLocaleString('en-GB') %></div>
+              </td>
+              <td>
+                <div class="flex items-center gap-3">
+                  <% if (comment.user_avatar) { %><img src="<%= comment.user_avatar %>" alt="<%= comment.user_name %>" class="w-10 h-10 rounded-full object-cover"> <% } %>
+                  <span><%= comment.user_name %></span>
+                </div>
+              </td>
+              <td><a href="/journal/<%= comment.blog_slug %>" class="text-primary hover:text-white transition-colors"><%= comment.blog_title %></a></td>
+              <td><span class="comment-status comment-status--<%= comment.status %>"><%= comment.status %></span></td>
+              <td>
+                <div class="flex flex-wrap gap-3">
+                  <form method="POST" action="/admin/comments/<%= comment.comment_id %>/status">
+                    <input type="hidden" name="status" value="approved">
+                    <button type="submit" class="px-4 py-3 rounded-full border border-emerald-300/20 text-[10px] uppercase tracking-[0.22em] text-emerald-200">Approve</button>
+                  </form>
+                  <form method="POST" action="/admin/comments/<%= comment.comment_id %>/status">
+                    <input type="hidden" name="status" value="declined">
+                    <button type="submit" class="px-4 py-3 rounded-full border border-red-300/20 text-[10px] uppercase tracking-[0.22em] text-red-200">Decline</button>
+                  </form>
+                </div>
+              </td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</main>
+
+<%- include('../components/footer') %>
+<script src="/assets/js/app.js"></script>
+</body>
+</html>

@@ -3,6 +3,11 @@ import { z } from "zod";
 import Car from "../models/car.model.js";
 import Blog from "../models/blog.model.js";
 import ContactInquiry from "../models/contact-inquiry.model.js";
+import BlogComment from "../models/blog-comment.model.js";
+
+const commentSchema = z.object({
+  content: z.string().trim().min(2, "Comment is too short").max(1000, "Comment is too long"),
+});
 
 const contactSchema = z.object({
   name: z.string().trim().min(1, "Name is required"),
@@ -87,12 +92,54 @@ async function getJournalDetailPage(req: Request, res: Response) {
     return res.status(404).send("Journal entry not found");
   }
 
-  const relatedPosts = (await Blog.findLatest(3)).filter((entry) => entry.slug !== post.slug).slice(0, 2);
+  const [relatedPosts, comments] = await Promise.all([
+    Blog.findLatest(3),
+    BlogComment.findApprovedByBlogId(post.blog_id!),
+  ]);
 
   return res.render("public/journal-detail", {
     post,
-    relatedPosts,
+    relatedPosts: relatedPosts.filter((entry) => entry.slug !== post.slug).slice(0, 2),
+    comments,
+    commentErrors: [],
+    commentFormData: { content: "" },
+    commentNotice: req.query.comment === "pending" ? "Your comment was sent for approval." : null,
   });
+}
+
+async function postJournalComment(req: Request, res: Response) {
+  const slug = String(req.params.slug);
+  const post = await Blog.findBySlug(slug);
+
+  if (!post) {
+    return res.status(404).send("Journal entry not found");
+  }
+
+  const parsed = commentSchema.safeParse(req.body);
+
+  if (!parsed.success) {
+    const [relatedPosts, comments] = await Promise.all([
+      Blog.findLatest(3),
+      BlogComment.findApprovedByBlogId(post.blog_id!),
+    ]);
+
+    return res.status(400).render("public/journal-detail", {
+      post,
+      relatedPosts: relatedPosts.filter((entry) => entry.slug !== post.slug).slice(0, 2),
+      comments,
+      commentErrors: parsed.error.issues,
+      commentFormData: req.body,
+      commentNotice: null,
+    });
+  }
+
+  await BlogComment.create({
+    blog_id: post.blog_id!,
+    user_id: req.session.user!.id,
+    content: parsed.data.content,
+  });
+
+  return res.redirect(`/journal/${post.slug}?comment=pending#comments`);
 }
 
 export {
@@ -102,4 +149,5 @@ export {
   postContactPage,
   getJournalPage,
   getJournalDetailPage,
+  postJournalComment,
 };

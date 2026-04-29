@@ -25,6 +25,67 @@
     <% }) %>
   </section>
 
+  <section class="kz-comments" id="comments">
+    <div class="kz-section-head">
+      <div>
+        <div class="kz-section-label kz-section-label--inline"><span></span><p>Reader comments</p></div>
+      </div>
+      <span class="kz-pill kz-pill--ghost"><%= comments.length %> approved</span>
+    </div>
+
+    <% if (commentNotice) { %>
+      <div class="alert-luxe mb-6"><%= commentNotice %></div>
+    <% } %>
+
+    <div class="kz-comments__grid">
+      <div class="kz-comments__list">
+        <% if (!comments.length) { %>
+          <article class="kz-comment-card">
+            <p class="text-on-surface-variant">No approved comments yet. Be the first to respond once moderation opens this discussion.</p>
+          </article>
+        <% } %>
+        <% comments.forEach((comment) => { %>
+          <article class="kz-comment-card">
+            <div class="kz-comment-card__head">
+              <div class="kz-comment-card__author">
+                <% if (comment.user_avatar) { %><img src="<%= comment.user_avatar %>" alt="<%= comment.user_name %>" class="kz-comment-card__avatar"> <% } %>
+                <div>
+                  <strong><%= comment.user_name %></strong>
+                  <span><%= new Date(comment.created_at || Date.now()).toLocaleDateString('en-GB') %></span>
+                </div>
+              </div>
+            </div>
+            <p><%= comment.content %></p>
+          </article>
+        <% }) %>
+      </div>
+
+      <aside class="kz-comment-form-wrap">
+        <h2>Leave a comment</h2>
+        <p class="text-on-surface-variant mb-5">Comments are submitted for moderation before they appear publicly.</p>
+        <% if (locals.isAuthenticated) { %>
+          <% if (commentErrors && commentErrors.length) { %>
+            <div class="alert-luxe form-error-list mb-6">
+              <% commentErrors.forEach((error) => { %><div><%= error.message %></div><% }) %>
+            </div>
+          <% } %>
+          <form method="POST" action="/journal/<%= post.slug %>/comments" class="space-y-5">
+            <div>
+              <label class="block text-[10px] uppercase tracking-[0.28em] text-outline mb-3">Your comment</label>
+              <textarea class="form-textarea-luxe min-h-[12rem]" name="content" placeholder="Share your perspective respectfully..."><%= commentFormData.content || '' %></textarea>
+            </div>
+            <button type="submit" class="px-8 py-4 rounded-full bg-gradient-to-r from-primary to-primary-container text-on-primary-fixed font-bold text-[10px] uppercase tracking-[0.24em]">Submit for approval</button>
+          </form>
+        <% } else { %>
+          <div class="kz-comment-login-note">
+            <p class="text-on-surface-variant mb-5">You need an account to comment on journal entries.</p>
+            <a href="/login" class="kz-pill">Log in to comment</a>
+          </div>
+        <% } %>
+      </aside>
+    </div>
+  </section>
+
   <% if (relatedPosts.length) { %>
     <section class="kz-journal kz-related-posts">
       <div class="kz-section-head">

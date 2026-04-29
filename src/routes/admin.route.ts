@@ -14,6 +14,8 @@ import {
   getEditBlog,
   postEditBlog,
   postDeleteBlog,
+  getAdminComments,
+  postUpdateCommentStatus,
 } from "../controllers/admin.controller.js";
 
 const router = express.Router();
@@ -33,5 +35,9 @@ router.post("/admin/blogs/new", checkAdmin, postCreateBlog);
 router.get("/admin/blogs/:id/edit", checkAdmin, getEditBlog);
 router.post("/admin/blogs/:id/edit", checkAdmin, postEditBlog);
 router.post("/admin/blogs/:id/delete", checkAdmin, postDeleteBlog);
+
+router.get("/admin/comments", checkAdmin, getAdminComments);
+router.post("/admin/comments/:id/status", checkAdmin, postUpdateCommentStatus);
+
 
 export default router;

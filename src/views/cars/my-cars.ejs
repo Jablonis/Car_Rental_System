@@ -20,8 +20,8 @@
         <p class="text-on-surface font-headline italic text-lg">Since 2026</p>
       </div>
       <div class="relative">
-        <div class="w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden border-2 border-outline-variant/20 p-1">
-          <img class="w-full h-full object-cover rounded-full grayscale hover:grayscale-0 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBSYQ1RaM_kWmQcM5Fh7Ra6EqJzO6kQXqfV1c3P8S3pE9TjY7t1utVByvSm5g1w0w7imVFRYd8K6U0NcgRPLOrLodJz1XPR6ujlpQvlKQmD9t-8zzJf1Hm3gwSCOjJVbOyqz7J7aC1tgr6U2Wh0OVgcl0D4jNnxt9aGDoN9XErKPh8L0b4mLidIGlgB7s2E1A7y8a-sA7r4yYz4sJYzQZ1W2o8n2QcZbcwkgj2xbHkA1r3nqg0ORWkVzQK-hz3mGxqVNmF8STQ" alt="Collector avatar" />
+        <div class="w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden border-2 border-outline-variant/20 p-1 bg-surface-container-lowest">
+          <img class="w-full h-full object-cover rounded-full grayscale hover:grayscale-0 transition-all duration-700" src="<%= profileUser?.avatar || '/assets/img/rana-singh.jpg' %>" alt="Collector avatar" />
         </div>
       </div>
     </div>
@@ -82,6 +82,17 @@
 
     <aside class="lg:col-span-4 space-y-8">
       <div class="glass-panel rounded-lg p-6 md:p-8 editorial-shadow">
+        <p class="text-[10px] uppercase tracking-[0.3em] text-primary mb-4">Collector Avatar</p>
+        <% if (avatarSaved) { %>
+          <div class="alert-luxe mb-5">Avatar updated.</div>
+        <% } %>
+        <form method="POST" action="/my-cars/avatar" class="space-y-4">
+          <label class="block text-[10px] uppercase tracking-[0.25em] text-outline">Avatar image URL</label>
+          <input class="form-input-luxe" type="text" name="avatar" value="<%= profileUser?.avatar || '' %>" placeholder="https://..." />
+          <button class="px-6 py-3 rounded-full bg-gradient-to-r from-primary to-primary-container text-on-primary-fixed font-bold text-[10px] uppercase tracking-[0.22em]" type="submit">Save avatar</button>
+        </form>
+      </div>
+      <div class="glass-panel rounded-lg p-6 md:p-8 editorial-shadow">
         <p class="text-[10px] uppercase tracking-[0.3em] text-primary mb-4">Portfolio Metrics</p>
         <div class="space-y-5">
           <div class="flex items-end justify-between">
@@ -93,7 +104,7 @@
             <span class="font-headline italic text-2xl text-primary">Curated</span>
           </div>
           <div class="flex items-end justify-between">
-            <span class="text-on-surface-variant uppercase text-[10px] tracking-[0.25em]">Access</span>
+            <span class="text-on-surface-variant uppercase text-[0.25em]">Access</span>
             <span class="font-headline italic text-2xl">Private</span>
           </div>
         </div>

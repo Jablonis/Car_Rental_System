@@ -54,6 +54,7 @@ async function updateCar(
   car.transmission = data.transmission;
   car.description = data.description;
   car.image = data.image;
+  car.galleryImages = data.galleryImages;
 
   await car.save();
   return car;

@@ -9,6 +9,7 @@ import {
   getEditCarPage,
   postEditCar,
   postDeleteCar,
+  postUpdateAvatar,
 } from "../controllers/car.controller.js";
 
 const router = express.Router();
@@ -16,6 +17,7 @@ const router = express.Router();
 router.get("/cars", getCarsPage);
 
 router.get("/my-cars", protectRoutes, getMyCarsPage);
+router.post("/my-cars/avatar", protectRoutes, postUpdateAvatar);
 
 router.get("/cars/new", protectRoutes, getCreateCarPage);
 router.post("/cars/new", protectRoutes, postCreateCar);

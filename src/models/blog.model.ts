@@ -40,7 +40,7 @@ class Blog {
     this.slug = data.slug || "";
     this.excerpt = data.excerpt;
     this.content = data.content;
-    this.image = data.image || "/assets/img/ritual.jpeg";
+    this.image = data.image || "/assets/img/ritual.webp";
     this.created_at = data.created_at;
     this.updated_at = data.updated_at;
   }
@@ -55,7 +55,7 @@ class Blog {
             slug TEXT NOT NULL UNIQUE,
             excerpt TEXT NOT NULL,
             content TEXT NOT NULL,
-            image TEXT NOT NULL DEFAULT '/assets/img/ritual.jpeg',
+            image TEXT NOT NULL DEFAULT '/assets/img/ritual.webp',
             created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
             updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
           )

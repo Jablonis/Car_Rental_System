@@ -179,7 +179,7 @@ function getCreateBlog(req: Request, res: Response) {
       title: "",
       excerpt: "",
       content: "",
-      image: "/assets/img/ritual.jpeg",
+      image: "/assets/img/ritual.webp",
     },
   });
 }
@@ -204,7 +204,7 @@ async function postCreateBlog(req: Request, res: Response) {
 
     const post = new Blog({
       ...parsed.data,
-      image: uploadedImage || parsed.data.image || "/assets/img/ritual.jpeg",
+      image: uploadedImage || parsed.data.image || "/assets/img/ritual.webp",
     });
     await post.save();
 

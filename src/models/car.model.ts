@@ -1,4 +1,5 @@
 import pool from "../data/db.js";
+import { normalizeAssetList, normalizeAssetPath } from "../lib/asset-path.js";
 
 type CarRow = {
   car_id: number;
@@ -66,8 +67,8 @@ class Car {
     this.fuel = data.fuel;
     this.transmission = data.transmission;
     this.description = data.description;
-    this.image = data.image;
-    this.galleryImages = data.galleryImages ?? [];
+    this.image = normalizeAssetPath(data.image) || data.image;
+    this.galleryImages = normalizeAssetList(data.galleryImages ?? []);
     this.user_id = data.user_id;
     this.created_at = data.created_at;
     this.owner_name = data.owner_name;

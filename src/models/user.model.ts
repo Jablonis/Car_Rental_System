@@ -1,6 +1,7 @@
 import crypto from "crypto";
 import { promisify } from "util";
 import pool from "../data/db.js";
+import { normalizeAssetPath } from "../lib/asset-path.js";
 
 const scrypt = promisify(crypto.scrypt);
 
@@ -111,7 +112,7 @@ class User {
         email: row.email,
         password: row.password,
         isAdmin: row.isAdmin,
-        avatar: row.avatar,
+        avatar: normalizeAssetPath(row.avatar),
       },
       row.user_id,
     );

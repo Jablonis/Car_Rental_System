@@ -1,9 +1,15 @@
 import { z } from "zod";
 
-const imageField = z.string().trim().min(1, "Obrázok je povinný");
+const imageField = z
+  .string()
+  .trim()
+  .refine((value) => value === "" || value.startsWith("/") || /^https?:\/\//i.test(value), {
+    message: "Obrázok musí byť platná URL alebo cesta začínajúca /",
+  })
+  .transform((value) => value || "");
 
 const carSchema = z.object({
-  title: z.string().trim().min(1, "Názov auta je povinný"),
+  title: z.string().trim().min(1, "Názov je povinný"),
   brand: z.string().trim().min(1, "Značka je povinná"),
   model: z.string().trim().min(1, "Model je povinný"),
   year: z.coerce
@@ -19,7 +25,7 @@ const carSchema = z.object({
   fuel: z.enum(["Diesel", "Gasoline"], { message: "Vyber palivo" }),
   transmission: z.enum(["Manual", "Automatic", "Semi-automatic"], { message: "Vyber prevodovku" }),
   description: z.string().trim().min(1, "Popis je povinný"),
-  image: imageField,
+  image: imageField.optional().default(""),
   galleryImages: z.array(z.string().trim()).default([]),
 });
 

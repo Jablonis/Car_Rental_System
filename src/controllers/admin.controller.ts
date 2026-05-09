@@ -14,6 +14,31 @@ import Car from "../models/car.model.js";
 import Blog from "../models/blog.model.js";
 import { blogSchema } from "../validators/blog.validator.js";
 import BlogComment, { BlogCommentStatus } from "../models/blog-comment.model.js";
+import { uploadImageToStorage } from "../lib/supabase-storage.js";
+
+type BlogUploadMap = Partial<Record<"imageFile", Express.Multer.File[]>>;
+
+function getBlogUpload(req: Request): BlogUploadMap {
+  return ((req.files ?? {}) as BlogUploadMap);
+}
+
+function renderBlogForm(
+  res: Response,
+  options: {
+    mode: "create" | "edit";
+    post: Blog | { blog_id: number } | null;
+    errors: Array<{ message: string }> | readonly { message: string }[];
+    formData: Record<string, unknown>;
+    status?: number;
+  },
+) {
+  return res.status(options.status ?? 200).render("admin/blog-form", {
+    mode: options.mode,
+    post: options.post,
+    errors: options.errors,
+    formData: options.formData,
+  });
+}
 
 async function getAdminUsers(req: Request, res: Response) {
   const search =
@@ -163,18 +188,36 @@ async function postCreateBlog(req: Request, res: Response) {
   const parsed = blogSchema.safeParse(req.body);
 
   if (!parsed.success) {
-    return res.status(400).render("admin/blog-form", {
+    return renderBlogForm(res, {
       mode: "create",
       post: null,
       errors: parsed.error.issues,
-      formData: req.body,
+      formData: req.body as Record<string, unknown>,
+      status: 400,
     });
   }
 
-  const post = new Blog(parsed.data);
-  await post.save();
+  try {
+    const uploadedImage = getBlogUpload(req).imageFile?.[0]
+      ? await uploadImageToStorage(getBlogUpload(req).imageFile![0], "blogs")
+      : null;
 
-  return res.redirect("/admin/blogs");
+    const post = new Blog({
+      ...parsed.data,
+      image: uploadedImage || parsed.data.image || "/assets/img/ritual.jpeg",
+    });
+    await post.save();
+
+    return res.redirect("/admin/blogs");
+  } catch (error) {
+    return renderBlogForm(res, {
+      mode: "create",
+      post: null,
+      errors: [{ message: error instanceof Error ? error.message : "Unknown error" }],
+      formData: req.body as Record<string, unknown>,
+      status: 400,
+    });
+  }
 }
 
 async function getEditBlog(req: Request, res: Response) {
@@ -209,21 +252,36 @@ async function postEditBlog(req: Request, res: Response) {
   const parsed = blogSchema.safeParse(req.body);
 
   if (!parsed.success) {
-    return res.status(400).render("admin/blog-form", {
+    return renderBlogForm(res, {
       mode: "edit",
       post,
       errors: parsed.error.issues,
-      formData: req.body,
+      formData: req.body as Record<string, unknown>,
+      status: 400,
     });
   }
 
-  post.title = parsed.data.title;
-  post.excerpt = parsed.data.excerpt;
-  post.content = parsed.data.content;
-  post.image = parsed.data.image;
-  await post.save();
+  try {
+    const uploadedImage = getBlogUpload(req).imageFile?.[0]
+      ? await uploadImageToStorage(getBlogUpload(req).imageFile![0], "blogs")
+      : null;
 
-  return res.redirect("/admin/blogs");
+    post.title = parsed.data.title;
+    post.excerpt = parsed.data.excerpt;
+    post.content = parsed.data.content;
+    post.image = uploadedImage || parsed.data.image || post.image;
+    await post.save();
+
+    return res.redirect("/admin/blogs");
+  } catch (error) {
+    return renderBlogForm(res, {
+      mode: "edit",
+      post,
+      errors: [{ message: error instanceof Error ? error.message : "Unknown error" }],
+      formData: req.body as Record<string, unknown>,
+      status: 400,
+    });
+  }
 }
 
 async function postDeleteBlog(req: Request, res: Response) {

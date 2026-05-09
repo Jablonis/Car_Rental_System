@@ -9,6 +9,9 @@ import {
   deleteCar,
 } from "../services/car.service.js";
 import User from "../models/user.model.js";
+import { uploadImageToStorage } from "../lib/supabase-storage.js";
+
+type UploadedFieldMap = Partial<Record<"imageFile" | "galleryImageFiles", Express.Multer.File[]>>;
 
 function sanitizeGalleryImages(raw: unknown): string[] {
   if (Array.isArray(raw)) {
@@ -25,16 +28,77 @@ function sanitizeGalleryImages(raw: unknown): string[] {
   return [];
 }
 
-function buildCarPayload(body: Record<string, unknown>) {
-  return {
-    ...body,
-    galleryImages: sanitizeGalleryImages(body.galleryImages),
-  };
+function getUploadedFiles(req: Request): UploadedFieldMap {
+  return ((req.files ?? {}) as UploadedFieldMap);
 }
 
 function buildYearOptions() {
   const currentYear = new Date().getFullYear() + 1;
   return Array.from({ length: currentYear - 1960 + 1 }, (_, index) => currentYear - index);
+}
+
+function buildFormData(body: Record<string, unknown>) {
+  return {
+    ...body,
+    galleryImages: sanitizeGalleryImages(body.galleryImages).join("\n"),
+  };
+}
+
+async function resolveCarImages(
+  req: Request,
+  body: Record<string, unknown>,
+  existing?: { image?: string; galleryImages?: string[] },
+) {
+  const uploadedFiles = getUploadedFiles(req);
+  const imageFromBody = typeof body.image === "string" ? body.image.trim() : "";
+  const galleryFromBody = sanitizeGalleryImages(body.galleryImages);
+
+  const uploadedMainImage = uploadedFiles.imageFile?.[0]
+    ? await uploadImageToStorage(uploadedFiles.imageFile[0], "cars/main")
+    : null;
+
+  const uploadedGalleryImages = uploadedFiles.galleryImageFiles?.length
+    ? await Promise.all(
+        uploadedFiles.galleryImageFiles.map((file) => uploadImageToStorage(file, "cars/gallery")),
+      )
+    : [];
+
+  return {
+    image: uploadedMainImage || imageFromBody || existing?.image || "",
+    galleryImages: [...galleryFromBody, ...uploadedGalleryImages].filter(Boolean),
+  };
+}
+
+function renderCarForm(
+  res: Response,
+  options: {
+    mode: "create" | "edit";
+    car: unknown;
+    errors: Array<{ message: string }> | readonly { message: string }[];
+    formData: Record<string, unknown>;
+    status?: number;
+  },
+) {
+  const renderer = () =>
+    res.render("cars/form", {
+      mode: options.mode,
+      car: options.car,
+      errors: options.errors,
+      formData: options.formData,
+      yearOptions: buildYearOptions(),
+    });
+
+  if (options.status) {
+    return res.status(options.status).render("cars/form", {
+      mode: options.mode,
+      car: options.car,
+      errors: options.errors,
+      formData: options.formData,
+      yearOptions: buildYearOptions(),
+    });
+  }
+
+  return renderer();
 }
 
 async function getCarsPage(req: Request, res: Response) {
@@ -87,41 +151,57 @@ function getCreateCarPage(req: Request, res: Response) {
       fuel: "Gasoline",
       transmission: "Automatic",
       galleryImages: "",
+      image: "",
     },
     yearOptions: buildYearOptions(),
   });
 }
 
 async function postCreateCar(req: Request, res: Response) {
-  const payload = buildCarPayload(req.body as Record<string, unknown>);
-  const parsed = carSchema.safeParse(payload);
+  const basePayload = {
+    ...(req.body as Record<string, unknown>),
+    galleryImages: sanitizeGalleryImages((req.body as Record<string, unknown>).galleryImages),
+  };
+
+  const parsed = carSchema.safeParse(basePayload);
 
   if (!parsed.success) {
-    return res.status(400).render("cars/form", {
+    return renderCarForm(res, {
       mode: "create",
       car: null,
       errors: parsed.error.issues,
-      formData: {
-        ...req.body,
-        galleryImages: sanitizeGalleryImages((req.body as Record<string, unknown>).galleryImages).join("\n"),
-      },
-      yearOptions: buildYearOptions(),
+      formData: buildFormData(req.body as Record<string, unknown>),
+      status: 400,
     });
   }
 
   try {
-    await createCar(parsed.data, req.session.user!.id);
+    const resolvedImages = await resolveCarImages(req, req.body as Record<string, unknown>);
+
+    if (!resolvedImages.image) {
+      return renderCarForm(res, {
+        mode: "create",
+        car: null,
+        errors: [{ message: "Add a main image URL or upload a main image file." }],
+        formData: buildFormData(req.body as Record<string, unknown>),
+        status: 400,
+      });
+    }
+
+    await createCar({
+      ...parsed.data,
+      image: resolvedImages.image,
+      galleryImages: resolvedImages.galleryImages,
+    }, req.session.user!.id);
+
     return res.redirect("/my-cars");
   } catch (error) {
-    return res.status(400).render("cars/form", {
+    return renderCarForm(res, {
       mode: "create",
       car: null,
       errors: [{ message: error instanceof Error ? error.message : "Unknown error" }],
-      formData: {
-        ...req.body,
-        galleryImages: sanitizeGalleryImages((req.body as Record<string, unknown>).galleryImages).join("\n"),
-      },
-      yearOptions: buildYearOptions(),
+      formData: buildFormData(req.body as Record<string, unknown>),
+      status: 400,
     });
   }
 }
@@ -161,35 +241,61 @@ async function getEditCarPage(req: Request, res: Response) {
 
 async function postEditCar(req: Request, res: Response) {
   const carId = Number(req.params.id);
-  const payload = buildCarPayload(req.body as Record<string, unknown>);
-  const parsed = carSchema.safeParse(payload);
+  const existingCar = await getCarById(carId);
+
+  if (!existingCar) {
+    return res.status(404).send("Auto neexistuje");
+  }
+
+  const basePayload = {
+    ...(req.body as Record<string, unknown>),
+    galleryImages: sanitizeGalleryImages((req.body as Record<string, unknown>).galleryImages),
+  };
+
+  const parsed = carSchema.safeParse(basePayload);
 
   if (!parsed.success) {
-    return res.status(400).render("cars/form", {
+    return renderCarForm(res, {
       mode: "edit",
       car: { car_id: carId },
       errors: parsed.error.issues,
-      formData: {
-        ...req.body,
-        galleryImages: sanitizeGalleryImages((req.body as Record<string, unknown>).galleryImages).join("\n"),
-      },
-      yearOptions: buildYearOptions(),
+      formData: buildFormData(req.body as Record<string, unknown>),
+      status: 400,
     });
   }
 
   try {
-    await updateCar(carId, parsed.data, req.session.user!.id, req.session.user!.isAdmin);
+    const resolvedImages = await resolveCarImages(req, req.body as Record<string, unknown>, existingCar);
+
+    if (!resolvedImages.image) {
+      return renderCarForm(res, {
+        mode: "edit",
+        car: { car_id: carId },
+        errors: [{ message: "Add a main image URL or upload a main image file." }],
+        formData: buildFormData(req.body as Record<string, unknown>),
+        status: 400,
+      });
+    }
+
+    await updateCar(
+      carId,
+      {
+        ...parsed.data,
+        image: resolvedImages.image,
+        galleryImages: resolvedImages.galleryImages,
+      },
+      req.session.user!.id,
+      req.session.user!.isAdmin,
+    );
+
     return res.redirect("/my-cars");
   } catch (error) {
-    return res.status(400).render("cars/form", {
+    return renderCarForm(res, {
       mode: "edit",
       car: { car_id: carId },
       errors: [{ message: error instanceof Error ? error.message : "Unknown error" }],
-      formData: {
-        ...req.body,
-        galleryImages: sanitizeGalleryImages((req.body as Record<string, unknown>).galleryImages).join("\n"),
-      },
-      yearOptions: buildYearOptions(),
+      formData: buildFormData(req.body as Record<string, unknown>),
+      status: 400,
     });
   }
 }

@@ -1,5 +1,6 @@
 import express from "express";
 import { protectRoutes } from "../middleware/protect-routes.middleware.js";
+import { carUpload } from "../middleware/upload.middleware.js";
 import {
   getCarsPage,
   getCarDetailPage,
@@ -20,10 +21,10 @@ router.get("/my-cars", protectRoutes, getMyCarsPage);
 router.post("/my-cars/avatar", protectRoutes, postUpdateAvatar);
 
 router.get("/cars/new", protectRoutes, getCreateCarPage);
-router.post("/cars/new", protectRoutes, postCreateCar);
+router.post("/cars/new", protectRoutes, carUpload, postCreateCar);
 
 router.get("/cars/:id/edit", protectRoutes, getEditCarPage);
-router.post("/cars/:id/edit", protectRoutes, postEditCar);
+router.post("/cars/:id/edit", protectRoutes, carUpload, postEditCar);
 
 router.post("/cars/:id/delete", protectRoutes, postDeleteCar);
 

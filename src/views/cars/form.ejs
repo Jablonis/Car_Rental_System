@@ -26,7 +26,7 @@
         </div>
       <% } %>
 
-      <form method="POST" action="<%= mode === 'create' ? '/cars/new' : '/cars/' + car.car_id + '/edit' %>" class="space-y-8">
+      <form method="POST" enctype="multipart/form-data" action="<%= mode === 'create' ? '/cars/new' : '/cars/' + car.car_id + '/edit' %>" class="space-y-8">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
             <label class="block text-[10px] uppercase tracking-[0.28em] text-outline mb-3">Title</label>
@@ -79,14 +79,29 @@
             </select>
           </div>
         </div>
-        <div>
-          <label class="block text-[10px] uppercase tracking-[0.28em] text-outline mb-3">Main image URL</label>
-          <input class="form-input-luxe" id="image" type="text" name="image" value="<%= formData.image || '' %>" />
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label class="block text-[10px] uppercase tracking-[0.28em] text-outline mb-3">Main image URL</label>
+            <input class="form-input-luxe" id="image" type="text" name="image" value="<%= formData.image || '' %>" />
+            <p class="text-xs text-on-surface-variant mt-3">You can keep using a URL, or upload a file below.</p>
+          </div>
+          <div>
+            <label class="block text-[10px] uppercase tracking-[0.28em] text-outline mb-3">Upload main image</label>
+            <input class="form-input-luxe file-input-luxe" id="imageFile" type="file" name="imageFile" accept="image/png,image/jpeg,image/webp,image/gif" />
+            <p class="text-xs text-on-surface-variant mt-3">If both are provided, the uploaded file is used.</p>
+          </div>
         </div>
-        <div>
-          <label class="block text-[10px] uppercase tracking-[0.28em] text-outline mb-3">Additional image URLs</label>
-          <textarea class="form-textarea-luxe" id="galleryImages" name="galleryImages" placeholder="One image URL per line"><%= formData.galleryImages || '' %></textarea>
-          <p class="text-xs text-on-surface-variant mt-3">Add extra photos one per line. They will appear in the detail gallery instead of the current static placeholders.</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label class="block text-[10px] uppercase tracking-[0.28em] text-outline mb-3">Additional image URLs</label>
+            <textarea class="form-textarea-luxe" id="galleryImages" name="galleryImages" placeholder="One image URL per line"><%= formData.galleryImages || '' %></textarea>
+            <p class="text-xs text-on-surface-variant mt-3">Add extra photos one per line if you want to keep using links.</p>
+          </div>
+          <div>
+            <label class="block text-[10px] uppercase tracking-[0.28em] text-outline mb-3">Upload gallery images</label>
+            <input class="form-input-luxe file-input-luxe" id="galleryImageFiles" type="file" name="galleryImageFiles" accept="image/png,image/jpeg,image/webp,image/gif" multiple />
+            <p class="text-xs text-on-surface-variant mt-3">You can select multiple files. They will be added to the detail gallery.</p>
+          </div>
         </div>
         <div>
           <label class="block text-[10px] uppercase tracking-[0.28em] text-outline mb-3">Editorial Notes</label>

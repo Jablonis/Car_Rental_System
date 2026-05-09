@@ -21,7 +21,7 @@
       </div>
     <% } %>
 
-    <form method="POST" class="grid gap-6">
+    <form method="POST" enctype="multipart/form-data" class="grid gap-6">
       <div>
         <label class="block text-[10px] uppercase tracking-[0.28em] text-outline mb-3">Title</label>
         <input class="form-input-luxe" type="text" name="title" value="<%= formData.title || '' %>" required>
@@ -34,9 +34,17 @@
         <label class="block text-[10px] uppercase tracking-[0.28em] text-outline mb-3">Content</label>
         <textarea class="form-input-luxe min-h-[18rem]" name="content" required><%= formData.content || '' %></textarea>
       </div>
-      <div>
-        <label class="block text-[10px] uppercase tracking-[0.28em] text-outline mb-3">Cover image</label>
-        <input class="form-input-luxe" type="text" name="image" value="<%= formData.image || '/assets/img/ritual.jpeg' %>">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <label class="block text-[10px] uppercase tracking-[0.28em] text-outline mb-3">Cover image URL</label>
+          <input class="form-input-luxe" type="text" name="image" value="<%= formData.image || '/assets/img/ritual.jpeg' %>">
+          <p class="text-xs text-on-surface-variant mt-3">You can still use a URL, or upload an image file instead.</p>
+        </div>
+        <div>
+          <label class="block text-[10px] uppercase tracking-[0.28em] text-outline mb-3">Upload cover image</label>
+          <input class="form-input-luxe file-input-luxe" type="file" name="imageFile" accept="image/png,image/jpeg,image/webp,image/gif">
+          <p class="text-xs text-on-surface-variant mt-3">If both are provided, the uploaded file is used.</p>
+        </div>
       </div>
       <div class="flex flex-wrap gap-4">
         <button class="px-6 py-4 rounded-full bg-gradient-to-r from-primary to-primary-container text-on-primary-fixed font-bold text-[10px] uppercase tracking-[0.24em]" type="submit"><%= mode === 'create' ? 'Publish entry' : 'Save changes' %></button>

@@ -22,6 +22,12 @@ function getClient(): SupabaseClient {
   return cachedClient;
 }
 
+function getPublicUrlForPath(path: string): string {
+  const client = getClient();
+  const { data } = client.storage.from(SUPABASE_STORAGE_BUCKET).getPublicUrl(path);
+  return data.publicUrl;
+}
+
 async function ensureBucket(): Promise<void> {
   if (bucketEnsured) return;
 
@@ -31,7 +37,9 @@ async function ensureBucket(): Promise<void> {
     throw new Error(`Unable to access Supabase Storage: ${listError.message}`);
   }
 
-  if (!buckets?.some((bucket) => bucket.name === SUPABASE_STORAGE_BUCKET)) {
+  const existingBucket = buckets?.find((bucket) => bucket.name === SUPABASE_STORAGE_BUCKET);
+
+  if (!existingBucket) {
     const { error: createError } = await client.storage.createBucket(SUPABASE_STORAGE_BUCKET, {
       public: true,
       fileSizeLimit: "8MB",
@@ -40,6 +48,16 @@ async function ensureBucket(): Promise<void> {
 
     if (createError && !/already exists/i.test(createError.message)) {
       throw new Error(`Unable to create Supabase bucket: ${createError.message}`);
+    }
+  } else if (!existingBucket.public) {
+    const { error: updateError } = await client.storage.updateBucket(SUPABASE_STORAGE_BUCKET, {
+      public: true,
+      fileSizeLimit: "8MB",
+      allowedMimeTypes: ["image/jpeg", "image/png", "image/webp", "image/gif"],
+    });
+
+    if (updateError) {
+      throw new Error(`Bucket "${SUPABASE_STORAGE_BUCKET}" exists but is not public: ${updateError.message}`);
     }
   }
 
@@ -56,18 +74,33 @@ function sanitizeFileName(name: string): string {
     .replace(/^-+|-+$/g, "") || "image";
 }
 
+export function normalizeStorageImageUrl(value?: string | null): string | null | undefined {
+  if (!value) return value;
+
+  if (/^https?:\/\//i.test(value)) {
+    return value;
+  }
+
+  const clean = String(value).replace(/^\/+/, "");
+  if (!clean || clean.startsWith("assets/")) {
+    return value;
+  }
+
+  return getPublicUrlForPath(clean);
+}
+
 export async function uploadImageToStorage(file: Express.Multer.File, folder: string): Promise<string> {
   await ensureBucket();
   const client = getClient();
 
-  const ext = file.originalname.includes(".") ? file.originalname.split('.').pop() : undefined;
+  const ext = file.originalname.includes(".") ? file.originalname.split(".").pop() : undefined;
   const cleanName = sanitizeFileName(file.originalname.replace(/\.[^.]+$/, ""));
   const fileName = `${Date.now()}-${crypto.randomUUID()}-${cleanName}${ext ? `.${ext}` : ""}`;
-  const path = `${folder}/${fileName}`;
+  const objectPath = `${folder}/${fileName}`;
 
   const { error } = await client.storage
     .from(SUPABASE_STORAGE_BUCKET)
-    .upload(path, file.buffer, {
+    .upload(objectPath, file.buffer, {
       cacheControl: "3600",
       upsert: false,
       contentType: file.mimetype,
@@ -77,6 +110,5 @@ export async function uploadImageToStorage(file: Express.Multer.File, folder: st
     throw new Error(`Image upload failed: ${error.message}`);
   }
 
-  const { data } = client.storage.from(SUPABASE_STORAGE_BUCKET).getPublicUrl(path);
-  return data.publicUrl;
+  return getPublicUrlForPath(objectPath);
 }

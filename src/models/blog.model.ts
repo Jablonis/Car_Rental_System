@@ -1,5 +1,6 @@
 import pool from "../data/db.js";
 import { normalizeAssetPath } from "../lib/asset-path.js";
+import { normalizeStorageImageUrl } from "../lib/supabase-storage.js";
 
 type BlogRow = {
   blog_id: number;
@@ -41,7 +42,7 @@ class Blog {
     this.slug = data.slug || "";
     this.excerpt = data.excerpt;
     this.content = data.content;
-    this.image = normalizeAssetPath(data.image || "/assets/img/ritual.webp") || "/assets/img/ritual.webp";
+    this.image = normalizeStorageImageUrl(normalizeAssetPath(data.image || "/assets/img/ritual.webp") || "/assets/img/ritual.webp") || "/assets/img/ritual.webp";
     this.created_at = data.created_at;
     this.updated_at = data.updated_at;
   }

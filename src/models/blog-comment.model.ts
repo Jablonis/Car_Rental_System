@@ -1,3 +1,5 @@
+import { normalizeAssetPath } from "../lib/asset-path.js";
+import { normalizeStorageImageUrl } from "../lib/supabase-storage.js";
 import pool from "../data/db.js";
 import User from "./user.model.js";
 import Blog from "./blog.model.js";
@@ -89,7 +91,7 @@ class BlogComment {
       created_at: row.created_at,
       updated_at: row.updated_at,
       user_name: row.user_name,
-      user_avatar: row.user_avatar,
+      user_avatar: row.user_avatar ? normalizeStorageImageUrl(normalizeAssetPath(row.user_avatar) || row.user_avatar) || row.user_avatar : null,
       blog_title: row.blog_title,
       blog_slug: row.blog_slug,
     }, row.comment_id);

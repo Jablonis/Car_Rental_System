@@ -1,5 +1,6 @@
 import pool from "../data/db.js";
 import { normalizeAssetList, normalizeAssetPath } from "../lib/asset-path.js";
+import { normalizeStorageImageUrl } from "../lib/supabase-storage.js";
 
 type CarRow = {
   car_id: number;
@@ -67,8 +68,8 @@ class Car {
     this.fuel = data.fuel;
     this.transmission = data.transmission;
     this.description = data.description;
-    this.image = normalizeAssetPath(data.image) || data.image;
-    this.galleryImages = normalizeAssetList(data.galleryImages ?? []);
+    this.image = normalizeStorageImageUrl(normalizeAssetPath(data.image) || data.image) || data.image;
+    this.galleryImages = normalizeAssetList(data.galleryImages ?? []).map((item) => normalizeStorageImageUrl(item) || item);
     this.user_id = data.user_id;
     this.created_at = data.created_at;
     this.owner_name = data.owner_name;
